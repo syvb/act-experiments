@@ -45,6 +45,11 @@ last blocks. Line plots show 90% bootstrap bands that resample whole docs.
 - `plot.py`: per-model heatmaps (disruption, retained, per-block), a cross-size figure, and a text summary.
 - `test_patch.py`: checks `run_patched` (residuals, attention/MLP outputs, logits) against a plain full forward pass
   with a hook, in fp32.
+- `check_means_precision.py`: checks that bf16 means match fp32 ones. On 0.6B the gap is 70–800× below the
+  sampling noise of a mean from 500 occurrences.
+- `log_wandb.py`: logs one model's result curves to W&B (metrics only).
+- `patch.py --acts` also saves bf16 activations: the clean last-position residuals of every sample, the sample
+  token ids, and every patched residual for the first 32 samples.
 - `run_all.sh`: the full GPU run. Launch it with `nohup ./run_all.sh > run.log 2>&1 &`, and copy `out/` off the pod
   before terminating it.
 

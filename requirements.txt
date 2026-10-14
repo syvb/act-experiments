@@ -4,3 +4,4 @@ pyarrow
 numpy
 matplotlib
 huggingface_hub
+wandb

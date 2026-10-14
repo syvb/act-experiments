@@ -1,8 +1,8 @@
 """Pass 1: mean residual stream at every site, per token, over positions [MIN_POS, MAX_LEN) of FineWeb docs.
 
 Causal attention means each position's activations are exactly those of the doc truncated there, so one forward pass
-over a doc gives a "document ending in token t" for every position. Runs in bf16: rounding noise averages out over
-the hundreds of occurrences behind each mean.
+over a doc gives a "document ending in token t" for every position. Runs in bf16 by default: rounding noise averages
+out over the hundreds of occurrences behind each mean.
 """
 import argparse
 import collections
@@ -18,11 +18,12 @@ p.add_argument("--data", required=True, help="FineWeb parquet file")
 p.add_argument("--tokens", type=float, default=10e6, help="number of positions to average over")
 p.add_argument("--min-count", type=int, default=500, help="only keep means of tokens seen at least this often")
 p.add_argument("--batch-tokens", type=int, default=16384)
+p.add_argument("--dtype", default="bfloat16", choices=["float32", "bfloat16"])
 p.add_argument("--device", default="cuda")
 p.add_argument("--out", required=True)
 args = p.parse_args()
 
-tok, model = load_model(args.model, args.device)
+tok, model = load_model(args.model, args.device, getattr(torch, args.dtype))
 dev = model.device
 
 # Tokenize enough docs, then pick the tokens that occur often enough to get a mean.
@@ -74,6 +75,7 @@ while start < len(docs):
 n = torch.tensor([counts[t] for t in token_ids], device=dev)
 result = dict(
     model=args.model,
+    dtype=args.dtype,
     token_ids=torch.tensor(token_ids),
     counts=n.cpu(),
     means=(sums / n[None, :, None]).cpu(),  # [n_sites, n_tokens, d]
