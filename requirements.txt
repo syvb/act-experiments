@@ -1,0 +1,6 @@
+torch
+transformers==5.19.0
+pyarrow
+numpy
+matplotlib
+huggingface_hub
