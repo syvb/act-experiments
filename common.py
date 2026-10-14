@@ -10,6 +10,7 @@ MAX_LEN = 512  # docs are truncated to this; means and test positions both come 
 
 
 def load_model(name, device, dtype=torch.bfloat16):
+    torch.backends.cuda.matmul.allow_tf32 = False  # fp32 should mean fp32 (TF32 would add rounding noise)
     tok = AutoTokenizer.from_pretrained(name)
     model = AutoModelForCausalLM.from_pretrained(name, dtype=dtype).to(device).eval()
     return tok, model
@@ -17,7 +18,8 @@ def load_model(name, device, dtype=torch.bfloat16):
 
 def iter_docs(parquet_path, tok, reverse=False):
     """Yield FineWeb docs as token-id lists truncated to MAX_LEN.
-    The means pass reads from the start of the file, test samples from the end (reverse=True), so they never overlap."""
+    The means pass reads from the start of the file, test samples from the end (reverse=True). The file has ~1M docs;
+    the means pass uses ~35k for 10M tokens and the test set 10k, so they never overlap."""
     f = pq.ParquetFile(parquet_path)
     groups = range(f.num_row_groups)
     for g in reversed(groups) if reverse else groups:
@@ -29,21 +31,18 @@ def iter_docs(parquet_path, tok, reverse=False):
 
 
 def residual_sites(model):
-    """Modules whose outputs are the residual stream. Site 0 = token embeddings, site i = output of block i-1."""
+    """Modules whose outputs are the residual stream. Site 0 = token embeddings, site i = after i blocks."""
     return [model.model.embed_tokens, *model.model.layers]
 
 
 @contextlib.contextmanager
 def hooks(modules, fn):
     """Call fn(i, output) after modules[i] runs; if fn returns a tensor, it replaces the output.
-    (Attention modules return (output, weights); fn only sees the output.)"""
+    Attention modules return (output, weights): fn sees only the output and must not replace it."""
 
     def make(i):
         def hook(module, args, out):
-            if isinstance(out, tuple):
-                new = fn(i, out[0])
-                return None if new is None else (new, *out[1:])
-            return fn(i, out)
+            return fn(i, out[0] if isinstance(out, tuple) else out)
 
         return hook
 
@@ -83,10 +82,8 @@ def run_patched(model, prefix, token, patch_site, patch_vec):
     resid, attn, mlp = {}, {}, {}
 
     def patch(site, h):
-        rows = patch_site == site
-        if rows.any():
-            h = h.clone()
-            h[rows, -1] = patch_vec[rows].to(h.dtype)
+        h = h.clone()
+        h[:, -1] = torch.where((patch_site == site)[:, None], patch_vec.to(h.dtype), h[:, -1])
         resid[site] = h[:, -1].float()
         return h
 
