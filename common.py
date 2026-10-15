@@ -1,5 +1,6 @@
 """Shared helpers: model/data loading, residual-stream hooks, and the patched forward pass."""
 import contextlib
+import copy
 
 import pyarrow.parquet as pq
 import torch
@@ -68,22 +69,30 @@ def last_position_resid(model, ids):
 
 
 @torch.no_grad()
-def run_patched(model, prefix, token, patch_site, patch_vec):
-    """Run `token` after `prefix`, once per row of a batch. Row r has its residual stream at site patch_site[r]
-    (at this last position only) replaced by patch_vec[r]; patch_site = -1 leaves the row clean.
+def prefix_cache(model, prefix):
+    """KV cache of `prefix` (one row), to share between run_patched calls on the same context."""
+    return model.model(input_ids=torch.tensor([prefix], device=model.device), use_cache=True).past_key_values
 
-    The prefix is unaffected by the patch (causal attention), so it is run once and its KV cache is shared by all rows.
+
+@torch.no_grad()
+def run_patched(model, cache, token, patch_site, patch_vec, add=False):
+    """Run `token` after the prefix in `cache` (from prefix_cache), once per row of a batch. Row r has its residual
+    stream at site patch_site[r] (at this last position only) replaced by patch_vec[r], or with add=True has
+    patch_vec[r] added to it; patch_site = -1 leaves the row clean.
+
+    The prefix is unaffected by the patch (causal attention), so its KV cache is computed once and shared by all rows.
     Returns residuals [B, n_sites, d], attention and MLP outputs [B, n_layers, d], and logits [B, vocab].
     """
     B = len(patch_site)
     layers = model.model.layers
-    cache = model.model(input_ids=torch.tensor([prefix], device=model.device), use_cache=True).past_key_values
+    cache = copy.deepcopy(cache)  # the forward pass below extends the cache, so leave the caller's copy untouched
     cache.batch_repeat_interleave(B)
     resid, attn, mlp = {}, {}, {}
 
     def patch(site, h):
         h = h.clone()
-        h[:, -1] = torch.where((patch_site == site)[:, None], patch_vec.to(h.dtype), h[:, -1])
+        new = h[:, -1] + patch_vec.to(h.dtype) if add else patch_vec.to(h.dtype)
+        h[:, -1] = torch.where((patch_site == site)[:, None], new, h[:, -1])
         resid[site] = h[:, -1].float()
         return h
 

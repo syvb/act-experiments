@@ -5,6 +5,10 @@ patches site s. Ablations:
   mean     - mean residual over other contexts ending in the same token (token identity kept, context removed)
   resample - the residual of one other real context ending in the same token (the "donor")
   global   - mean residual over all tokens (removes the token identity too)
+With --noise-scales, noise is also added to the clean residual (nothing is removed), at each given multiple s:
+  add_context_x{s} - adds s * (donor - token mean): another real context's deviation from the token mean. At s = 1,
+                     resample = mean ablation + this, since donor = clean + (token mean - clean) + (donor - token mean)
+  add_random_x{s}  - adds a random direction of the same size, fixed per sample
 Runs in fp32 by default: with bf16, rounding noise is comparable to the effect of small early-layer patches.
 """
 import argparse
@@ -15,9 +19,7 @@ import random
 import numpy as np
 import torch
 
-from common import MIN_POS, iter_docs, last_position_resid, load_model, run_patched
-
-ABLATIONS = ["mean", "resample", "global"]
+from common import MIN_POS, iter_docs, last_position_resid, load_model, prefix_cache, run_patched
 
 p = argparse.ArgumentParser()
 p.add_argument("--model", default="Qwen/Qwen3-0.6B-Base")
@@ -28,6 +30,8 @@ p.add_argument("--test-docs", type=int, default=10000, help="held-out docs to dr
 p.add_argument("--dtype", default="float32", choices=["float32", "bfloat16"])
 p.add_argument("--device", default="cuda")
 p.add_argument("--seed", type=int, default=0)
+p.add_argument("--ablations", nargs="+", default=["mean", "resample", "global"], choices=["mean", "resample", "global"])
+p.add_argument("--noise-scales", type=float, nargs="*", default=[], help="see the docstring")
 p.add_argument("--out", required=True)
 p.add_argument("--acts", help="also save activations (bf16) here: clean last-position residuals of every sample, and "
                               "all patched residuals of the first --full-acts samples")
@@ -36,6 +40,8 @@ p.add_argument("--massive-dims", type=int, default=5,
                help="also record sq/spread without the N dims with the largest |mean| (massive activations dominate L2 "
                     "distances in some layers of some models)")
 args = p.parse_args()
+conditions = (args.ablations + [f"add_context_x{s:g}" for s in args.noise_scales]
+              + [f"add_random_x{s:g}" for s in args.noise_scales])
 
 tok, model = load_model(args.model, args.device, getattr(torch, args.dtype))
 dev = model.device
@@ -75,11 +81,18 @@ for i, (doc, T, donor_doc, donor_T) in enumerate(samples):
     token, next_token = ids[T], ids[T + 1]
     donor = last_position_resid(model, docs[donor_doc][: donor_T + 1])  # [n_sites, d]
     token_mean = means[:, slot[token]].to(dev)  # [n_sites, d]
+    context_dev = donor - token_mean  # [n_sites, d]; 0 at site 0, where nothing depends on context
+    direction = torch.randn(context_dev.shape, generator=torch.Generator().manual_seed(doc * 1000 + T)).to(dev)
+    random_dev = direction / direction.norm(dim=-1, keepdim=True) * context_dev.norm(dim=-1, keepdim=True)
+    replace = {"mean": token_mean, "resample": donor, "global": global_mean}
+    patches = ([(replace[a], False) for a in args.ablations] + [(s * context_dev, True) for s in args.noise_scales]
+               + [(s * random_dev, True) for s in args.noise_scales])  # (vector per site, add it?) per condition
+    cache = prefix_cache(model, ids[:T])
 
-    out, resids = collections.defaultdict(list), []  # metric -> one entry per ablation
-    for patch_vec in [token_mean, donor, global_mean]:
+    out, resids = collections.defaultdict(list), []  # metric -> one entry per condition
+    for patch_vec, add in patches:
         patch_vec = torch.cat([patch_vec[:1], patch_vec])  # row 0's entry is unused
-        resid, attn, mlp, logits = run_patched(model, ids[:T], token, patch_site, patch_vec)
+        resid, attn, mlp, logits = run_patched(model, cache, token, patch_site, patch_vec, add)
         resids.append(resid)
         clean, patched = resid[0], resid[1:]  # [site, d], [patch site, measured site, d]
         diff = patched - clean
@@ -106,22 +119,22 @@ for i, (doc, T, donor_doc, donor_T) in enumerate(samples):
     results["spread_no_massive"].append(((clean - token_mean)[..., keep] ** 2).sum(-1).cpu())
     results["donor_gap"].append(((clean - donor) ** 2).sum(-1).cpu())  # [site]: clean's distance from the donor
     for k, v in out.items():
-        results[k].append(torch.stack(v).cpu())  # [ablation, ...]
+        results[k].append(torch.stack(v).cpu())  # [condition, ...]
     if args.acts:
         acts["ids"].append(torch.tensor(ids[: T + 2]))  # context, final token, and the true next token
         acts["clean"].append(clean.bfloat16().cpu())  # [site, d]
         if i < args.full_acts:
-            acts["patched"].append(torch.stack(resids).bfloat16().cpu())  # [ablation, 1 + patch site, site, d]
+            acts["patched"].append(torch.stack(resids).bfloat16().cpu())  # [condition, 1 + patch site, site, d]
     if (i + 1) % 100 == 0:
         print(f"{i + 1}/{len(samples)} samples", flush=True)
 
 arrays = {k: torch.stack(v).numpy() if torch.is_tensor(v[0]) else np.array(v) for k, v in results.items()}
-np.savez(args.out + ".tmp.npz", model=args.model, dtype=args.dtype, ablations=ABLATIONS,
+np.savez(args.out + ".tmp.npz", model=args.model, dtype=args.dtype, ablations=conditions,
          massive_dims=massive.cpu().numpy(), **arrays)
 os.replace(args.out + ".tmp.npz", args.out)  # never leave a truncated file behind
 
 if args.acts:
-    acts = dict(model=args.model, ablations=ABLATIONS, doc=results["doc"], T=results["T"], ids=acts["ids"],
+    acts = dict(model=args.model, ablations=conditions, doc=results["doc"], T=results["T"], ids=acts["ids"],
                 clean=torch.stack(acts["clean"]), patched=torch.stack(acts["patched"]) if acts["patched"] else None)
     torch.save(acts, args.acts + ".tmp")
     os.replace(args.acts + ".tmp", args.acts)

@@ -15,6 +15,13 @@ Ablations (all applied only at the final position; earlier positions are untouch
   on-distribution, and it lets us ask how far the model moves back from the donor towards the true context.
 - **global**: the mean over all tokens, which also deletes the token's identity. This is a contrast condition.
 
+Noise conditions (`patch.py --noise-scales`) add a vector to the clean residual instead of replacing it, so nothing is
+removed. Each is run at several multiples s of |donor − token mean|:
+
+- **add_context_x{s}**: adds s × (donor − token mean), another real context's deviation for the same token. At s = 1,
+  resample = mean ablation + this.
+- **add_random_x{s}**: adds a random direction of the same size (fixed per sample).
+
 ## Metrics (see `plot.py` for exact definitions)
 
 - **disruption**[l, l']: E|patched − clean|² / E|clean − token mean|², both at l'. The perturbation's size relative
@@ -25,6 +32,9 @@ Ablations (all applied only at the final position; earlier positions are untouch
   differences created by later blocks. Per-block attention/MLP contributions to "retained" are plotted too.
 - **pullback** (resample): fraction of the way back from the donor's activation to the clean one.
 - **Output**: KL(clean ‖ patched) of the next-token distribution and the increase in loss on the true next token.
+- **induced** (`plot_noise.py`): like disruption, but only the part of the perturbation orthogonal to the injected
+  vector, i.e. what later blocks changed because of the patch. Noise that later blocks ignore counts towards
+  disruption but not towards induced.
 
 Raw size ratios (|diff at l'| / |injected at l|) are not used, because typical activation sizes grow ~10× over the
 last blocks. Line plots show 90% bootstrap bands that resample whole docs.
@@ -42,10 +52,11 @@ last blocks. Line plots show 90% bootstrap bands that resample whole docs.
 ## Files
 
 - `common.py`: model/data loading, hooks, and `run_patched`. The context is run once and its KV cache is shared by a
-  batch of last-token rows: row 0 is clean, and row 1 + s patches site s.
+  batch of last-token rows (row 0 is clean, and row 1 + s patches site s) and by every condition.
 - `means.py`: pass 1, per-token mean residuals over FineWeb positions [64, 512).
 - `patch.py`: pass 2, the patching experiment on held-out docs. It makes one `run_patched` call per ablation.
 - `plot.py`: per-model heatmaps (disruption, retained, per-block), a cross-size figure, and a text summary.
+- `plot_noise.py`: heatmaps, KL curves and a text summary for a run with noise conditions.
 - `test_patch.py`: checks `run_patched` (residuals, attention/MLP outputs, logits) against a plain full forward pass
   with a hook, in fp32.
 - `check_means_precision.py`: checks that bf16 means match fp32 ones. On 0.6B the gap is 70–800× below the
@@ -55,6 +66,7 @@ last blocks. Line plots show 90% bootstrap bands that resample whole docs.
   token ids, and every patched residual for the first 32 samples.
 - `run_robust.sh`: an extra 1,000-sample pass after `run_all.sh` that also records distances without the 5
   massive-activation dims.
+- `run_noise.sh`: the GPU run with noise conditions, for one model (14B by default), on the main run's samples.
 - `run_all.sh`: the full GPU run. Launch it with `nohup ./run_all.sh > run.log 2>&1 &`, and copy `out/` off the pod
   before terminating it.
 
