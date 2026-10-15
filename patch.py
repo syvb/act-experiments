@@ -32,6 +32,9 @@ p.add_argument("--out", required=True)
 p.add_argument("--acts", help="also save activations (bf16) here: clean last-position residuals of every sample, and "
                               "all patched residuals of the first --full-acts samples")
 p.add_argument("--full-acts", type=int, default=32)
+p.add_argument("--massive-dims", type=int, default=5,
+               help="also record sq/spread without the N dims with the largest |mean| (massive activations dominate L2 "
+                    "distances in some layers of some models)")
 args = p.parse_args()
 
 tok, model = load_model(args.model, args.device, getattr(torch, args.dtype))
@@ -41,6 +44,9 @@ assert m["model"] == args.model
 means, global_mean = m["means"], m["global_mean"].to(dev)  # [n_sites, n_tokens, d] (kept on CPU), [n_sites, d]
 slot = {t: i for i, t in enumerate(m["token_ids"].tolist())}
 n_sites = model.config.num_hidden_layers + 1
+massive = means.abs().amax(dim=(0, 1)).topk(args.massive_dims).indices.to(dev)
+keep = torch.ones(model.config.hidden_size, dtype=torch.bool, device=dev)
+keep[massive] = False
 
 # Sample (doc, T) uniformly among held-out positions whose token has a mean; the donor is a random occurrence of the
 # same token in a different doc. T+1 must exist so we can measure the loss on the true next token.
@@ -80,6 +86,7 @@ for i, (doc, T, donor_doc, donor_T) in enumerate(samples):
         injected = diff[range(n_sites), range(n_sites)]  # [patch site, d]: the perturbation we put in
         logp = logits.log_softmax(-1)
         out["sq"].append((diff**2).sum(-1))  # [patch, measured]: squared size of the perturbation downstream
+        out["sq_no_massive"].append((diff[..., keep] ** 2).sum(-1))  # ... ignoring the massive-activation dims
         out["proj"].append(torch.einsum("pmd,pd->pm", diff, injected))  # ... and its overlap with the injected one
         # [patch, block]: how much each block's attention / MLP output pushes against the injected perturbation
         out["attn_repair"].append(-torch.einsum("pld,pd->pl", attn[1:] - attn[0], injected))
@@ -96,6 +103,7 @@ for i, (doc, T, donor_doc, donor_T) in enumerate(samples):
     results["donor_doc"].append(donor_doc)
     results["donor_T"].append(donor_T)
     results["spread"].append(((clean - token_mean) ** 2).sum(-1).cpu())  # [site]: clean's distance from token mean
+    results["spread_no_massive"].append(((clean - token_mean)[..., keep] ** 2).sum(-1).cpu())
     results["donor_gap"].append(((clean - donor) ** 2).sum(-1).cpu())  # [site]: clean's distance from the donor
     for k, v in out.items():
         results[k].append(torch.stack(v).cpu())  # [ablation, ...]
@@ -108,7 +116,8 @@ for i, (doc, T, donor_doc, donor_T) in enumerate(samples):
         print(f"{i + 1}/{len(samples)} samples", flush=True)
 
 arrays = {k: torch.stack(v).numpy() if torch.is_tensor(v[0]) else np.array(v) for k, v in results.items()}
-np.savez(args.out + ".tmp.npz", model=args.model, dtype=args.dtype, ablations=ABLATIONS, **arrays)
+np.savez(args.out + ".tmp.npz", model=args.model, dtype=args.dtype, ablations=ABLATIONS,
+         massive_dims=massive.cpu().numpy(), **arrays)
 os.replace(args.out + ".tmp.npz", args.out)  # never leave a truncated file behind
 
 if args.acts:

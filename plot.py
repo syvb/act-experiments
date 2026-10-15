@@ -43,15 +43,21 @@ def load(path):
     E_injected = injected.mean(0)[:, :, None]
     with np.errstate(invalid="ignore", divide="ignore"):
         r["disruption"] = r["sq"].mean(0) / r["spread"].mean(0)
+        if "sq_no_massive" in r:  # same, ignoring the few massive-activation dims (see patch.py --massive-dims)
+            r["disruption_no_massive"] = r["sq_no_massive"].mean(0) / r["spread_no_massive"].mean(0)
         r["retained"] = r["proj"].mean(0) / E_injected
         # per-block change in the retained share; block j writes into site j + 1
         r["block_attn"], r["block_mlp"] = [np.full_like(r["retained"], np.nan) for _ in range(2)]
         r["block_attn"][:, :, 1:] = -r["attn_repair"].mean(0) / E_injected
         r["block_mlp"][:, :, 1:] = -r["mlp_repair"].mean(0) / E_injected
-    for k, include_diag in [("disruption", True), ("retained", True), ("block_attn", False), ("block_mlp", False)]:
-        r[k][:, np.tril(np.ones((n, n), bool), -1 if include_diag else 0)] = np.nan
-    r["disruption"][:, :, 0] = np.nan  # embeddings don't vary across contexts (spread is 0)
-    r["disruption"][[a != "global" for a in r["ablations"]], 0] = np.nan  # same-token patches of embeddings: no-ops
+    for k, include_diag in [("disruption", True), ("disruption_no_massive", True), ("retained", True),
+                            ("block_attn", False), ("block_mlp", False)]:
+        if k in r:
+            r[k][:, np.tril(np.ones((n, n), bool), -1 if include_diag else 0)] = np.nan
+    for k in ["disruption", "disruption_no_massive"]:
+        if k in r:
+            r[k][:, :, 0] = np.nan  # embeddings don't vary across contexts (spread is 0)
+            r[k][[a != "global" for a in r["ablations"]], 0] = np.nan  # same-token patches of embeddings: no-ops
     for k in ["retained", "block_attn", "block_mlp"]:
         r[k][:, 0] = np.nan  # ... and global's embedding-scale perturbation isn't comparable to the later ones
     docs = np.unique(r["doc"], return_inverse=True)[1]
@@ -159,6 +165,11 @@ if __name__ == "__main__":
                  "perturbation size relative to natural context variation",
                  "disruption (log scale; 1 = as big as normal context variation)",
                  TwoSlopeNorm(vcenter=0, vmin=-6, vmax=3), f"{out_dir}/{name}_disruption.png", log2=True)
+        if "disruption_no_massive" in r:
+            heatmaps(r, [(f"{a} ablation", r["disruption_no_massive"][i]) for i, a in enumerate(r["ablations"])],
+                     f"disruption ignoring the {len(r['massive_dims'])} massive-activation dims",
+                     "disruption (log scale; 1 = as big as normal context variation)",
+                     TwoSlopeNorm(vcenter=0, vmin=-6, vmax=3), f"{out_dir}/{name}_disruption_no_massive.png", log2=True)
         heatmaps(r, [(f"{a} ablation", r["retained"][i]) for i, a in enumerate(r["ablations"])],
                  "share of the injected direction still present",
                  "retained (1 = all still there, 0 = cancelled, >1 = grown)",
