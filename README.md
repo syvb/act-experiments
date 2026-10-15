@@ -1,7 +1,7 @@
 # act-experiments: how self-correcting are Qwen3 base models?
 
-**Results: see [RESULTS.md](RESULTS.md).** The data is on Hugging Face (private dataset
-`syvb/qwen3-last-position-patching`).
+**Results: see [RESULTS.md](RESULTS.md).** The data is on Hugging Face:
+[`syvb/qwen3-last-position-patching`](https://huggingface.co/datasets/syvb/qwen3-last-position-patching).
 
 Replace the residual stream at the **last position** at one site with an ablated value, then measure how far every
 later site's residual stream at that position moves away from the clean run. Repeating this for every site gives a

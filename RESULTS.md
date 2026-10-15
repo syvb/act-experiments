@@ -10,8 +10,8 @@ Ablations:
 - **global**: the average over all tokens.
 
 Earlier positions are left untouched, so the only way to recover is for later blocks to re-read the context from
-them. Method and metric definitions are in [README.md](README.md). Data is on Hugging Face (private):
-`syvb/qwen3-last-position-patching`. Curves are on W&B: `octahedral-systems/qwen3-self-correction`.
+them. Method and metric definitions are in [README.md](README.md). Data is on Hugging Face:
+[`syvb/qwen3-last-position-patching`](https://huggingface.co/datasets/syvb/qwen3-last-position-patching). Curves are on W&B: `octahedral-systems/qwen3-self-correction`.
 
 ![cross-size curves](results/cross_size.png)
 
