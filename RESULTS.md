@@ -15,6 +15,33 @@ them. Method and metric definitions are in [README.md](README.md). Data is on Hu
 
 ![cross-size curves](results/cross_size.png)
 
+## The triangular matrices
+
+Each panel is the (patched site × measured site) matrix for one ablation. Rows are the site that was patched, columns
+the site where the perturbation is measured; site 0 = embeddings, site i = after i blocks. The colour is disruption on
+a log scale: white = 1, i.e. the perturbation is as big as the natural difference between contexts for this token;
+blue = smaller (recovered); red = larger. Reading along a row follows one patch through the later blocks, and the
+rightmost column is what is left after the last block. Mean-ablation rows start at exactly 1 on the diagonal, and
+resample rows at ≈2, because two real contexts differ by about twice the natural variation.
+
+![Qwen3-14B-Base triangular matrices](results/Qwen3-14B-Base_disruption.png)
+
+In the mean and resample panels, rows above about site 25 (of 40) end up blue at the right edge, and rows below it
+stay white or red. That boundary is the transition in finding 1. The global panel stays at or above 1 almost everywhere, because the
+token's identity is never recovered (finding 6). The other sizes show the same shape:
+
+![Qwen3-0.6B-Base triangular matrices](results/Qwen3-0.6B-Base_disruption.png)
+
+![Qwen3-1.7B-Base triangular matrices](results/Qwen3-1.7B-Base_disruption.png)
+
+For 4B and 8B these are from the 1,000-sample pass that leaves out the 5 massive-activation dimensions. In their main
+3,000-sample matrices ([4B](results/Qwen3-4B-Base_disruption.png), [8B](results/Qwen3-8B-Base_disruption.png)), a
+band at measured sites 17–26 is dominated by 3 samples; see Caveats.
+
+![Qwen3-4B-Base triangular matrices without massive dims](results/Qwen3-4B-Base_disruption_no_massive.png)
+
+![Qwen3-8B-Base triangular matrices without massive dims](results/Qwen3-8B-Base_disruption_no_massive.png)
+
 ## Findings
 
 1. **There is a sharp transition at about 60–65% depth, and it is the same at every size.** Context removed at the
@@ -55,13 +82,16 @@ not re-gathered.
 
 ## Caveats
 
-- **Massive activations in 8B.** In Qwen3-8B, a few samples reach |x| ≈ 10⁴ in 5 dimensions at sites 17–26. In the
-  main 8B heatmap (`results/Qwen3-8B-Base_disruption.png`), just 3 of the 3,000 samples carry 92% of the
-  perturbation in that band. That band reflects the patch flipping those activations, not typical behavior. A
-  separate 1,000-sample pass that leaves those dimensions out gives a smooth picture like the other models
-  (`results/Qwen3-8B-Base_disruption_no_massive.png`). Final-site disruption changes by at most ~20%: for patches at
-  75% depth in 8B/14B it drops from ~1.15 to ~0.9–0.96. So late perturbations persist at about full size rather than
-  clearly growing. The other models are not much affected (`results/summary_robust.txt`).
+- **Massive activations in 4B and 8B.** In a few samples, the patch switches a massive activation at the last
+  position on or off: |patched − clean| reaches 4,000–13,000 at sites 17–26, while clean values in those dimensions
+  are normally below ~100 (in 4B, no clean sample exceeds 100 there). In the main heatmaps
+  (`results/Qwen3-{4B,8B}-Base_disruption.png`), just 3 of the 3,000 samples carry 74% (4B) and 93% (8B) of the
+  mean-ablation perturbation in that band, against about 1% in 0.6B, 1.7B and 14B. So that band reflects a few
+  samples, not typical behavior. A separate 1,000-sample pass that leaves out the 5 dimensions with the largest mean
+  activation gives a smooth picture like the other models (`results/Qwen3-{4B,8B}-Base_disruption_no_massive.png`).
+  Final-site disruption changes by at most ~20%: for patches at 75% depth it drops by 11% in 4B and 20% in 8B, and in
+  8B/14B it goes from ~1.15 to ~0.9–0.96. So late perturbations persist at about full size rather than clearly
+  growing (`results/summary_robust.txt`).
 - Only tokens with ≥500 occurrences in the means set are tested: 2,139 token types, 73% of positions. Function
   tokens and punctuation dominate. The text is English web data only, contexts are 64–511 tokens long, and only the
   final position is patched; positions after it are not simulated.
