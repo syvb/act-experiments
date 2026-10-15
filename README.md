@@ -1,5 +1,8 @@
 # act-experiments: how self-correcting are Qwen3 base models?
 
+**Results: see [RESULTS.md](RESULTS.md).** The data is on Hugging Face (private dataset
+`syvb/qwen3-last-position-patching`).
+
 Replace the residual stream at the **last position** at one site with an ablated value, then measure how far every
 later site's residual stream at that position moves away from the clean run. Repeating this for every site gives a
 triangular (patched site × measured site) matrix per model. Sites: 0 = token embeddings, i = after i blocks.
@@ -50,6 +53,8 @@ last blocks. Line plots show 90% bootstrap bands that resample whole docs.
 - `log_wandb.py`: logs one model's result curves to W&B (metrics only).
 - `patch.py --acts` also saves bf16 activations: the clean last-position residuals of every sample, the sample
   token ids, and every patched residual for the first 32 samples.
+- `run_robust.sh`: an extra 1,000-sample pass after `run_all.sh` that also records distances without the 5
+  massive-activation dims.
 - `run_all.sh`: the full GPU run. Launch it with `nohup ./run_all.sh > run.log 2>&1 &`, and copy `out/` off the pod
   before terminating it.
 
