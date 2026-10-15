@@ -161,15 +161,17 @@ if __name__ == "__main__":
     runs = [load(p) for p in paths]
     for r in runs:
         name = r["name"]
+        # symmetric log scale (1/64 and 64 equally saturated); older *_disruption.png files used 1/64..8
         heatmaps(r, [(f"{a} ablation", r["disruption"][i]) for i, a in enumerate(r["ablations"])],
                  "perturbation size relative to natural context variation",
                  "disruption (log scale; 1 = as big as normal context variation)",
-                 TwoSlopeNorm(vcenter=0, vmin=-6, vmax=3), f"{out_dir}/{name}_disruption.png", log2=True)
+                 TwoSlopeNorm(vcenter=0, vmin=-6, vmax=6), f"{out_dir}/{name}_disruption_sym.png", log2=True)
         if "disruption_no_massive" in r:
             heatmaps(r, [(f"{a} ablation", r["disruption_no_massive"][i]) for i, a in enumerate(r["ablations"])],
                      f"disruption ignoring the {len(r['massive_dims'])} massive-activation dims",
                      "disruption (log scale; 1 = as big as normal context variation)",
-                     TwoSlopeNorm(vcenter=0, vmin=-6, vmax=3), f"{out_dir}/{name}_disruption_no_massive.png", log2=True)
+                     TwoSlopeNorm(vcenter=0, vmin=-6, vmax=6), f"{out_dir}/{name}_disruption_no_massive_sym.png",
+                     log2=True)
         heatmaps(r, [(f"{a} ablation", r["retained"][i]) for i, a in enumerate(r["ablations"])],
                  "share of the injected direction still present",
                  "retained (1 = all still there, 0 = cancelled, >1 = grown)",

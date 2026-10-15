@@ -30,28 +30,31 @@ curve comes from the massive-activation dimensions (see Caveats).
 Each panel is the (patched site × measured site) matrix for one ablation. Rows are the site that was patched, columns
 the site where the perturbation is measured; site 0 = embeddings, site i = after i blocks. The colour is disruption on
 a log scale: white = 1, i.e. the perturbation is as big as the natural difference between contexts for this token;
-blue = smaller; red = larger. Reading along a row follows one patch through the later blocks, and the rightmost column
+blue = smaller; red = larger. The scale is symmetric, from 1/64 to 64, so equal colour strength means an equal factor
+away from 1. Reading along a row follows one patch through the later blocks, and the rightmost column
 is what is left after the last block. Mean-ablation rows start at exactly 1 on the diagonal, and resample rows at ≈2,
 because two real contexts differ by about twice the natural variation. Row 0 of the mean and resample panels is blank
 because those patches are no-ops.
 
 All five matrices here come from the 1,000-sample pass that leaves out the 5 massive-activation dimensions, so they
 are on the same footing (see Caveats). The main 3,000-sample matrices, with all dimensions, are
-`results/Qwen3-*-Base_disruption.png`.
+`results/Qwen3-*-Base_disruption_sym.png`. Earlier versions of all these charts, with an asymmetric 1/64 to 8 scale
+that makes red look stronger than blue, are kept as `results/Qwen3-*-Base_disruption.png` and
+`results/Qwen3-*-Base_disruption_no_massive.png`.
 
-![Qwen3-14B-Base triangular matrices](results/Qwen3-14B-Base_disruption_no_massive.png)
+![Qwen3-14B-Base triangular matrices](results/Qwen3-14B-Base_disruption_no_massive_sym.png)
 
 In the mean panel, rows down to about site 27 (of 40) end up blue at the right edge, and rows from about site 30 end
 near 1. In the resample panel, the boundary is at about site 25. That boundary is the transition in finding 1. The
 global panel stays at or above 1 almost everywhere (finding 6). The other sizes show the same shape:
 
-![Qwen3-0.6B-Base triangular matrices](results/Qwen3-0.6B-Base_disruption_no_massive.png)
+![Qwen3-0.6B-Base triangular matrices](results/Qwen3-0.6B-Base_disruption_no_massive_sym.png)
 
-![Qwen3-1.7B-Base triangular matrices](results/Qwen3-1.7B-Base_disruption_no_massive.png)
+![Qwen3-1.7B-Base triangular matrices](results/Qwen3-1.7B-Base_disruption_no_massive_sym.png)
 
-![Qwen3-4B-Base triangular matrices](results/Qwen3-4B-Base_disruption_no_massive.png)
+![Qwen3-4B-Base triangular matrices](results/Qwen3-4B-Base_disruption_no_massive_sym.png)
 
-![Qwen3-8B-Base triangular matrices](results/Qwen3-8B-Base_disruption_no_massive.png)
+![Qwen3-8B-Base triangular matrices](results/Qwen3-8B-Base_disruption_no_massive_sym.png)
 
 ## Findings
 
