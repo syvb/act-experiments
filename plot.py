@@ -84,7 +84,7 @@ def bootstrap(r, n_boot=200, seed=0):
     return {k: np.nanpercentile([b[k] for b in boots], [5, 95], axis=0) for k in boots[0]}
 
 
-def heatmaps(r, panels, title, cbar_label, norm, out, log2=False, xlabel="measured at site l'"):
+def heatmaps(r, panels, title, cbar_label, norm, out, log2=False, xlabel="measured at site l'", n_note=None):
     """One heatmap per (subtitle, [patch site, measured site] matrix) panel."""
     fig, axes = plt.subplots(1, len(panels), figsize=(4.2 * len(panels) + 1, 4.8), constrained_layout=True)
     for ax, (subtitle, M) in zip(axes, panels):
@@ -102,7 +102,8 @@ def heatmaps(r, panels, title, cbar_label, norm, out, log2=False, xlabel="measur
         cb.set_ticks(cb.get_ticks(), labels=[f"{2**t:g}" if t >= 0 else f"1/{2**-t:g}" for t in cb.get_ticks()])
     cb.set_label(cbar_label, color=INK_2)
     cb.outline.set_visible(False)
-    fig.suptitle(f"{r['name']}: {title}\n(n = {len(r['T'])} samples, {r['dtype']}; "
+    n_note = n_note or f"n = {len(r['T'])} samples"
+    fig.suptitle(f"{r['name']}: {title}\n({n_note}, {r['dtype']}; "
                  "site 0 = embeddings, site i = after i blocks)", color=INK, fontsize=11)
     fig.savefig(out, dpi=150)
     plt.close(fig)

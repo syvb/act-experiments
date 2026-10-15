@@ -1,6 +1,7 @@
 """Shared helpers: model/data loading, residual-stream hooks, and the patched forward pass."""
 import contextlib
 import copy
+import re
 
 import pyarrow.parquet as pq
 import torch
@@ -8,6 +9,11 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MIN_POS = 64   # skip early positions (Qwen3 has no BOS; the first tokens act as attention sinks)
 MAX_LEN = 512  # docs are truncated to this; means and test positions both come from [MIN_POS, MAX_LEN)
+TOPICS = {  # for steering: a regex for a mention, and single-token words whose probability measures the topic
+    "weddings": (r"\bweddings?\b", "wedding weddings bride groom bridal marriage married ceremony reception honeymoon"),
+    "football": (r"\b(football|soccer)\b", "football soccer goal goals match team league season coach players striker"),
+    "cooking": (r"\b(recipes?|cooking|baking)\b", "recipe recipes cook cooking bake baking oven flour sauce ingredients dish"),
+}
 
 
 def load_model(name, device, dtype=torch.bfloat16):
@@ -17,8 +23,8 @@ def load_model(name, device, dtype=torch.bfloat16):
     return tok, model
 
 
-def iter_docs(parquet_path, tok, reverse=False):
-    """Yield FineWeb docs as token-id lists truncated to MAX_LEN.
+def iter_docs(parquet_path, tok, reverse=False, with_text=False):
+    """Yield FineWeb docs as token-id lists truncated to MAX_LEN (with with_text=True, as (ids, text) pairs).
     The means pass reads from the start of the file, test samples from the end (reverse=True). The file has ~1M docs;
     the means pass uses ~35k for 10M tokens and the test set 10k, so they never overlap."""
     f = pq.ParquetFile(parquet_path)
@@ -28,7 +34,14 @@ def iter_docs(parquet_path, tok, reverse=False):
         for text in reversed(texts) if reverse else texts:
             ids = tok(text[: MAX_LEN * 16]).input_ids[:MAX_LEN]  # pre-cut very long docs before tokenizing
             if len(ids) >= MIN_POS + 2:
-                yield ids
+                yield (ids, text) if with_text else ids
+
+
+def topic_mentions(text, ids, tok, pattern):
+    """Positions in ids (a doc's first MAX_LEN tokens, from iter_docs) right after each match of pattern."""
+    offsets = tok(text[: MAX_LEN * 16], return_offsets_mapping=True).offset_mapping[: len(ids)]
+    matches = re.finditer(pattern, text[: offsets[-1][1]], re.I)
+    return [next(i for i, (_, end) in enumerate(offsets) if end >= m.end()) + 1 for m in matches]
 
 
 def residual_sites(model):

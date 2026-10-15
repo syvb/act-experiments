@@ -19,6 +19,11 @@ later blocks write far more context-dependent state, read from the untouched ear
 perturbation ends up a small part of it. Only 4B, 8B and 14B also cancel much of the injected vector. Patches after
 about 60–65% depth persist to the output at about full size.
 
+Adding a vector instead of removing the context gives a sharper picture (14B, [below](#adding-noise-instead-14b)).
+Before the transition, the MLPs remove most of an added random vector, and less of a realistic one, which also does
+3–6× more damage. A topic steering vector is not removed at all: in a 0.6B prototype
+([below](#steering-06b-prototype)), the model amplifies it.
+
 ![cross-size curves](results/cross_size.png)
 
 The cross-size figure is from the main run, with all dimensions. The points at depth 0 for mean and resample ablation
@@ -110,6 +115,97 @@ middle of the network. Their main subject is Llama 3.1; for Qwen 3 they report t
 pronounced, but still present". Our transition is somewhat later, at 55–65% depth. The two results describe the same
 picture from different sides: if late layers write little, a late patch persists while an early one is outgrown.
 
+## Adding noise instead (14B)
+
+Mean ablation removes the context. Here nothing is removed: at one site, a vector is added to the clean residual at the
+last position. There are two kinds, each at ¼, 1, 4 and 16 × |donor − token mean|, so at ×1 the vector is on average
+as large as a mean ablation's:
+
+- **add_context**: another real context's deviation for the same token (donor − token mean). This is realistic,
+  activation-shaped noise. At ×1, resample = mean ablation + add_context exactly.
+- **add_random**: a random direction of the same size.
+
+The run uses Qwen3-14B-Base with the main run's 3,000 samples and donors; it reproduces the main run's mean and resample
+numbers exactly. A 200-sample CPU run of 0.6B shows the same pattern. Values below are after the last block, for
+patches at 25/50/75% depth (sites 10/20/30).
+
+![14B noise curves](results/Qwen3-14B-Base_noise_curves.png)
+
+![14B retained share](results/Qwen3-14B-Base_noise_retained.png)
+
+1. **Random noise does much less damage than realistic noise of the same size.** At ×1, KL is 0.010/0.032/0.13 for
+   random noise, 0.048/0.16/0.77 for add_context, and 0.11/0.28/1.75 for mean ablation. Realistic noise does more
+   damage than random noise in 85–97% of samples, with a median per-sample ratio of 3–6×. Removing the right context
+   costs about twice as much as adding an equally large wrong one.
+2. **Before the transition, the MLPs actively remove added noise, random noise most of all.** For a patch at 25% depth,
+   11% of a random vector is left after the last block, against 35% of a realistic one (41% for mean ablation). Over
+   the 10 blocks after a patch at site 10, the MLPs remove 77% of the random vector and attention 7%. After the
+   transition nothing is removed: at 75% depth a random vector passes through unchanged (retained 1.0), and realistic
+   ones grow (1.18; mean ablation 1.30). This comes on top of the dilution in finding 4.
+3. **The removal saturates.** For a patch at 25% depth, the share of a random vector left is 0.10, 0.11, 0.19 and 0.83
+   at ¼, 1, 4 and 16×, and 0.28, 0.35, 0.50 and 0.88 for realistic noise. At 16×, the MLPs of the next 10 blocks remove
+   only 1% of the random vector.
+4. **Small realistic noise sits on a plateau.** If the response were smooth, KL would grow with the square of the
+   noise size, i.e. 16× per 4× step. At 25% depth, KL for random noise grows 17×, 21× and 24× per step; the growth
+   speeds up as the removal saturates. For realistic noise it grows 32× from ¼ to 1, so at ¼ it is damped more than
+   proportionally (the activation plateaus of Heimersheim & Mendel 2024 and Janiak et al. 2024), then 24× and 5× as the
+   output saturates.
+5. **Resample costs more than its two parts.** Its KL is 1.8–2.1× the sum of mean ablation and add_context ×1 (0.28 vs
+   0.16, 0.93 vs 0.45, 5.2 vs 2.5), which fits KL growing faster than quadratically at these sizes. This explains
+   finding 5's resample/mean ratio beyond the built-in factor of 2.
+
+Caveat: sites 3–4 are where 14B's massive activations form, and noise there sometimes switches one on at the last
+position. For add_random ×4 at site 4, disruption at site 20 is 79 with all dimensions and 2.2 without the 5 massive
+ones. For add_context ×1 at site 3, 3 samples carry 95% of it (the red streak in
+`results/Qwen3-14B-Base_noise_disruption.png`). This causes the KL bumps near depth 0.1; the median sample is
+unaffected. Other figures: `results/Qwen3-14B-Base_noise_{disruption,induced,decomposition}.png`; numbers in
+`results/summary_noise_14B.txt`.
+
+Isotropic random directions are known to be a weak baseline (Lee & Heimersheim 2024, "Investigating Sensitive
+Directions in GPT-2"); add_context is close to their covariance-shaped alternative. That models treat realistic
+directions differently from random ones matches Ferreira da Silva & Heimersheim (2026), "Evidence for feature-specific
+error correction in LLMs".
+
+## Steering (0.6B prototype)
+
+Instead of noise, a topic steering vector (weddings, football or cooking) is added to the last position at one site.
+Each vector is the mean context deviation (residual minus its token's mean) at positions after the first mention, in
+200 FineWeb docs about the topic. So scale 1 is the average topic shift of a real doc, which is small: about 1–5% of
+the natural context variation (squared). The steer is applied at scales 1–32 to two sets of samples, each next to a random
+direction of the same size:
+
+- 80 positions in docs that never mention any topic, each steered with every topic.
+- 50 positions per topic in docs about that topic.
+
+Real topic signals grow about 10⁵× in squared size from the first block to the last. So the topic a steer carries at a
+later layer, measured along that layer's own topic vector, is compared with what an untouched steer would carry. This is
+a CPU prototype on 0.6B with 390 sample×topic rows, so the numbers are rough.
+
+![0.6B steering curves](results/Qwen3-0.6B-Base_steer_curves.png)
+
+![0.6B steering retained share](results/Qwen3-0.6B-Base_steer_retained.png)
+
+1. **The model doesn't correct a topic steer; it amplifies it.** For steers at 35–70% depth, the topic signal after the
+   last block is about 2–4× that of an untouched steer (3.9× for ×8 at 50% depth). The steering vector itself is kept
+   or grows (retained 1.16–1.45 off-topic at 50% depth), while a random vector of the same size is partly removed
+   (0.47–0.78).
+2. **Early steers are partly removed, like noise, and stay small.** At 25% depth, the steering vector is removed about
+   as much as a random one (retained 0.35 vs 0.27 at ×1). Its topic signal ends up about as large as an untouched
+   steer's (1.0–1.15× at scales 1–8), which by then is a tiny part of the model's own topic signal. The output moves
+   only from mid-depth on: log P(topic words) rises 2.3 nats for ×8 at 50% depth and 6.2 at 75%. For comparison, docs
+   on the topic and off it differ by about 5 nats.
+3. **A steer that contradicts the context isn't suppressed more.** Off-topic docs amplify it more than on-topic ones
+   (retained 1.16–1.45 vs 0.88–0.95 at 50% depth; topic signal 2.3–4.2× vs 2.1–2.9×). Its output effect is also larger
+   (+2.27 vs +0.76 nats at ×8, 50% depth), partly because topic words are already likely in on-topic docs. This fits
+   Bigelow et al. (2025), where steering and in-context evidence add up rather than the context overriding the steer.
+4. **A topic direction matters more than a random one.** At ×8, KL is 1.2–2.4× that of a random vector of the same
+   size.
+
+The closest prior measurement is Hahami et al. (2025), "Detecting the Disturbance", Section 6.2. After an early
+injection in Llama-3.1-8B-Instruct, the projection onto the injected direction decays. That matches point 2, but from
+mid-depth on we see the opposite. More figures: `results/Qwen3-0.6B-Base_steer_uptake.png`; numbers in
+`results/summary_steer_0.6B.txt`.
+
 ## Caveats
 
 - **Massive activations, mainly in 4B and 8B.** In a few samples, a patch switches a massive activation at the last
@@ -137,3 +233,7 @@ picture from different sides: if late layers write little, a late patch persists
 The pod ran for 3 h 39 min on 1× H100 SXM (RunPod secure cloud), about $14.60: 2 h 41 min for the main run (including installs and tests), 43 min
 for the extra pass without the massive dimensions, and the rest for setup and copying results. Reproduce with
 `run_all.sh` followed by `run_robust.sh`.
+
+The 14B noise run (`run_noise.sh`) took a second pod for 2 h 8 min, $8.49: 7 min of setup, 64 min of patching, and
+about 55 min idle after it finished. The steering prototype ran on CPU (`steer_vectors.py` and `steer.py` with
+`--device cpu --off-topic 80 --on-topic 50`).

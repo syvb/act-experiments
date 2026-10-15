@@ -22,6 +22,13 @@ removed. Each is run at several multiples s of |donor − token mean|:
   resample = mean ablation + this.
 - **add_random_x{s}**: adds a random direction of the same size (fixed per sample).
 
+Steering (`steer.py`) adds a topic vector (weddings, football, cooking) instead. Each vector is the mean context
+deviation (residual minus its token's mean) at positions in FineWeb docs about the topic, so scale 1 is the average
+topic shift of a real doc. It is applied both to docs that never mention the topic and to docs about it, next to a
+random direction of the same size. **uptake** is how much of the topic the perturbation carries at each later layer,
+measured along that layer's own topic vector, relative to a steer that later blocks left untouched (1 = same, < 1 =
+removed, > 1 = the model added more). The output effect is the change in log-probability of a fixed set of topic words.
+
 ## Metrics (see `plot.py` for exact definitions)
 
 - **disruption**[l, l']: E|patched − clean|² / E|clean − token mean|², both at l'. The perturbation's size relative
@@ -57,6 +64,7 @@ last blocks. Line plots show 90% bootstrap bands that resample whole docs.
 - `patch.py`: pass 2, the patching experiment on held-out docs. It makes one `run_patched` call per ablation.
 - `plot.py`: per-model heatmaps (disruption, retained, per-block), a cross-size figure, and a text summary.
 - `plot_noise.py`: heatmaps, KL curves and a text summary for a run with noise conditions.
+- `steer_vectors.py`, `steer.py`, `plot_steer.py`: the topic vectors, the steering run, and its plots and summary.
 - `test_patch.py`: checks `run_patched` (residuals, attention/MLP outputs, logits) against a plain full forward pass
   with a hook, in fp32.
 - `check_means_precision.py`: checks that bf16 means match fp32 ones. On 0.6B the gap is 70–800× below the
