@@ -28,7 +28,7 @@ Controls: the full layer-20 residual at the same token (positive), random Gaussi
 | `modal/config_200.json` | 20 texts × 10 random heads = 200 heads (`results/results_200.json`) |
 | `results/results_v1.json` | First run on the 4 texts: raw variant only, plus one T=1 sample per vector |
 | `judge/` | Haiku judge (`judge.mjs`), its 1,380 judgments (`judgments.jsonl`) and analysis (`analyze.mjs` → `summary.md`, `summary.json`) |
-| `report/` | Page and markdown report built from the 4-text run |
+| `report/` | Page and markdown report built from the 4-text run, and `examples_200.md` (built by `examples.mjs`): example decodes from the 200-head run with the judge's verdicts |
 
 All texts were written for this experiment, so they can't be in the NLA's training data. Positions and heads are
 picked by a seeded RNG: 8 heads from layers 0–20 (which write into the vector the NLA reads) and 2 from layers 21–27
