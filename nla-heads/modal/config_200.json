@@ -1,0 +1,137 @@
+{
+  "seed": 2026,
+  "batch_size": 96,
+  "max_new_tokens": 400,
+  "mean_texts": [
+    {
+      "kind": "chat",
+      "text": "Can you write a short cover letter for a junior data analyst position? I have a statistics degree and one summer internship at a regional bank, and I'm worried I don't have enough experience."
+    },
+    {
+      "kind": "text",
+      "text": "Preheat the oven to 190C. In a large bowl, whisk together the flour, baking soda and salt. In a separate bowl, cream the butter and both sugars until pale and fluffy, about three minutes, then beat in the eggs one at a time. Fold the dry ingredients into the wet mixture until just combined; overmixing will make the cookies tough."
+    },
+    {
+      "kind": "text",
+      "text": "The 2026 regional transit plan allocates roughly 40 percent of new capital spending to bus rapid transit corridors, a sharp change from the previous plan, which focused almost entirely on light rail. Planners argued that buses could be deployed faster and adjusted as ridership patterns continue to shift after the pandemic."
+    },
+    {
+      "kind": "text",
+      "text": "import numpy as np\n\ndef softmax(x, axis=-1):\n    # subtract the max for numerical stability\n    z = x - x.max(axis=axis, keepdims=True)\n    e = np.exp(z)\n    return e / e.sum(axis=axis, keepdims=True)\n\nprint(softmax(np.array([1.0, 2.0, 3.0])))"
+    },
+    {
+      "kind": "chat",
+      "text": "Why does the moon look bigger when it's near the horizon? My kid asked me and I realized I have no idea."
+    }
+  ],
+  "n_heads_early": 8,
+  "n_heads_late": 2,
+  "n_random": 20,
+  "also_sample": false,
+  "examples": [
+    {
+      "name": "chat: TFSA over-contribution",
+      "kind": "chat",
+      "text": "I think I accidentally put $4,000 too much into my TFSA this year because I forgot I'd already contributed at my old bank before switching jobs. The CRA hasn't contacted me yet. Should I withdraw the extra money right away, and will I have to pay a penalty for the months it was sitting there?",
+      "min_pos": 34
+    },
+    {
+      "name": "chat: JavaScript promise bug",
+      "kind": "chat",
+      "text": "Why does this print undefined? I'm calling getUser(id) which does fetch('/api/users/' + id).then(r => r.json()) but I'm not returning anything from the outer function, and then I do const user = getUser(5); console.log(user.name). I tried adding await in front of fetch but then it says await is only valid in async functions.",
+      "min_pos": 34
+    },
+    {
+      "name": "chat: roommate dispute",
+      "kind": "chat",
+      "text": "My roommate keeps leaving dirty dishes in the sink for days and when I bring it up she says she'll do them 'later' but later never comes. We split rent 50/50 and I don't want to ruin the friendship, but I'm starting to dread coming home. How do I bring this up without it turning into a huge fight?",
+      "min_pos": 34
+    },
+    {
+      "name": "chat: French train strike",
+      "kind": "chat",
+      "text": "Bonjour, je dois prendre le TGV de Lyon à Marseille vendredi matin mais j'ai entendu parler d'une grève de la SNCF ce week-end. Est-ce que mon billet sera remboursé automatiquement si le train est annulé, ou est-ce que je dois faire une demande moi-même?",
+      "min_pos": 34
+    },
+    {
+      "name": "news: wildfire evacuation",
+      "kind": "text",
+      "text": "Residents of Pine Hollow were ordered to evacuate Sunday afternoon as a wind-driven wildfire jumped Highway 12 and moved toward the town's northern subdivisions. Fire officials said the blaze had grown to roughly 3,200 hectares by evening and was zero percent contained. An emergency shelter opened at the regional high school gymnasium, where volunteers handed out water and cots to families who had left with little more than their pets."
+    },
+    {
+      "name": "news: curling final",
+      "kind": "text",
+      "text": "Down two points in the ninth end, skip Anneliese Brandt drew the button with her last stone to force an extra end, and her rink stole the winning point when the Halvorsen team's final takeout rolled out of the house. It was the first provincial title for the Brandt rink, which had lost in the semifinal three years in a row. 'We just kept telling each other to trust the ice,' Brandt said afterward."
+    },
+    {
+      "name": "science abstract: bumblebee navigation",
+      "kind": "text",
+      "text": "Bumblebees are known to use visual landmarks when returning to their nest, but the role of polarized skylight under overcast conditions remains unclear. Here we tracked 214 foraging workers of Bombus terrestris using harmonic radar while selectively blocking the ultraviolet polarization pattern with filter canopies. Bees under blocked canopies took on average 41 percent longer to return and showed increased looping flights near the release point, suggesting that polarization cues remain informative even when the sun is hidden."
+    },
+    {
+      "name": "recipe: red lentil soup",
+      "kind": "text",
+      "text": "Heat two tablespoons of olive oil in a heavy pot and soften one chopped onion and two carrots for about eight minutes. Stir in three cloves of garlic, a teaspoon of cumin and half a teaspoon of smoked paprika, and cook until fragrant. Add one cup of rinsed red lentils and five cups of vegetable stock, bring to a boil, then simmer for twenty minutes until the lentils collapse. Finish with the juice of half a lemon and blend partially if you like a thicker texture."
+    },
+    {
+      "name": "review: noise-cancelling headphones",
+      "kind": "text",
+      "text": "I've worn these on three long-haul flights now and the noise cancelling is genuinely excellent, especially on low engine drone. Battery life is closer to 26 hours than the advertised 30, which is still plenty. My main complaint is comfort: the headband presses on the top of my head after about two hours, and the ear cups get warm. The companion app is cluttered and kept asking me to create an account. Four stars, mostly for the sound."
+    },
+    {
+      "name": "legal: lease clause",
+      "kind": "text",
+      "text": "12. Early Termination. The Tenant may terminate this Lease before the end of the Term by giving the Landlord not less than sixty (60) days' written notice and paying an early termination fee equal to one (1) month's Rent. Upon such termination, the Security Deposit shall be returned in accordance with Section 9, less any amounts lawfully deducted for damage beyond ordinary wear and tear. This Section shall not apply if the Tenant is in default of any obligation under this Lease at the time notice is given."
+    },
+    {
+      "name": "history: fictional canal",
+      "kind": "text",
+      "text": "Construction of the Ashby and Wrenfield Canal began in 1791 after a decade of disputes between rival mill owners over the route. The engineer, a former surveyor named Josiah Pell, insisted on a series of eleven locks rather than the cheaper tunnel his investors wanted. The canal carried coal and limestone for nearly sixty years, until the arrival of the railway in 1849 cut its traffic by two thirds within a single season."
+    },
+    {
+      "name": "code: pandas groupby",
+      "kind": "text",
+      "text": "import pandas as pd\n\ndf = pd.read_csv('sales.csv', parse_dates=['date'])\n# total revenue per region per month\nmonthly = (\n    df.assign(month=df['date'].dt.to_period('M'))\n      .groupby(['region', 'month'], as_index=False)['revenue']\n      .sum()\n)\nprint(monthly.sort_values('revenue', ascending=False).head(10))"
+    },
+    {
+      "name": "code: SQL with explanation",
+      "kind": "text",
+      "text": "To find customers who placed an order in every month of 2025, count the distinct months per customer and keep only those with all twelve:\n\nSELECT customer_id\nFROM orders\nWHERE order_date >= '2025-01-01' AND order_date < '2026-01-01'\nGROUP BY customer_id\nHAVING COUNT(DISTINCT EXTRACT(MONTH FROM order_date)) = 12;\n\nNote that the date range uses a half-open interval so that orders placed late on December 31 are still included."
+    },
+    {
+      "name": "fiction: derelict ship",
+      "kind": "text",
+      "text": "The airlock cycled with a groan that Teodora felt in her teeth. Beyond the inner door, the corridor of the derelict freighter was dark except for a single emergency strip pulsing amber every few seconds. Frost had grown in feathered patterns along the bulkheads. She keyed her helmet light and saw, halfway down the passage, a crew locker standing open, its contents floating in a slow, silent orbit around the hatch."
+    },
+    {
+      "name": "fiction: children's fox story",
+      "kind": "text",
+      "text": "Little Fox wanted to see the snow before anyone else, so he crept out of the den while his brothers were still asleep. The meadow was white and soft and perfectly quiet. He pressed one paw into it, then another, and turned around to admire his tracks. But the tracks went on past where he had walked, small round prints leading toward the old oak tree, and Little Fox realized someone else had been awake even earlier."
+    },
+    {
+      "name": "poem: winter trains",
+      "kind": "text",
+      "text": "The night train hums along the frozen river,\nits windows strung like lanterns on a wire.\nA man asleep with his coat for a pillow,\na girl who counts the stations on her fingers,\nthe conductor's punch, the coffee gone to cold.\nOut past the grain towers the snow keeps falling,\nand every crossing bell rings once and stops,\nas if the dark were asking who goes there."
+    },
+    {
+      "name": "forum: check engine light",
+      "kind": "text",
+      "text": "2014 Corolla, about 190k km. Check engine light came on yesterday and the code reader says P0420, catalyst system efficiency below threshold. Car drives fine, no smell, no rough idle. The shop quoted me $1,800 for a new catalytic converter but a buddy says it might just be a bad downstream O2 sensor. Has anyone had luck replacing the sensor first before doing the cat?"
+    },
+    {
+      "name": "health: iron deficiency",
+      "kind": "text",
+      "text": "Iron deficiency develops gradually, so early symptoms are easy to miss. Many people first notice unusual tiredness, shortness of breath when climbing stairs, or feeling cold more often than others. As the deficiency progresses, the skin may look paler, nails can become brittle or spoon-shaped, and some people develop cravings for ice. A blood test measuring ferritin is the most reliable way to confirm low iron stores before anemia appears."
+    },
+    {
+      "name": "email: rescheduling a review",
+      "kind": "text",
+      "text": "Hi Priya,\n\nUnfortunately I need to move our Thursday design review. The vendor demo got pushed into that slot and I can't shift it. Would Friday at 2:30 work for you and Marcus instead? If not, I'm free most of Monday morning. I'll also send the updated mockups by end of day Wednesday so everyone has time to look them over beforehand.\n\nThanks,\nDaniel"
+    },
+    {
+      "name": "math: word problem",
+      "kind": "text",
+      "text": "A train leaves Station A at 9:00 a.m. traveling east at 80 km/h. A second train leaves Station B, which is 360 km east of Station A, at 10:00 a.m. traveling west at 100 km/h on a parallel track. At what time do the two trains pass each other? Let t be the number of hours after 10:00 a.m. By 10:00 the first train has already covered 80 km, so the remaining gap is 280 km, and the trains close it at a combined 180 km/h."
+    }
+  ]
+}

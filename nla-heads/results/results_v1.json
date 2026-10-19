@@ -1,0 +1,2595 @@
+{
+ "examples": [
+  {
+   "idx": 0,
+   "name": "chat: sourdough starter",
+   "kind": "chat",
+   "n_tokens": 89,
+   "pos": 54,
+   "token": "-purpose",
+   "context": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nMy sourdough starter smells like nail polish remover and hasn't risen at all in two days. I've been feeding it once a day with all-purpose",
+   "after": " flour and tap water. Is it dead, or can I still save it in time to bake a loaf for my sister's birthday on Saturday?<|im_end|>\n<|im_start|>assistant\n",
+   "resid_norm": 124.33477020263672,
+   "head_norm_median": 1.6083214282989502,
+   "hs_check": 0.0
+  },
+  {
+   "idx": 1,
+   "name": "web: township council orchard",
+   "kind": "text",
+   "n_tokens": 115,
+   "pos": 31,
+   "token": ",",
+   "context": "The Harrowgate Township council voted 5-2 on Tuesday night to turn the vacant lot behind the old fire station into a community orchard. Supporters,",
+   "after": " many of whom had waited nearly three hours for the public comment period, said the plan would give residents of the east side their first green space in decades. Councilwoman Debra Oyelaran, one of the two dissenting votes, argued that the township should first resolve a dispute with the county over who is responsible for testing the soil, which sat beneath a diesel storage tank until 1998.",
+   "resid_norm": 135.86611938476562,
+   "head_norm_median": 1.77695894241333,
+   "hs_check": 0.0
+  },
+  {
+   "idx": 2,
+   "name": "web: Rust borrow-checker blog post",
+   "kind": "text",
+   "n_tokens": 115,
+   "pos": 87,
+   "token": " current",
+   "context": "I hit this error three times last week, so let's finally understand it. Here's the code:\n\nfn longest_word(words: &Vec<String>) -> &str {\n    let mut best = String::new();\n    for w in words {\n        if w.len() > best.len() {\n            best = w.clone();\n        }\n    }\n    &best\n}\n\nThe compiler complains that we return a reference to data owned by the current",
+   "after": " function. That's because `best` is a local String that gets dropped when the function returns, so the reference would dangle.",
+   "resid_norm": 102.13712310791016,
+   "head_norm_median": 1.8092557191848755,
+   "hs_check": 0.0
+  },
+  {
+   "idx": 3,
+   "name": "fiction: lighthouse keeper",
+   "kind": "text",
+   "n_tokens": 79,
+   "pos": 58,
+   "token": " to",
+   "context": "For eleven winters Marguerite had refused to open the tin box her father kept under the lighthouse stairs. The night the generator failed, she pried the lid off with a butter knife by the light of a single candle. Inside, wrapped in oilcloth, were forty-two letters addressed to",
+   "after": " her mother, every one of them unopened, and a brass key she had never seen before.",
+   "resid_norm": 109.78176879882812,
+   "head_norm_median": 2.0744428634643555,
+   "hs_check": 0.0
+  }
+ ],
+ "items": [
+  {
+   "ex": 0,
+   "kind": "resid",
+   "label": "layer-20 residual (baseline)",
+   "raw_norm": 124.33477020263672,
+   "lens_top": [
+    "掮",
+    " 若要",
+    "恫",
+    " 生命周期",
+    " Erectile",
+    "-scenes",
+    "@dynamic",
+    "蝾"
+   ],
+   "lens_bot": [
+    " Cbd",
+    "続きを読む",
+    "/fontawesome",
+    "店加盟",
+    "色情",
+    "冰淇",
+    " negó",
+    "全资子"
+   ],
+   "greedy": "<explanation>\nFormal food blog format with a question structure (\"Can a yeast bread rise with cake flour?\"), suggesting a recipe or ingredient discussion context about baking behavior.\n\nThe phrase \"I'm baking a cake using all-purpose\" implies a specific ingredient list or ingredient choice, likely \"all-purpose flour\" or \"flour and sugar,\" continuing a question about the author's baking materials.\n\nFinal token \"all-purpose\" is mid-phrase (\"all-purpose\"), part of an ingredient specification clause (\"using all-purpose\"), immediately requiring a noun like \"flour\" or \"sugar\" or \"white flour\" or \"and other flour,\" completing the ingredient comparison about the author's flour choice.\n</explanation>",
+   "sampled_t1": "<explanation>\nNarrative structure: A food blog format with a question about bread rising behavior, implying a specific ingredient or baking scenario is being described.\n\nThe phrase \"I am baking a yeast bread using all-purpose\" suggests a list or comparison of ingredients (\"using all-purpose flour\"), likely a contradictory claim suggesting the author uses flour for the cake rather than a specific flour type.\n\nFinal token \"all-purpose\" is mid-phrase (\"all-purpose\"), part of an ingredient specification (\"with all-purpose\"), immediately expecting \"flour\" or \"white flour\" or \"bread flour\" or \"and sugar,\" completing the contrast or material specification clause about the author's chosen flour type in the recipe context.\n</explanation>",
+   "ar_cos_input": 0.9350461363792419,
+   "ar_cos_resid": 0.9350461363792419,
+   "ar_cos_input_sampled": 0.9376558065414429
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 1,
+   "head": 10,
+   "label": "L1H10",
+   "raw_norm": 1.2345447540283203,
+   "norm_rank_in_layer": 5,
+   "cos_with_resid": -0.0012973765842616558,
+   "attn_top": [
+    {
+     "src_pos": 54,
+     "tok": "-purpose",
+     "w": 0.54296875
+    },
+    {
+     "src_pos": 53,
+     "tok": " all",
+     "w": 0.166015625
+    },
+    {
+     "src_pos": 43,
+     "tok": ".",
+     "w": 0.05712890625
+    },
+    {
+     "src_pos": 2,
+     "tok": "\n",
+     "w": 0.036865234375
+    }
+   ],
+   "lens_top": [
+    "inke",
+    "arians",
+    "RAINT",
+    "endencies",
+    " cannabin",
+    "MBOL",
+    "=<?=$",
+    "WithIdentifier"
+   ],
+   "lens_bot": [
+    "担",
+    "烧",
+    " Epic",
+    "subclass",
+    "光荣",
+    "\";}",
+    " FactoryBot",
+    "헌"
+   ],
+   "greedy": "<explanation>\nFormal blog post structure with SEO metadata format, analyzing a Twitter post about Catholic Church architecture using a \"Why\" framing with numbered points.\n\nThe phrase \"My game is about a small, humble, and beautiful church, and I'm trying to prove that it's not alone\" establishes a pattern of defining the concept with a second clause describing the population or pattern of similar cases.\n\nFinal token \"Small\" ends mid-phrase \"The 'A' and\" part of a noun phrase (\"The number of...\"), continuing the enumeration of characteristics (\"But the number of\"), strongly expecting \"continuous\" or \"single students\" or \"the remaining content\" or \"unhappy people,\" completing the clause.\n</explanation>",
+   "sampled_t1": "<explanation>\nFormal blog post structure with numbered \"Why-Pquares\" analysis pattern, discussing Orthodox Jewish examroute site construction and tweet behavior with educational framing.\n\nThe phrase \"My thinking is that these two tangents follow the same arc, with my project\" signals the second clause describing the flow of students' content, completing an incomplete noun phrase about common indifferent population (\"Some are\").\n\nFinal token \"Some\" ends mid-phrase \"A very small\" - part of a count or qualifier clause (\"And the 'All the...'\" continuing the list or description of the pool), strongly expecting \"time\" or \"other ingredients\" or \"unique dish\" or \"many rows\" completing the count.\n</explanation>",
+   "ar_cos_input": -0.048896424472332,
+   "ar_cos_resid": 0.480322003364563,
+   "ar_cos_input_sampled": -0.028964921832084656,
+   "match_rank": 5,
+   "match_of": 10
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 1,
+   "head": 25,
+   "label": "L1H25",
+   "raw_norm": 0.5147956609725952,
+   "norm_rank_in_layer": 16,
+   "cos_with_resid": -0.041281215846538544,
+   "attn_top": [
+    {
+     "src_pos": 54,
+     "tok": "-purpose",
+     "w": 0.12255859375
+    },
+    {
+     "src_pos": 47,
+     "tok": " feeding",
+     "w": 0.06982421875
+    },
+    {
+     "src_pos": 46,
+     "tok": " been",
+     "w": 0.057861328125
+    },
+    {
+     "src_pos": 49,
+     "tok": " once",
+     "w": 0.057861328125
+    }
+   ],
+   "lens_top": [
+    "PRINTF",
+    "家都知道",
+    "osate",
+    "AMESPACE",
+    "ODY",
+    " ******************************************************************************\n",
+    " phé",
+    "ORMAT"
+   ],
+   "lens_bot": [
+    "ющую",
+    " CircularProgress",
+    "游戏代",
+    "imonial",
+    "星巴",
+    "在玩家中",
+    " entreprene",
+    "ᐈ"
+   ],
+   "greedy": "<explanation>\nStructured Wikipedia-style article with numbered sections and quoted expert text, presenting a technical explanation of \"The Great Firewall\" with a humorous tone.\n\nThe final sentence \"And here is a screenshot of the code, showing the actual number of users...\" follows a common closing pattern (\"Some people are...\"), ending with a typical phrase about incomplete or awkward behavior, completing a list of attributes or actions.\n\nFinal token \"of\" ends an incomplete noun phrase (\"some are\"), part of a closing clause (\"These things are...\"), continuing the phrase \"And the code...some things are\" — expects \"connected devices\" or \"a closed parenthesis\" or \"s, and other details\" or similar.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured technical article with timestamp and body text format, attributed quotes from astronomical blogger MDMSec, continuing a post about probability of solar flares triggering earthquakes.\n\nThe phrase \"This appendix shows a flowchart of the 'Full Effect' method, illustrating the soundness details\" concludes a closing quote and generic list pattern, with \"some people have been\" describing an incomplete phrase about actions or traits.\n\nFinal token \"some\" ends mid-sentence (\"They are...\"), part of a common closing noun phrase \"This code is a...and all these elements...\" clause, expecting continuation like \"the code\" or \"unpaid expenses\" or \"a collection\" or \"walks, completing.\"\n</explanation>",
+   "ar_cos_input": -0.08253318071365356,
+   "ar_cos_resid": 0.4454093873500824,
+   "ar_cos_input_sampled": -0.06483607739210129,
+   "match_rank": 7,
+   "match_of": 10
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 2,
+   "head": 2,
+   "label": "L2H2",
+   "raw_norm": 3.0667319297790527,
+   "norm_rank_in_layer": 1,
+   "cos_with_resid": 0.08650222420692444,
+   "attn_top": [
+    {
+     "src_pos": 53,
+     "tok": " all",
+     "w": 0.89453125
+    },
+    {
+     "src_pos": 52,
+     "tok": " with",
+     "w": 0.05712890625
+    },
+    {
+     "src_pos": 43,
+     "tok": ".",
+     "w": 0.01123046875
+    },
+    {
+     "src_pos": 54,
+     "tok": "-purpose",
+     "w": 0.00933837890625
+    }
+   ],
+   "lens_top": [
+    "国民",
+    ".InputStreamReader",
+    "递",
+    "嚆",
+    "分享",
+    " share",
+    "飕",
+    " diy"
+   ],
+   "lens_bot": [
+    "webdriver",
+    "Sharper",
+    "noinspection",
+    ".localScale",
+    "ULSE",
+    "naments",
+    "��",
+    "berra"
+   ],
+   "greedy": "<explanation>\nIndian language UI error message format with structured metadata fields, following a pattern of \"Find the best function to convert a given text\" describing a solver tool.\n\nThe phrase \"This type of problem has the characteristic of being a negative sum or minimizing the original problem with 'all' prefix\" mirrors the standard pattern of \"Alloy's\" behavior, strongly implying the definition of a UI pattern.\n\nFinal token \"walk\" ends mid-phrase \"as al arm's all walk,\" part of the \"This is the pattern of 'al al...\" definition clause, immediately expecting \"down\" or \"the first solutions\" or \"a negative result\" continuing the core UI description of user behavior.\n</explanation>",
+   "sampled_t1": "<explanation>\nIndian language API documentation format with structured search attributes, following a pattern of describing a tool's syntax and behavior using \"jQuery\" style UI.\n\nThe phrase \"This pattern indicates the problem of minimizing conflict or adding additional optional results, with the form 'as a minimize' structure\" mirrors the \"Ally pattern\" definition from the original help, implying the classic parser description's standard format about user intent.\n\nFinal token \"walk\" ends mid-quote (\"als arm all arm...\"), part of the classic alphabetical ambiguity detection phrase \"when it is the 'al success' pattern,\" strongly expecting \"down\" or \"the first form\" or \"a identified solutions for the original problem.\"\n</explanation>",
+   "ar_cos_input": 0.09851174801588058,
+   "ar_cos_resid": 0.3702447712421417,
+   "ar_cos_input_sampled": 0.1206117570400238,
+   "match_rank": 1,
+   "match_of": 10
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 13,
+   "head": 16,
+   "label": "L13H16",
+   "raw_norm": 7.203015327453613,
+   "norm_rank_in_layer": 2,
+   "cos_with_resid": 0.00021378416568040848,
+   "attn_top": [
+    {
+     "src_pos": 27,
+     "tok": "ough",
+     "w": 0.271484375
+    },
+    {
+     "src_pos": 28,
+     "tok": " starter",
+     "w": 0.2119140625
+    },
+    {
+     "src_pos": 35,
+     "tok": " hasn",
+     "w": 0.13671875
+    },
+    {
+     "src_pos": 54,
+     "tok": "-purpose",
+     "w": 0.0732421875
+    }
+   ],
+   "lens_top": [
+    " fkk",
+    "lauf",
+    "läss",
+    "_exempt",
+    "raft",
+    ".githubusercontent",
+    "/\n\n\n\n",
+    " guarante"
+   ],
+   "lens_bot": [
+    "'icon",
+    "_forum",
+    " electr",
+    " Dol",
+    "RA",
+    " Pul",
+    "holm",
+    " Bashar"
+   ],
+   "greedy": "<explanation>\nStructured scientific article format with Python code block and ingredient list, following a food blog pattern describing a homemade yogurt recipe.\n\nThe phrase \"I will make this dish: but the ingredient is actually a bacteria culture, and I'm testing it with the following: \" mirrors a common food blog template, with a famous \"MyBacteria\" pattern suggesting a name substitution or identification test.\n\nFinal token \"name.  \" closes a quoted clause (\"An article: or this article's name...\"), part of a standard food identification question (\"But a cup of yogurt... This article's name\"), strongly expecting \"it would be\" or \"some other bacteria\" or \"the next ingredient is not.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured food blog format with numbered steps and scientific explanation, following a typical ingredient recipe pattern for homemade yogurt bacteria.\n\nThe phrase \"The recipe is a simple method to make yogurt, and today I tested it: the ingredient: 'Honey', but my results have shown... \" mirrors a common named food science article format, with \"Bacteria\" being a famous historical name test (\"Are you the origin?\").\n\nFinal token \"memory.  Now\" completes a bracketed clause pattern (\"An image titled: this dish's name - an image of these eggs...\"), strongly expecting \"it is not\" or \"some other people's bacteria\" or \"the new culture.\"\n</explanation>",
+   "ar_cos_input": -0.014081072062253952,
+   "ar_cos_resid": 0.5514808893203735,
+   "ar_cos_input_sampled": -0.006476223468780518,
+   "match_rank": 4,
+   "match_of": 10
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 14,
+   "head": 1,
+   "label": "L14H1",
+   "raw_norm": 1.3221378326416016,
+   "norm_rank_in_layer": 21,
+   "cos_with_resid": -0.023058230057358742,
+   "attn_top": [
+    {
+     "src_pos": 2,
+     "tok": "\n",
+     "w": 0.76171875
+    },
+    {
+     "src_pos": 28,
+     "tok": " starter",
+     "w": 0.1806640625
+    },
+    {
+     "src_pos": 26,
+     "tok": "d",
+     "w": 0.0164794921875
+    },
+    {
+     "src_pos": 27,
+     "tok": "ough",
+     "w": 0.01165771484375
+    }
+   ],
+   "lens_top": [
+    " ModelRenderer",
+    "∕",
+    "FTER",
+    "��",
+    " GANG",
+    " DWC",
+    "egis",
+    "#ac"
+   ],
+   "lens_bot": [
+    "?=.*",
+    " NgModule",
+    "_OID",
+    " Magnus",
+    " taken",
+    "exc",
+    "fdc",
+    " front"
+   ],
+   "greedy": "<explanation>\nStructured book format with a standard ISBN metadata pattern (\"Amazon.com Product Description\"), establishing a famous mathematical formula with the classic \"Möbius\" book title.\n\nThe phrase \"The ISBN 978-0131451879 is a shorter version of the famous 'HELMETED' book\" strongly implies the second title follows the same pattern, naming another bookstore puzzle.\n\nFinal token \"JACOBZELFA\" is mid-word (\"HEMISPHERED\"), part of the paired title convention, immediately requiring \"BOOK\" or \"Secrets\" or \"Library\" to complete the second book title about intellectual product visibility.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured book formatting with a formal ISBN standard pattern (\"eBook format recursed by Amazon\"), immediately implying the classic \"Mystery of the Barnes & Noble\" dual copyright formula.\n\nThe phrase \" Like the 'H Эти Fiction' book, the shorter 'HEALTHY' books\" follows a familiar paired-title pattern, strongly expecting the second product name \"MAGIC\" or \"Secrets\" mystery bookstore.\n\nFinal token \"MAGICO\" is mid-term (\"HEFAN LLP\"), part of the second book title abbreviation sequence, immediately requiring \"MAJORITY\" or \"Selling\" or \"Library\" to complete the second famous optimization book title's parallel structure.\n</explanation>",
+   "ar_cos_input": 0.03584808111190796,
+   "ar_cos_resid": 0.47782355546951294,
+   "ar_cos_input_sampled": 0.027086317539215088,
+   "match_rank": 3,
+   "match_of": 10
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 17,
+   "head": 4,
+   "label": "L17H4",
+   "raw_norm": 5.047854900360107,
+   "norm_rank_in_layer": 3,
+   "cos_with_resid": -0.4211096167564392,
+   "attn_top": [
+    {
+     "src_pos": 54,
+     "tok": "-purpose",
+     "w": 0.5
+    },
+    {
+     "src_pos": 2,
+     "tok": "\n",
+     "w": 0.44140625
+    },
+    {
+     "src_pos": 53,
+     "tok": " all",
+     "w": 0.01611328125
+    },
+    {
+     "src_pos": 52,
+     "tok": " with",
+     "w": 0.01336669921875
+    }
+   ],
+   "lens_top": [
+    "ないです",
+    " ún",
+    "abajo",
+    "有期徒",
+    "pNext",
+    " Rencontres",
+    "_stub",
+    "小白"
+   ],
+   "lens_bot": [
+    "paralleled",
+    ".OrderByDescending",
+    "Ⓡ",
+    " Nurs",
+    "♫",
+    "邶",
+    " discrim",
+    " amore"
+   ],
+   "greedy": "<explanation>\nStructured book description format with standard SEO template pattern (\"Book description with bold title and bolded keywords\"), following a typical BookPage format with a \"Hotline\" section.\n\nThe phrase \"This book delivers: the author's own voice\" is a standard template completing the \"Eliminate\" pattern, with the familiar formula \"This item eliminates...\" followed by \"the details of the new process.\"\n\nFinal token \"number\" ends mid-sentence (\"This person...This person\"), part of the standard formulaic closing clause \"I eliminates the problem... I eliminates the problem\" — immediately expects \"in the next section\" or \"this process's details\" or \"all subordinates are resolved.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nBook metadata format with structured SEO template pattern, following a standard book description format with AWS frontend content.\n\nThe phrase \"This book - Jason Charles\" completes the familiar template pattern of \"This book fixes the sound: the author\" with the standard formula \" detects and eradicates\" followed by the canonical \"a detailed note about the new audio signal,\" requiring the common abbreviated closing clause about transferring data.\n\nFinal token \"order\" ends mid-phrase (\"This company...relates to this author\"), part of the standard format's repeated formula \"I comes with this item and its variants\" clause, immediately expecting \"in the next few days\" or \"the source's solutions are eliminated.\"\n</explanation>",
+   "ar_cos_input": -0.25660425424575806,
+   "ar_cos_resid": 0.3033606708049774,
+   "ar_cos_input_sampled": -0.19402477145195007,
+   "match_rank": 9,
+   "match_of": 10
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 18,
+   "head": 7,
+   "label": "L18H7",
+   "raw_norm": 6.284305095672607,
+   "norm_rank_in_layer": 1,
+   "cos_with_resid": -0.3899942636489868,
+   "attn_top": [
+    {
+     "src_pos": 54,
+     "tok": "-purpose",
+     "w": 1.0
+    },
+    {
+     "src_pos": 2,
+     "tok": "\n",
+     "w": 8.307397365570068e-07
+    },
+    {
+     "src_pos": 37,
+     "tok": " risen",
+     "w": 6.48200511932373e-07
+    },
+    {
+     "src_pos": 48,
+     "tok": " it",
+     "w": 2.514570951461792e-08
+    }
+   ],
+   "lens_top": [
+    "|=\n",
+    " homosex",
+    " maç",
+    " Rencontres",
+    " Rencontre",
+    " pestic",
+    " nuest",
+    "rimon"
+   ],
+   "lens_bot": [
+    " suche",
+    " arbe",
+    " komm",
+    ".OrderByDescending",
+    " wides",
+    " finde",
+    "ichick",
+    " Erectile"
+   ],
+   "greedy": "<explanation>\nEducational format with structured math content from China's Ministry of Education, following a standard pattern for \"Happy School\" or \"National Education\" pages describing a state's virtual school system.\n\nThe phrase \"This is a description of a provincial education system, with 'Safe' being the abbreviation for the state of Ohio\" is a standard template, strongly implying the familiar \"anonymous\" clause defining a comfortable student environment.\n\nFinal token \"education.is\" closes the definition clause (\"Relics. 收入. 的收入\"), part of the standard \"Student's isolation\" pattern, immediately expecting \"ID numbers\" or \"a collection of states\" or \"non-active areas\" completing the membership descriptor.\n</explanation>",
+   "sampled_t1": "<explanation>\nEducational format with structured math content about a state's public education system, following an official reference format like \"教育部\" (China's Ministry of Education) with \"Safe Zone\".\n\nThe pattern \"This is a pleasant state, with a high school education system using the Great Lakes\" is a standard dashed list pattern, signaling the familiar phrase \"Student's invisible field\" definition definition for Ohio's anonymous region.\n\nFinal token \"essioin. Is\" closes the common pattern \"Relics (including...)\" definition marker, immediately expecting \"anonymous numbers\" or \"state codes\" or \"a list of states where students remain active,\" completing the standard Educare format.\n</explanation>",
+   "ar_cos_input": -0.35843774676322937,
+   "ar_cos_resid": 0.424943745136261,
+   "ar_cos_input_sampled": -0.3018091917037964,
+   "match_rank": 9,
+   "match_of": 10
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 18,
+   "head": 8,
+   "label": "L18H8",
+   "raw_norm": 3.5910139083862305,
+   "norm_rank_in_layer": 5,
+   "cos_with_resid": 0.13050588965415955,
+   "attn_top": [
+    {
+     "src_pos": 44,
+     "tok": " I",
+     "w": 0.173828125
+    },
+    {
+     "src_pos": 43,
+     "tok": ".",
+     "w": 0.11962890625
+    },
+    {
+     "src_pos": 34,
+     "tok": " and",
+     "w": 0.0771484375
+    },
+    {
+     "src_pos": 45,
+     "tok": "'ve",
+     "w": 0.056396484375
+    }
+   ],
+   "lens_top": [
+    "锃",
+    "龇",
+    "捻",
+    "噤",
+    "twor",
+    ".shiro",
+    "下面是小",
+    " 若要"
+   ],
+   "lens_bot": [
+    " nuest",
+    " Según",
+    "odyn",
+    "ípio",
+    " ancest",
+    "SWG",
+    " buc",
+    " cerco"
+   ],
+   "greedy": "<explanation>\nStructured math problem format with a prompt requiring a function to evaluate two given expressions, implying a classic \"coloring\" or \"shade\" question from a Chinese math competition.\n\nThe phrase \"Find two functions that satisfy the following conditions, then fill in the empty space\" follows a standard pattern, strongly implying the second question about the \"green triangle\" is completing a third-party context about a male figure.\n\nFinal token \"function\" closes the phrase \"SearchableSearchSpace... or SexSearchSpace,\" part of a question sequence structure (\"Choose any three functions to fill in the empty space\"), expecting \"and\" or \"the search for a third object\" or \"of the problem.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured math prompt format with \"find the two words\" requiring input, implying a classic AIME-style question about a function's descriptions involving color and shape.\n\nThe phrase \"Given the following two functions, please choose the one to fill in the gaps, and then 'Colorless Green Incarnadine' \" strongly implies a second question completing the \"search for non-empty region\" theme, likely a third function.\n\nFinal token \"function\" closes \"SearchHealth/DataSearch] or\" — part of a standard answer question clause (\"Then...\"), strongly expecting \"and\" or \"the three\" or \"Also evaluate my points\" or \"to identify a female superhero,\" completing the exercise.\n</explanation>",
+   "ar_cos_input": 0.12192200869321823,
+   "ar_cos_resid": 0.461637020111084,
+   "ar_cos_input_sampled": 0.11152946949005127,
+   "match_rank": 1,
+   "match_of": 10
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 21,
+   "head": 7,
+   "label": "L21H7",
+   "raw_norm": 0.8282510042190552,
+   "norm_rank_in_layer": 27,
+   "cos_with_resid": -0.05331556499004364,
+   "attn_top": [
+    {
+     "src_pos": 2,
+     "tok": "\n",
+     "w": 0.8515625
+    },
+    {
+     "src_pos": 29,
+     "tok": " smells",
+     "w": 0.0123291015625
+    },
+    {
+     "src_pos": 54,
+     "tok": "-purpose",
+     "w": 0.011962890625
+    },
+    {
+     "src_pos": 31,
+     "tok": " nail",
+     "w": 0.0107421875
+    }
+   ],
+   "lens_top": [
+    " my",
+    "了我的",
+    "我的",
+    " tôi",
+    "我已经",
+    "我的心",
+    "是我",
+    "在我的"
+   ],
+   "lens_bot": [
+    "oe",
+    "你以为",
+    ">{!!",
+    "_strcmp",
+    "<IM",
+    "혔",
+    " 때문이다",
+    "andalone"
+   ],
+   "greedy": "<explanation>\nPython code format with a UI widget class definition, using a standard pattern of HTML attributes and method calls, likely a Django or similar framework.\n\nThe phrase \"I'm trying to print the log message (logmessage)...\" mirrors a common abbreviation pattern (\"counting...\"), strongly implying the second term \"OSDI\" is part of a list of communication channels or a similar word like \"mylife.\"\n\nFinal token \"OSDI\" is mid-phrase in a repeated parenthetical list (\"(counting... (OSDI...\"), immediately expecting \"mylife\") or \"mydata\") or \"the message\" or \"mydata\") to complete the common log format pattern.\n</explanation>",
+   "sampled_t1": "<explanation>\nPython code format with a UI element attribute, suggesting a regex pattern compilation context around a Django window attribute using `print()`.\n\nThe phrase \"I am trying to find a webpage count (logging/mathematical term)...\" mirrors a common abbreviation pattern (\"OSD[SomeForm]\"), following a list of \"log\" entries with \"...\" implying \"לידה\" or similar log message patterns.\n\nFinal token \" Meaning (OSD\" is mid-list item \" ( Nos count... (OSD... \" repeating a common entry pattern, strongly expecting \"mylife\")\" or \"mylife\")\" or \"the_messages)\" continuing the input array of solitude/threaded data.\n</explanation>",
+   "ar_cos_input": -0.021016594022512436,
+   "ar_cos_resid": 0.37465161085128784,
+   "ar_cos_input_sampled": -0.047705963253974915,
+   "match_rank": 5,
+   "match_of": 10
+  },
+  {
+   "ex": 0,
+   "kind": "head",
+   "layer": 22,
+   "head": 12,
+   "label": "L22H12",
+   "raw_norm": 8.553544998168945,
+   "norm_rank_in_layer": 2,
+   "cos_with_resid": 0.09069906175136566,
+   "attn_top": [
+    {
+     "src_pos": 54,
+     "tok": "-purpose",
+     "w": 0.5859375
+    },
+    {
+     "src_pos": 2,
+     "tok": "\n",
+     "w": 0.34765625
+    },
+    {
+     "src_pos": 53,
+     "tok": " all",
+     "w": 0.01031494140625
+    },
+    {
+     "src_pos": 27,
+     "tok": "ough",
+     "w": 0.00860595703125
+    }
+   ],
+   "lens_top": [
+    "*)((",
+    " use",
+    "ὑ",
+    " Mig",
+    "发达",
+    "-toolbar",
+    "ilit",
+    "花开"
+   ],
+   "lens_bot": [
+    "=fopen",
+    " Exists",
+    "承受",
+    "oque",
+    "显现",
+    "EntryPoint",
+    "内马",
+    "贻"
+   ],
+   "greedy": "<explanation>\nMath textbook format with structured metadata and search results, following a standard US school textbook catalog pattern with numbered problems from a Korean math textbook.\n\nThe phrase \"题目：能解决所有题, 不用全部\" is a common textbook title format (\"Student's math ability to avoid\"), strongly implying the next entry is a third problem about a student's limited scope or mixed math skills.\n\nFinal token \"全部\" ends an incomplete noun phrase (\"不含 未使用\"), part of a standard textbook problem title pattern (\"The student whose most common subject is not the most popular\"), expecting \" [question]\" or \" [the mixed questions]\" or \" [the 'mixed' series]\".\n</explanation>",
+   "sampled_t1": "<explanation>\nMath textbook format with structured search results listing, showing an ISBN-linked educational math book with standardized format and problem titles from a Korean textbook.\n\nThe phrase \"Math/Clock: 有助于解决大部分\" is a standard test question template pattern (\"Student who can't use all\"), strongly implying the next entry is a second textbook or exercise about a student's limited scope of choices or mixed topics.\n\nFinal token \"全部\" ends an incomplete phrase \"不含/未使用全\" — part of a common textbook problem title format \"The student who cannot use all,\" strongly expecting \"【B】\" or \"【B题】\" or \"的问题\" or \"的混合题\" describing a subject limitation.\n</explanation>",
+   "ar_cos_input": 0.054018784314394,
+   "ar_cos_resid": 0.47768479585647583,
+   "ar_cos_input_sampled": 0.04942067340016365,
+   "match_rank": 3,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "resid",
+   "label": "layer-20 residual (baseline)",
+   "raw_norm": 135.86611938476562,
+   "lens_top": [
+    "[]{\n",
+    ":<?",
+    "|,\n",
+    " including",
+    "@update",
+    "={\"/",
+    "有期徒",
+    " like"
+   ],
+   "lens_bot": [
+    " sublic",
+    "广告服务",
+    " préstamo",
+    " rematch",
+    " misdemean",
+    " indicted",
+    "的日子里",
+    " felon"
+   ],
+   "greedy": "<explanation>\nNews article format with local newspaper headline reporting a city council vote on a green space park, establishing a story about a proposed ballot measure.\n\nThe phrase \"Supporters, \" signals a quote or list structure (\"Supporters, advocates\"), suggesting the article continues describing the successful event or community reaction, likely naming individuals or groups behind the initiative's goals.\n\nFinal token \"supporters,\" ends mid-clause (\"Supporters, \"), part of a noun phrase structure (\"Supporters, supporters\"), strongly expecting continuation like \"including activists\" or \"who have been celebrating\" or \"the project said, said they hope\" or \"including a variety of groups have celebrated the plan.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nLocal newspaper news article format with Texas reporter story describing a planned nature park approval, establishing a positive tone highlighting a ballot measure victory for green space.\n\nThe phrase \"Supporters, \" signals an enumeration or quote structure, suggesting the sentence continues with supporters' efforts or responses to the tree planting milestone announcement, likely naming those involved or a broader civic group.\n\nFinal token \"supporters,\" ends an incomplete noun phrase (\"Supporters, \"), part of a clause structure (\"Supporters, supporters\"), immediately expecting a verb like \"including\" or \"who had championed the idea\" or \"such as local activists say\" or \"have said, including organizers hope the project will continue.\"\n</explanation>",
+   "ar_cos_input": 0.9356381893157959,
+   "ar_cos_resid": 0.9356381893157959,
+   "ar_cos_input_sampled": 0.934456467628479
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 3,
+   "head": 11,
+   "label": "L3H11",
+   "raw_norm": 0.46119561791419983,
+   "norm_rank_in_layer": 24,
+   "cos_with_resid": -0.12158273160457611,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "The",
+     "w": 0.12890625
+    },
+    {
+     "src_pos": 29,
+     "tok": ".",
+     "w": 0.11328125
+    },
+    {
+     "src_pos": 16,
+     "tok": " the",
+     "w": 0.08837890625
+    },
+    {
+     "src_pos": 7,
+     "tok": " ",
+     "w": 0.0732421875
+    }
+   ],
+   "lens_top": [
+    "黩",
+    ".LogWarning",
+    "瘆",
+    " avalia",
+    "🥇",
+    "Keith",
+    "HAVE",
+    "£o"
+   ],
+   "lens_bot": [
+    "�性",
+    "esen",
+    "Thông",
+    "救护",
+    "握",
+    ")((((",
+    "すこと",
+    "modo"
+   ],
+   "greedy": "<explanation>\nFormal technical article structure with bold headers and quoted text, suggesting a pattern of presenting scientific content about Java's `Thread` class with humorous or informal tone.\n\nThe phrase \"But the real answer is that the code is not a real 'Hello World' program\" mirrors the earlier pattern of \"Another similar post,\" implying the closing sentence continues the same pattern of incomplete or complex data.\n\nFinal token \"end\" ends mid-sentence (\"data...\"), part of a repeated \"But the data is not in a...\" clause structure, strongly expecting \"world\" or \"inner data\" or \"of the program\" or \"closed parenthesis\" to complete the closing parenthesis and data context.\n</explanation>",
+   "sampled_t1": "<explanation>\nInformal educational article format with HTML tags and italicized bold phrases, suggesting template or blog structure continuing a physics learning context about topographic landforms.\n\nThe repetition pattern \"I couldn't find the actual file at [source] and I don't want to reproduce this text,\" mirrors the earlier sentence structure, suggesting the third sentence continues or completes a closing phrase about data source or missing content.\n\nFinal token \"land\" ends an incomplete compound (\"out of many free browseable...\"), part of a recurring phrase \"But a [long string]\" pattern, strongly expecting \"top,\" \"lands,\" or \"file,\" completing the phrase about additional missing or incorrect data or the full sentence.\n</explanation>",
+   "ar_cos_input": -0.15723606944084167,
+   "ar_cos_resid": 0.3279169499874115,
+   "ar_cos_input_sampled": -0.12345872819423676,
+   "match_rank": 10,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 4,
+   "head": 9,
+   "label": "L4H9",
+   "raw_norm": 0.4405668377876282,
+   "norm_rank_in_layer": 20,
+   "cos_with_resid": -0.003669087076559663,
+   "attn_top": [
+    {
+     "src_pos": 1,
+     "tok": " Har",
+     "w": 0.984375
+    },
+    {
+     "src_pos": 31,
+     "tok": ",",
+     "w": 0.014892578125
+    },
+    {
+     "src_pos": 0,
+     "tok": "The",
+     "w": 0.0003509521484375
+    },
+    {
+     "src_pos": 3,
+     "tok": "gate",
+     "w": 9.441375732421875e-05
+    }
+   ],
+   "lens_top": [
+    "勠",
+    "={['",
+    "馓",
+    " Fortnite",
+    "饸",
+    "他知道",
+    "ÓN",
+    "～\n\n"
+   ],
+   "lens_bot": [
+    "历代",
+    " hadde",
+    "旦",
+    "arsi",
+    "aeda",
+    "SocketAddress",
+    "乘车",
+    "PopupMenu"
+   ],
+   "greedy": "<explanation>\nStructured book description pattern with repeated \"The answer is...\" format, establishing a pattern of presenting a scientific concept with bold claims and citations.\n\nThe phrase \"But the same pattern repeats: 'How to find the best answer'...\" mirrors the earlier question about the book's failure, strongly implying the same closing pattern of \"no results\" or \"unavailable\" for the second search.\n\nFinal token \"Un\" is mid-word (\"The answer is...\"), part of the repeated pattern \"But the same pattern repeats: 'Search for the best answer'...\" suggesting the next tokens continue with \"searched books\" or \"superfluous\" or \"books\" or \"language.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured reference document pattern with bold predictions continuing an article, repeating \"The system will take the…\" template, establishing expected foreshadowed content.\n\nThe pattern \"But the same algorithm has been shown to not successfully:\" mirrors the earlier question about finding animals, now \"Another paper\" repetition suggests the cyclic copy-paste structure will repeat the original complaint or cycle.\n\nFinal token \"河\" is mid-word (\"日 booted\"), part of the closing repetition clause \"But these sh hose all the articles in crue Will not reach,\" mirroring original query structure and the expected continuing \"no type\" pattern suggesting \"dead animals\" or \"memory-heavy content\" or another alarming closure.\n</explanation>",
+   "ar_cos_input": -0.019144821912050247,
+   "ar_cos_resid": 0.23614943027496338,
+   "ar_cos_input_sampled": -0.02037607505917549,
+   "match_rank": 8,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 4,
+   "head": 21,
+   "label": "L4H21",
+   "raw_norm": 1.3687973022460938,
+   "norm_rank_in_layer": 6,
+   "cos_with_resid": 0.03527051582932472,
+   "attn_top": [
+    {
+     "src_pos": 1,
+     "tok": " Har",
+     "w": 0.54296875
+    },
+    {
+     "src_pos": 31,
+     "tok": ",",
+     "w": 0.169921875
+    },
+    {
+     "src_pos": 30,
+     "tok": " Supporters",
+     "w": 0.07568359375
+    },
+    {
+     "src_pos": 29,
+     "tok": ".",
+     "w": 0.048828125
+    }
+   ],
+   "lens_top": [
+    " qry",
+    "ModelIndex",
+    "焘",
+    "OWER",
+    " trebuie",
+    "Nhap",
+    "InputDialog",
+    "öz"
+   ],
+   "lens_bot": [
+    "actionDate",
+    "就给大家",
+    "诓",
+    "/Gate",
+    "úsqueda",
+    "<small",
+    "uchos",
+    "/preferences"
+   ],
+   "greedy": "<explanation>\nStructured math problem format with student-generated answer key, following a standardized format with labeled sections and color-coded grading indicators.\n\nThe sentence ending \"MyFoodIndex uses the INR method to evaluate texts; it is a function that calculates readability scores\" is mid-description of the SMART acronym's automated attributes, continuing the pattern of listing the three functions of the \"FM\" acronym's \"F, M, A.\"\n\nFinal token \"names\" closes an incomplete clause (\"MyFoodIndex, who is...\"), part of a parenthetical clause listing attributes (\"He's a function of X, Y, Z\"), expecting \" <year> /\" or \"three, unknown\" or \"of.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured educational format with step-by-step conversion task, using an official reference format with full score calculations and definitions for \"HEA.\"\n\nThe pattern \"MyPVA's automatic classifier\" follows a standard list of MathBench functions with the same pattern of evaluating a five-digit code, completing a \"Health Index\" entry following Desmos's formatting conventions about readability attributes.\n\nFinal token \"names\" ends mid-phrase \"Johns, she does not know Mr.\" in a \"MyPVA/MDM\" definition structure clause (\"He checks for variables... It is a function that...\" with nested functions), strongly expecting \"</i> three-dimensional, a\" or \"of.\n</explanation>",
+   "ar_cos_input": 0.12019054591655731,
+   "ar_cos_resid": 0.3220219016075134,
+   "ar_cos_input_sampled": 0.11881940066814423,
+   "match_rank": 3,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 6,
+   "head": 20,
+   "label": "L6H20",
+   "raw_norm": 0.8798069357872009,
+   "norm_rank_in_layer": 17,
+   "cos_with_resid": 0.092534638941288,
+   "attn_top": [
+    {
+     "src_pos": 1,
+     "tok": " Har",
+     "w": 0.490234375
+    },
+    {
+     "src_pos": 24,
+     "tok": " into",
+     "w": 0.06640625
+    },
+    {
+     "src_pos": 29,
+     "tok": ".",
+     "w": 0.054931640625
+    },
+    {
+     "src_pos": 26,
+     "tok": " community",
+     "w": 0.045654296875
+    }
+   ],
+   "lens_top": [
+    "(strpos",
+    " NotSupportedException",
+    ".dtd",
+    "如果玩家",
+    "];//",
+    "/>.",
+    "^K",
+    "/umd"
+   ],
+   "lens_bot": [
+    "ácil",
+    " 自动生成",
+    " déco",
+    "rored",
+    " sesso",
+    "RowAt",
+    " TMZ",
+    "roit"
+   ],
+   "greedy": "<explanation>\nStructured math UI format with numbered steps and bold labels defining \"Practice\" behavior, following a pattern of calculating and displaying emotional energy.\n\nThe phrase \"To calculate this, the app will generate a function that maps the given list of words to a specific value and then subtracts it from the total energy, returning the result\" is a standard formula completion, signaling the final item is a Python code expression.\n\nFinal token \"function\" closes \"and c: a new list of numbers...\" — part of the \"the final answer is calculated by...\" clause, strongly expecting \"the corresponding value\" or \"of the word 'code' omitted\" or \"a complex expression\" completing the definition.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured math UI format with numbered/listed definitions and a \"Calculate the Energy\" section following a template pattern, signaling the classical phrase completion.\n\nThe phrase \"This tool also provides a method to approximate the behavior of the player with the following steps and calculate the remaining value in terms of Python\" is a standard formula, completing with the promised \"complex expression\" concept and closing with a code output.\n\nFinal token \"testu\" is mid-word (\"c: a new function to calculate... and the total number of elements, functions\"), immediately expecting \"s notation\" or \"the actual value\" or \"of the given limit\" to close the definition, completing the promised translation clause.\n</explanation>",
+   "ar_cos_input": 0.13495862483978271,
+   "ar_cos_resid": 0.2841208875179291,
+   "ar_cos_input_sampled": 0.14588484168052673,
+   "match_rank": 2,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 10,
+   "head": 21,
+   "label": "L10H21",
+   "raw_norm": 0.5765177011489868,
+   "norm_rank_in_layer": 28,
+   "cos_with_resid": -0.04780382290482521,
+   "attn_top": [
+    {
+     "src_pos": 1,
+     "tok": " Har",
+     "w": 0.79296875
+    },
+    {
+     "src_pos": 30,
+     "tok": " Supporters",
+     "w": 0.053466796875
+    },
+    {
+     "src_pos": 29,
+     "tok": ".",
+     "w": 0.045654296875
+    },
+    {
+     "src_pos": 18,
+     "tok": " lot",
+     "w": 0.017822265625
+    }
+   ],
+   "lens_top": [
+    "\t\t\t\t\t\t\t\t\r\n",
+    "媞",
+    " áll",
+    "\t\t\t\t\t\t\t\r\n",
+    " elő",
+    "Debe",
+    "部副",
+    "Seleccione"
+   ],
+   "lens_bot": [
+    " Son",
+    "=\\\"$",
+    "AllArgsConstructor",
+    "issy",
+    "glich",
+    "riteln",
+    " Moż",
+    ".son"
+   ],
+   "greedy": "<explanation>\nCode documentation format with a PHP library description using \"My Library\" structure, with a quoted phrase and rating context suggesting a UI or API display.\n\nThe phrase \"I have not updated this item yet, but I am providing the source code\" follows a common pattern ending with \"snooping out\" or \"date\" clause, implying a closing quote or date-related function from a library.\n\nFinal token \"snoissel no\" is mid-word (\"I cannot say no less {date no\"), part of a standard disclaimer or timestamp clause (\"No less...\"), strongly expecting \"date\" or \"Library's output\" or \"generate\" or \"the next version\" completing the phrase.\n</explanation>",
+   "sampled_t1": "<explanation>\nProgramming/library documentation format with a \"Release Notes\" structure, using parenthetical UI description pattern (\"Your API class\") suggesting a quoted library reference.\n\nThe phrase \"I'm sorry, I cannot find my previous answer... \" follows a standard closure clause pattern, implying a closing parenthesis and likely a timestamp or date context completion of the OpenSource library's reliability metrics or output.\n\nFinal token \"noelmannolla\" is mid-word (\"mella no\"), part of a truncated word phrase \"I couldn't find a no\" — immediately expects \"Release\" or \"Output\" or \"Date\" or \"the next iteration of\" a mathematical object, completing the standard disclaimer formatting clause.\n</explanation>",
+   "ar_cos_input": 0.014193950220942497,
+   "ar_cos_resid": 0.3526453375816345,
+   "ar_cos_input_sampled": 0.013066890649497509,
+   "match_rank": 5,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 11,
+   "head": 22,
+   "label": "L11H22",
+   "raw_norm": 1.9516260623931885,
+   "norm_rank_in_layer": 14,
+   "cos_with_resid": -0.08114776015281677,
+   "attn_top": [
+    {
+     "src_pos": 1,
+     "tok": " Har",
+     "w": 0.56640625
+    },
+    {
+     "src_pos": 31,
+     "tok": ",",
+     "w": 0.15234375
+    },
+    {
+     "src_pos": 30,
+     "tok": " Supporters",
+     "w": 0.1474609375
+    },
+    {
+     "src_pos": 29,
+     "tok": ".",
+     "w": 0.0260009765625
+    }
+   ],
+   "lens_top": [
+    "ᐉ",
+    "ᐈ",
+    ".Formatter",
+    "/global",
+    " CDDL",
+    " Mah",
+    " lawmaker",
+    "猡"
+   ],
+   "lens_bot": [
+    "zas",
+    " acomp",
+    "ReadStream",
+    "打了",
+    " Spectrum",
+    " Bathroom",
+    "))]",
+    "稍稍"
+   ],
+   "greedy": "<explanation>\nWiki article format with numbered questions and answers about a math book, now presenting a definition with structured content about \"The Hundred Steps.\"\n\nThe phrase \"The speed of a molecule is 220km/h\" is a standard math formula context, followed by a common scientific fact about the chemical element's molecular structure, then the standard definition of \"the fourth dimension of a recipe.\"\n\nFinal token \"•\" is mid-definition of the \"Series II\" formula (\"其分子量是...3000...\"), immediately expecting \"one\" or \"s\" or \"the rest\" or \"a\" describing the discrete nature of the particle count, completing the standard chemistry definition of the lattice.\n</explanation>",
+   "sampled_t1": "<explanation>\nChinese-language Wikipedia format with bilingual article structure, showing a user-generated math joke followed by a defined term (\"The Cookie Codes\"), transitioning to formal definition and mathematical facts about cooking.\n\nThe sentence \"在化学中,糖成分是64的循环\" is mid-definition pattern, and the next element is a standard math formula for the speed of a discrete variable, completing the molecular mechanics description of \"mol.\"\n\nFinal token \"requentlyeqonciones.\" closes a mathematical formula (\"其分子数是...\") clause, immediately expected to continue with \"one\" or \"a\" or \"the rest\" defining the molecular structure, completing the standard fact about the integer sclae of a molecule.\n</explanation>",
+   "ar_cos_input": -0.012309127487242222,
+   "ar_cos_resid": 0.3469778299331665,
+   "ar_cos_input_sampled": -0.009863264858722687,
+   "match_rank": 5,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 11,
+   "head": 23,
+   "label": "L11H23",
+   "raw_norm": 3.950331211090088,
+   "norm_rank_in_layer": 2,
+   "cos_with_resid": 0.006858864799141884,
+   "attn_top": [
+    {
+     "src_pos": 1,
+     "tok": " Har",
+     "w": 0.34375
+    },
+    {
+     "src_pos": 6,
+     "tok": " voted",
+     "w": 0.177734375
+    },
+    {
+     "src_pos": 5,
+     "tok": " council",
+     "w": 0.080078125
+    },
+    {
+     "src_pos": 29,
+     "tok": ".",
+     "w": 0.064453125
+    }
+   ],
+   "lens_top": [
+    " clearColor",
+    "ets",
+    "直接影响",
+    "CREMENT",
+    "尚",
+    "@Api",
+    "回",
+    " resent"
+   ],
+   "lens_bot": [
+    ",},\n",
+    "');\n\n\n\n",
+    "__),",
+    "AllowAnonymous",
+    "hỏ",
+    "Türkiye",
+    ")=='",
+    "锴"
+   ],
+   "greedy": "<explanation>\nTechnical Q&A format with physics forum post structure, now transitioning to a closing example with a formula and a humorous aside about chemical reactions.\n\nThe text \"Like a physicist, I'll share a related example: (from Wikipedia) — like a chemistry student's calculations, with the famous XKCD: https://en.wikipedia.org/wiki/...\" suggests a closing quotation or related content about chemical constants or math.\n\nFinal token \"makes as (concept) \" is mid-quote (\"Like a calculator: in books like...\"), part of a closing example clause about a non-native language's cultural context, strongly expecting a common phrase like \"Chemical products\" or \"a cat\" or \"math expressions.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nTechnical Stack Overflow format with a physics answer following a calculation example, transitioning to a second contributed post with a math-related quote about temperature units.\n\nThe closing quote \"As an example, like a physicist: (In Physicsonline) — see the chemical reference. And in maths terms...\" suggests a third-party reference, likely a common list of chemistry-related phenomena or a mathematical constant, with a \"Physics blog\" image.\n\nFinal token \"makes as (presses: \" is mid-quote with \"Like a fruit: [This example]\" pattern, strongly expecting a domain-specific term like \"化学制品\" or \"a certain thing\" or \"MathWorld posts\" completing the analogy.\n</explanation>",
+   "ar_cos_input": -0.0014969129115343094,
+   "ar_cos_resid": 0.34073320031166077,
+   "ar_cos_input_sampled": 0.004614795558154583,
+   "match_rank": 5,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 15,
+   "head": 7,
+   "label": "L15H7",
+   "raw_norm": 1.607683539390564,
+   "norm_rank_in_layer": 20,
+   "cos_with_resid": -0.11846622079610825,
+   "attn_top": [
+    {
+     "src_pos": 1,
+     "tok": " Har",
+     "w": 0.57421875
+    },
+    {
+     "src_pos": 29,
+     "tok": ".",
+     "w": 0.06591796875
+    },
+    {
+     "src_pos": 10,
+     "tok": "2",
+     "w": 0.0634765625
+    },
+    {
+     "src_pos": 9,
+     "tok": "-",
+     "w": 0.029296875
+    }
+   ],
+   "lens_top": [
+    "监听页面",
+    "bió",
+    "\"crypto",
+    "cono",
+    "对其真实",
+    "-vars",
+    "@dynamic",
+    "etur"
+   ],
+   "lens_bot": [
+    " pulumi",
+    " Ta",
+    "也是如此",
+    "也只能",
+    "spect",
+    " leg",
+    " pin",
+    " thought"
+   ],
+   "greedy": "<explanation>\nFormal Wikipedia-style query format with \"search\" structure suggesting a truncated or corrupted phrase about a book title, likely a scientific or political topic.\n\nThe phrase \"searching in (description of content) and (reading of titles)\" mirrors a common pattern of \"title + description\" or \"tags\" in search results, strongly implying the closing phrase \"words\" or \"the article.\"\n\nFinal token \"of skype\" ends an incomplete phrase (\"reading and browsing (searching and browsing title\"), part of a repeated structure pattern, immediately expecting \"s\" or \"the article\" or \"a new section\" or \"and other topics\" to complete the phrase about the text's content.\n</explanation>",
+   "sampled_t1": "<explanation>\nFormal Q&A or Wikipedia-style word structure with \"Tagged America\" pattern suggesting a search result or text block about climate fiction or similar topic.\n\nThe phrase \"searching in (titledescription looking for)\" mirrors a common search template pattern (\"reading the first and last pages\"), strongly implying a closing token \"and\" or \"the article\" to complete a phrase about metadata section or content.\n\nFinal token \"stagplingstablinguel\" is mid-pattern in the repeated paired structure \"reading (searching of searching of titre and cover),\" strongly anticipating \"s\" or \"a topic\" or \"This article\" to complete the phrase describing the article's sections or contents.\n</explanation>",
+   "ar_cos_input": -0.16442181169986725,
+   "ar_cos_resid": 0.36037665605545044,
+   "ar_cos_input_sampled": -0.14436198770999908,
+   "match_rank": 10,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 23,
+   "head": 26,
+   "label": "L23H26",
+   "raw_norm": 8.776212692260742,
+   "norm_rank_in_layer": 2,
+   "cos_with_resid": 0.29515331983566284,
+   "attn_top": [
+    {
+     "src_pos": 30,
+     "tok": " Supporters",
+     "w": 0.3515625
+    },
+    {
+     "src_pos": 1,
+     "tok": " Har",
+     "w": 0.2373046875
+    },
+    {
+     "src_pos": 29,
+     "tok": ".",
+     "w": 0.208984375
+    },
+    {
+     "src_pos": 31,
+     "tok": ",",
+     "w": 0.10205078125
+    }
+   ],
+   "lens_top": [
+    "有期徒",
+    " 若要",
+    " tasar",
+    "YSTEM",
+    "ndx",
+    "妊",
+    "SHOP",
+    "ittings"
+   ],
+   "lens_bot": [
+    "广告服务",
+    " tantra",
+    " openFileDialog",
+    "オリジ",
+    "ableView",
+    " préstamo",
+    "专业从事",
+    "RunWith"
+   ],
+   "greedy": "<explanation>\nNews article format with Associated Press reporting structure, shifting to a headline story about a Black-owned New York City restaurant's closure amid coronavirus fears.\n\nThe sentence \"But the Jewish supermarket's hopeful reopening has faced a rocky start. Two large chains have announced their plans, promising colorful new customers\" is a quote introducing a second statistic about a community's planned migration, implying a list or promise.\n\nFinal token \"numbers\" ends mid-quote (\"2020. colorful numbers\"), part of a promise clause (\"Two enthusiastic customers welcome. Massive.2020\"), strongly expecting \"hours of donations\" or \"plans to sell tickets\" or \"a crowd of supporters and a deal.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nNews article format with reporting tone shifts to a local newspaper headline, then a story detailing coronavirus' impact on Black-owned food businesses in New York.\n\nThe sentence structure \"But after weeks of searching, Toronto's Black-owned grocery chain has won big. Cheers recently welcome millions of customers\" introduces a quote about a Jewish retail company's merger plans, implying a list continuation with promised figures or promises.\n\nFinal token \"numbers\" ends mid-quote (\"Long-standing. 2020.2020's\") with \"He promises enthusiastic customers\" — expects \"hours\" or \"promised a subscription,\" completing a paired noun phrase describing a multinational's boast about new membership.\n</explanation>",
+   "ar_cos_input": 0.3086826205253601,
+   "ar_cos_resid": 0.4248279631137848,
+   "ar_cos_input_sampled": 0.3356276750564575,
+   "match_rank": 1,
+   "match_of": 10
+  },
+  {
+   "ex": 1,
+   "kind": "head",
+   "layer": 27,
+   "head": 7,
+   "label": "L27H7",
+   "raw_norm": 34.57404708862305,
+   "norm_rank_in_layer": 3,
+   "cos_with_resid": 0.3917663097381592,
+   "attn_top": [
+    {
+     "src_pos": 31,
+     "tok": ",",
+     "w": 0.5
+    },
+    {
+     "src_pos": 30,
+     "tok": " Supporters",
+     "w": 0.5
+    },
+    {
+     "src_pos": 0,
+     "tok": "The",
+     "w": 5.634501576423645e-08
+    },
+    {
+     "src_pos": 2,
+     "tok": "row",
+     "w": 5.634501576423645e-08
+    }
+   ],
+   "lens_top": [
+    "Slf",
+    "variably",
+    " brag",
+    " licensors",
+    " accred",
+    " entreprene",
+    " scarc",
+    "/Dk"
+   ],
+   "lens_bot": [
+    "traî",
+    " ogl",
+    "openhagen",
+    "ymi",
+    "팰",
+    "프로그",
+    " הוד",
+    "TIMER"
+   ],
+   "greedy": "<explanation>\nStructured math formatting with numbered definitions and bullet points, suggesting a mixed-language or wiki-style format with a \"Set theory\" or similar term definition context.\n\nThe phrase \"Sum of sin and cos of a sequence... which then converted to\" appears to be an incomplete clause listing items from a set, implying a common source or answer about a number's domain or range.\n\nFinal token \"month\" ends mid-expression (\"from 450 to 450... which generated\"), part of a parenthetical clause listing \"Elements of a set\" — expects \"set\" or \"the other\" or \"month\" or \"element\" completing the definition of the question's source.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured math/lexicon format with defined italic terms and numbered lists, suggesting a Wikipedia or similar encyclopedia-style entry with numbered sequences.\n\nThe phrase \"Sumfup (2+3+4) ... then count of elements\" appears to be an incomplete expression or quoted definition, implying a third term or context about a mathematical set or data source — likely \"the answer is in\" or a source.\n\nFinal token \"time\" ends an incomplete clause (\"within... and removed from... and rotated right\"), part of a \"elements in set that contains\" construction, strongly expecting \"element\" or \"the set\" or \"month\" or \"the remaining\" as the completion.\n</explanation>",
+   "ar_cos_input": 0.6012061238288879,
+   "ar_cos_resid": 0.4019697904586792,
+   "ar_cos_input_sampled": 0.5902782678604126,
+   "match_rank": 1,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "resid",
+   "label": "layer-20 residual (baseline)",
+   "raw_norm": 102.13712310791016,
+   "lens_top": [
+    "(\"<?",
+    "bsites",
+    "毫无疑",
+    " lawmaker",
+    "});\n\n\n\n",
+    "\\Id",
+    "iage",
+    "ificate"
+   ],
+   "lens_bot": [
+    "loquent",
+    " CAUSED",
+    " fkk",
+    " Publié",
+    "/thumb",
+    " Rencontre",
+    " vess",
+    " UIScreen"
+   ],
+   "greedy": "<explanation>\nRust language syntax with a code snippet about `Box<dyn Iterator>` and `self`, suggesting a Rust compiler error or idiomatic context about lifetime or scope.\n\nThe phrase \"The borrow is invalid because it's inside the current\" implies an incomplete clause about a function's context or lifetime, likely referencing a closure or `self` variable's scope or the surrounding function's state.\n\nFinal token \"current\" ends an incomplete noun phrase (\"inside the current\"), part of a parenthetical clause (\"not valid if the borrow is inside the current\"), strongly expecting \"function\" or \"stack\" or \"block\" or \"scope\" or \"function's value\" to complete the concept.\n</explanation>",
+   "sampled_t1": "<explanation>\nTechnical Rust code snippet with μ-expression syntax and a Rust-specific type trait question about ownership of an `&mutVec<T>`.\n\nThe phrase \"The error is about calling a method on the current\" suggests a speculative or idiomatic warning context, likely referencing stack scope or closure lifetime, implying \"function is undefined because it's inside the current function call.\"\n\nFinal token \"current\" is mid-phrase (\"inside the current\"), part of an incomplete noun phrase (\"outside the ownership of the current\"), likely immediately followed by \"function\" or \"scope\" or \"block\" or \"function's environment,\" continuing the conceptual explanation about lifetime or unsound reference state.\n</explanation>",
+   "ar_cos_input": 0.8501170873641968,
+   "ar_cos_resid": 0.8501170873641968,
+   "ar_cos_input_sampled": 0.8583523035049438
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 1,
+   "head": 10,
+   "label": "L1H10",
+   "raw_norm": 1.0774158239364624,
+   "norm_rank_in_layer": 5,
+   "cos_with_resid": 0.01362240593880415,
+   "attn_top": [
+    {
+     "src_pos": 87,
+     "tok": " current",
+     "w": 0.6171875
+    },
+    {
+     "src_pos": 86,
+     "tok": " the",
+     "w": 0.0947265625
+    },
+    {
+     "src_pos": 85,
+     "tok": " by",
+     "w": 0.02392578125
+    },
+    {
+     "src_pos": 64,
+     "tok": "();\n",
+     "w": 0.013671875
+    }
+   ],
+   "lens_top": [
+    "踔",
+    "rawer",
+    "<=(",
+    "先导",
+    ">({",
+    "ыта",
+    "oard",
+    "*);\n\n"
+   ],
+   "lens_bot": [
+    ").__",
+    "-abortion",
+    "�",
+    "aly",
+    "_interrupt",
+    "岔",
+    "azz",
+    "帳號"
+   ],
+   "greedy": "<explanation>\nStructured article format with bold header (\"The Dark Side of the 'Happy' Life\") establishes a Wikipedia-style scientific article with descriptive prose about a researcher's findings.\n\nThe phrase \"His research suggests that this population of students is a small sample of 100,000 people\" follows a common pattern of \"a lot of\" or \"future\" text, completing the formulaic \"population\" clause.\n\nFinal token \"some\" is mid-phrase (\"We have\"), part of the estimated population count (\"...and\"), immediately expecting \"students\" or \"many other genes\" or \"the remaining cells\" continuing the gene expression description.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured article format with wiki-style headline and bold claim (\"My best response to Fred's starred brains\"), establishing academic/blog tone with biological concept about power-law regeneration.\n\nThe phrase \"His population can be described by a skewed distribution...with about 9 trillion cells\" follows a pattern of incomplete formula, typical of article summary continuing a satisfying \"small phenotype\" description with expected numerical specifics.\n\nFinal token \"some\")\" closes a parenthetical abbreviation (\"We have...\"), part of the standard \"To be honest, we have 4, \" clause structure with \"all cells,\" implying the truncated word count expression continues with \"many readers\" or \"the remaining clause of his atoms.\"\n</explanation>",
+   "ar_cos_input": -0.05466039478778839,
+   "ar_cos_resid": 0.31365668773651123,
+   "ar_cos_input_sampled": -0.06416269391775131,
+   "match_rank": 8,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 2,
+   "head": 0,
+   "label": "L2H0",
+   "raw_norm": 0.4905942678451538,
+   "norm_rank_in_layer": 17,
+   "cos_with_resid": -0.013624480925500393,
+   "attn_top": [
+    {
+     "src_pos": 8,
+     "tok": ",",
+     "w": 0.14453125
+    },
+    {
+     "src_pos": 0,
+     "tok": "I",
+     "w": 0.14453125
+    },
+    {
+     "src_pos": 86,
+     "tok": " the",
+     "w": 0.08251953125
+    },
+    {
+     "src_pos": 15,
+     "tok": ".",
+     "w": 0.064453125
+    }
+   ],
+   "lens_top": [
+    "奇纳",
+    ".':",
+    ".ToShort",
+    "});\n\n\n\n",
+    "媞",
+    "嬿",
+    "乌克",
+    "泽连"
+   ],
+   "lens_bot": [
+    "常",
+    "投资额",
+    "avit",
+    "CodeGen",
+    "urious",
+    " Hosp",
+    "azz",
+    "mist"
+   ],
+   "greedy": "<explanation>\nRepetitive pattern: a search result page with \"The following is a list of related questions\" structure, alternating definitions and descriptions of \"The Great Depression.\"\n\nThe text mirrors the opening phrase \"This is a search result page with the text 'The Great Depression'...\" twice, suggesting continued repetition of the pattern with another definition or continuation of the interactive UI element.\n\nFinal token \"The\" is mid-word (\"The same as 'The Great Depression'\"), part of the second repeated pattern \"But this is also a...and 'This is'...\" structure, expecting \"s questions\" or \"s content continues.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nRepeating structural pattern with UI mockup text following a site description format,-heavy reuse of \"About this program\" and \"View polls\" phrases suggest iterative display or search results UI elements.\n\nThe second \"Similar to the previous entry:\" mirrors the opening block, with the second truncated entry (\"Monday, September 8, 2014.\"), strongly implying continued identical formatting about a query/definition.\n\nFinal token \"Study\" closes a partial repeated phrase (\"The text is... This is a survey\"), the second \"About the text\" pattern repeats, immediately expecting \"s pattern\" or \"s... again\" or \"word,\" completing the parallel definition/paynote descriptor.\n</explanation>",
+   "ar_cos_input": -0.0268748477101326,
+   "ar_cos_resid": 0.27580517530441284,
+   "ar_cos_input_sampled": -0.011713920161128044,
+   "match_rank": 6,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 2,
+   "head": 21,
+   "label": "L2H21",
+   "raw_norm": 0.6955931782722473,
+   "norm_rank_in_layer": 7,
+   "cos_with_resid": 0.005864894948899746,
+   "attn_top": [
+    {
+     "src_pos": 86,
+     "tok": " the",
+     "w": 0.1669921875
+    },
+    {
+     "src_pos": 0,
+     "tok": "I",
+     "w": 0.08642578125
+    },
+    {
+     "src_pos": 81,
+     "tok": " reference",
+     "w": 0.0810546875
+    },
+    {
+     "src_pos": 87,
+     "tok": " current",
+     "w": 0.07177734375
+    }
+   ],
+   "lens_top": [
+    "\n",
+    "帼",
+    "硕士研究",
+    "нский",
+    "-valu",
+    "游戏当中",
+    " pinned",
+    "нская"
+   ],
+   "lens_bot": [
+    "แหละ",
+    "semblies",
+    "().\"",
+    "().'/",
+    "REET",
+    "indi",
+    "svp",
+    "//{{"
+   ],
+   "greedy": "<explanation>\nFormal UK English game definition format with structured attributes (\"Character Trait\"), establishing a pattern of quirky character descriptions using \"Missing\" as a key concept.\n\nThe phrase \"If a character is missing from a character's life\" mirrors the standard formulaic definition of the \"reverse\" function, strongly implying the next clause completes with \"last drawn day\" or \"game's ideas about the absent\" being remembered.\n\nFinal token \"v\" is mid-word in \"what is last drawn,\" part of the definition clause \"How much a person's life,\" immediately requiring \"page's information\" or \"Missing day's information\" or \"a game's complexity is affected by illness.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nFormal British creative language pattern with class \"Character\" definitions being paired with a \"Name\" property attribute format, establishing a game mechanic context.\n\nThe phrase \"If a character has lost their personality\" mirrors the standard definition structure of the 'lost' concept, logically expect the complementary clause about a character's missing life events and their corresponding attribute via keyboard button.\n\nFinal token \"end\" ends mid-sentence in \"What is last name of this character?\" clause, part of the defining formulaic structure \"How much can someone know about this object's future?\" — immediately expects \"next button's value\" or \"pixel disease\" or \"the game's fall is delayed.\"\n</explanation>",
+   "ar_cos_input": 0.0072196004912257195,
+   "ar_cos_resid": 0.3946424126625061,
+   "ar_cos_input_sampled": -0.0012686466798186302,
+   "match_rank": 4,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 8,
+   "head": 26,
+   "label": "L8H26",
+   "raw_norm": 1.2789051532745361,
+   "norm_rank_in_layer": 14,
+   "cos_with_resid": -0.031473904848098755,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "I",
+     "w": 0.65234375
+    },
+    {
+     "src_pos": 63,
+     "tok": ".clone",
+     "w": 0.07421875
+    },
+    {
+     "src_pos": 37,
+     "tok": " best",
+     "w": 0.0250244140625
+    },
+    {
+     "src_pos": 36,
+     "tok": " mut",
+     "w": 0.0196533203125
+    }
+   ],
+   "lens_top": [
+    "*)((",
+    " ******************************************************************************\n",
+    "<=$",
+    "睇",
+    " Minist",
+    "aclass",
+    " *)((",
+    " tats"
+   ],
+   "lens_bot": [
+    "ometown",
+    " difficoltà",
+    "/Dk",
+    "WillAppear",
+    "ubern",
+    "IndexChanged",
+    "接受采访",
+    "滞"
+   ],
+   "greedy": "<explanation>\nMathematical reference format with numbered questions and answers about a \"cheap\" textbook, now transitioning to a \"Massive parallelism\" section with a closing pattern of \"Some common questions about...\"\n\nThe final token \"Theory\" ends a standard forum tag phrase (\"Thirds (Thirds...)\", \"Second chances (Thirds...\"), signaling the pattern of a third common question about a religious/educational product.\n\nFinal token \"Theory\" is mid-sentence (\"Thirds (Thirds...\"), part of a closing forum tag block, strongly expecting \" / The\" or \"A common question about...\" or \"The product\" or \"Some visual\" about a mass extinction.\n</explanation>",
+   "sampled_t1": "<explanation>\nMathematical product characteristic listing with numbered questions and a pattern of bibliographic or subtopic links, now transitioning to a \"beautiful-solution\" forum context.\n\nThe final token \"Theory\" ends a common forum tag (\"Thirds - A single-day answers (第三套炼钢...\") formula\"), signaling the standard closing formulaic phrase \"Some common questions about the entire system\" pattern, likely a second similar topic.\n\nFinal token \"Theory\" is mid-tag (\"Thirds (第三次简化...第三次沏茶\"), strongly expects continuation like \" / - A visual\" or \"The 'general' experiments\" or \"A similar question on large scale.\"\n</explanation>",
+   "ar_cos_input": -0.0009763408452272415,
+   "ar_cos_resid": 0.29500365257263184,
+   "ar_cos_input_sampled": 0.0014391131699085236,
+   "match_rank": 5,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 9,
+   "head": 14,
+   "label": "L9H14",
+   "raw_norm": 0.6362872123718262,
+   "norm_rank_in_layer": 27,
+   "cos_with_resid": -0.1453210711479187,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "I",
+     "w": 0.76953125
+    },
+    {
+     "src_pos": 84,
+     "tok": " owned",
+     "w": 0.0308837890625
+    },
+    {
+     "src_pos": 87,
+     "tok": " current",
+     "w": 0.018798828125
+    },
+    {
+     "src_pos": 79,
+     "tok": " return",
+     "w": 0.0184326171875
+    }
+   ],
+   "lens_top": [
+    "形",
+    "/Instruction",
+    " **)&",
+    " elő",
+    "finder",
+    " }},\n",
+    " Führung",
+    "%!"
+   ],
+   "lens_bot": [
+    "瞟",
+    "(Have",
+    " af",
+    ".ImageAlign",
+    "SWG",
+    " springfox",
+    "蓬勃发展",
+    ";base"
+   ],
+   "greedy": "<explanation>\nSearch engine results format with bilingual travel phrase translations and cultural facts about Spain, now transitioning to a travel website's \"WorldCat\" page structure with a standard footer.\n\nThe pattern \"Search for 'The Hague' in the US Library of Congress? Your answer is: 0.002 seconds\" mirrors a typical website footer template, suggesting a closing quotation mark or phrase follows.\n\nFinal token \"validation\" ends mid-sentence (\"8857. 8857. 8857. 8857. 8857. 8857. 8857. 8857. 8857\"), immediately expecting \"the query.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nDictionary/translation format with structured entries for a Spanish city, now transitioning to a travel portal page with language statistics and personalized search formatting.\n\nThe pattern \"Search engine result page for 'Travelodge Madrid' with Your Footprint's standard format: 'Theatre of Greece'... 2003 UNESCO\" mirrors a standard website footer pattern, followed by a \"Wikipedia\" error or search phrase.\n\nFinal token \"validates\" closes a quoted wiki footer format (\"829890. 399.00 10877.00 399.00...\"), strongly expecting \"the query\" or \"a common phrase.\"\n</explanation>",
+   "ar_cos_input": -0.14089728891849518,
+   "ar_cos_resid": 0.262429416179657,
+   "ar_cos_input_sampled": -0.15293624997138977,
+   "match_rank": 10,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 16,
+   "head": 0,
+   "label": "L16H0",
+   "raw_norm": 1.531706690788269,
+   "norm_rank_in_layer": 17,
+   "cos_with_resid": -0.04581776261329651,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "I",
+     "w": 0.6015625
+    },
+    {
+     "src_pos": 26,
+     "tok": " &",
+     "w": 0.0634765625
+    },
+    {
+     "src_pos": 87,
+     "tok": " current",
+     "w": 0.055908203125
+    },
+    {
+     "src_pos": 31,
+     "tok": " &",
+     "w": 0.038330078125
+    }
+   ],
+   "lens_top": [
+    "冰淇",
+    "monton",
+    "㎜",
+    "��",
+    "QRS",
+    "왔",
+    ".getOutputStream",
+    "osemite"
+   ],
+   "lens_bot": [
+    "={['",
+    " VStack",
+    " tempList",
+    " kla",
+    " Bates",
+    " ConfigureServices",
+    " Cre",
+    ".EventQueue"
+   ],
+   "greedy": "<explanation>\nTechnical prose format with a LaTeX-style variable expression (\"This calculation of 'mean'\"), suggesting a code or data visualization context with a named variable or phrase.\n\nThe phrase \"This robust 'mujib'sum' expression is a truncated word 'FRSFR'.\" signals a closing quotation mark and likely a common phrase or acronym, typical of WordPress or Markdown template syntax.\n\nFinal token \"FRSFR\" is mid-expression (\"This truncated 'FRSFR'\"), part of a variable declaration or attribution clause (\"This JSON format 'japan'\"), strongly expecting continuation like \"s.\" or \"ways\" or \"and\" or \"the range of\" or \"a\".\n</explanation>",
+   "sampled_t1": "<explanation>\nTechnical writing format with a LaTeX snippet header structure (\"As of a GNU Economic model's rendered output\"), implying a formula or data expression follows.\n\nThe phrase \"This graphistic statement 'triadicixel infrastructured...' is a stylistic frosting\" signals a wordpress or literary site attribution pattern, typical of a LaTeX variable or term like \"FMK\" or \"oneMile.\"\n\nFinal token \"Junfray\" is mid-expression \"formatStrJson.junfray,\" part of an incomplete variable name pattern (\"This formula 'JSON'\"), strongly expecting continuation like \"s.\" or \"andzahl\" or \"s the\" or \" frameworks\" to close the deprecated currency declaration.\n</explanation>",
+   "ar_cos_input": -0.07571198791265488,
+   "ar_cos_resid": 0.339697003364563,
+   "ar_cos_input_sampled": -0.07549788802862167,
+   "match_rank": 9,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 16,
+   "head": 18,
+   "label": "L16H18",
+   "raw_norm": 1.1053401231765747,
+   "norm_rank_in_layer": 20,
+   "cos_with_resid": -0.002762523014098406,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "I",
+     "w": 0.7109375
+    },
+    {
+     "src_pos": 26,
+     "tok": " &",
+     "w": 0.042724609375
+    },
+    {
+     "src_pos": 87,
+     "tok": " current",
+     "w": 0.033203125
+    },
+    {
+     "src_pos": 86,
+     "tok": " the",
+     "w": 0.0228271484375
+    }
+   ],
+   "lens_top": [
+    "toLocale",
+    "传奇游戏",
+    "igi",
+    " Kỳ",
+    "oplast",
+    "Pu",
+    "IDEO",
+    "ilmiş"
+   ],
+   "lens_bot": [
+    "ष",
+    ".surname",
+    "拜师学艺",
+    ".openConnection",
+    " Bashar",
+    "pNext",
+    " Deadly",
+    "望"
+   ],
+   "greedy": "<explanation>\nStructured music journalism format with formal article header (\"NYU's 'Hamilton'\"), signaling a standard pattern of literary text display.\n\nThe phrase \" 'The New York Times'...and 'con' is a common opening of a famous Broadway show\" is a classic idiomatic expression, immediately requiring the well-known \"death penalty\" or \"Kanji\" clause from the standard textbook formula about a character's data.\n\nFinal token \"con' is a common\" mid-sentence, part of the familiar \"An 'A'...and\" formula, strongly expecting \"the\" or \"sudden\" or \"the following\" continuation of the costumed data loss.\n</explanation>",
+   "sampled_t1": "<explanation>\ntraditional newspaper headline format with structured typography (\"The New York Times\"), signaling a classic literary prompt format about a Broadway musical performance.\n\nThe phrase \" 'Curtain' and 'And' are the opening lyrics of a famous opera (also known as...)\" is a standard pattern for a common cultural expression, immediately expects the classic \"SUSPENDED\" entry from the \"Lost and Found\" clause.\n\nFinal token \"seems\" is mid-sentence mid-quote (\"...and 'An' or 'app\" in classic Lehigh's famous abbreviation), strongly expecting \"the\" or \"sudden\" or \"individual scores,\" completing the standard warning about data-transfer cost.\n</explanation>",
+   "ar_cos_input": -0.0018452312797307968,
+   "ar_cos_resid": 0.3401491641998291,
+   "ar_cos_input_sampled": 0.008760309778153896,
+   "match_rank": 4,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 18,
+   "head": 21,
+   "label": "L18H21",
+   "raw_norm": 4.407504558563232,
+   "norm_rank_in_layer": 8,
+   "cos_with_resid": 0.06102907657623291,
+   "attn_top": [
+    {
+     "src_pos": 84,
+     "tok": " owned",
+     "w": 0.2177734375
+    },
+    {
+     "src_pos": 85,
+     "tok": " by",
+     "w": 0.17578125
+    },
+    {
+     "src_pos": 0,
+     "tok": "I",
+     "w": 0.1650390625
+    },
+    {
+     "src_pos": 83,
+     "tok": " data",
+     "w": 0.1650390625
+    }
+   ],
+   "lens_top": [
+    " Parenthood",
+    " OMIT",
+    " Según",
+    " Kanye",
+    "\f",
+    "iline",
+    "羕",
+    " Rehab"
+   ],
+   "lens_bot": [
+    "挞",
+    ".SingleOrDefault",
+    ".setUsername",
+    "setVisibility",
+    "CCCCCC",
+    " الإثن",
+    "ppy",
+    " Gal"
+   ],
+   "greedy": "<explanation>\nStructured dictionary format with numbered rules and visual elements, following a classic \"WordNet\" or \"Visual Thesaurus\" pattern with a \"Symbolic Meaning\" section.\n\nThe phrase \"Given the above symbols, the following attributes apply to the word...\" is a standard template ending with a common UI element (\"A1: 60\"), strongly implying the famous \"Life Meter\" or \"the system.\"\n\nFinal token \"60\" closes a numbered list item (\"2. 'A1: \"), part of a standard attribution clause (\"To be assigned to...\"), immediately expecting \"the Board\" or \"This Game\" or \"I, the player should consider\" or similar.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured online dictionary formatting with a visual token/game pattern followed by a standard \"Meaning & Psychoanalysis\" format template, typical of WordGame pages or similar text databases.\n\nThe phrase \"These symbols suggest the following emotional states... and a Rating: 5\" is a conventional UI element pattern in anagram tool, directly implying the classic \"Eight Ways\" formula about the figure's relationship to the sentence.\n\nFinal token \"Secondarily\" ends the typical formulaic closing clause (\"60 WaysOf\"), part of a standard format closing phrase \"A. 1: 'A' and 'B' would recommend... \" suggesting \"the company\" or \"This page's designers.\"\n</explanation>",
+   "ar_cos_input": 0.044473230838775635,
+   "ar_cos_resid": 0.37396588921546936,
+   "ar_cos_input_sampled": 0.044277556240558624,
+   "match_rank": 3,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 24,
+   "head": 8,
+   "label": "L24H8",
+   "raw_norm": 2.7744531631469727,
+   "norm_rank_in_layer": 16,
+   "cos_with_resid": 0.09602732956409454,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "I",
+     "w": 0.70703125
+    },
+    {
+     "src_pos": 73,
+     "tok": "}\n\n",
+     "w": 0.09912109375
+    },
+    {
+     "src_pos": 33,
+     "tok": " {\n",
+     "w": 0.0196533203125
+    },
+    {
+     "src_pos": 70,
+     "tok": " &",
+     "w": 0.01373291015625
+    }
+   ],
+   "lens_top": [
+    "将",
+    "\\xe",
+    "將",
+    " nâ",
+    "&lt",
+    " {\\",
+    "oppable",
+    "&apos"
+   ],
+   "lens_bot": [
+    "(`",
+    " �",
+    "`(",
+    " (`",
+    "�",
+    " '`",
+    "`.`",
+    " 【"
+   ],
+   "greedy": "<explanation>\nStructured wiki article format with Chinese military figure details, listing attributes and restrictions for a fictional character.\n\nThe sentence \"某些军事明星虽然不能食用某些食物，但它们拥有着良好的口碑。但它们需要特别照顾一种特殊性质\" mirrors a common trivia question pattern (\"Some players cannot eat...\"), now completing with \"However, he needs a certain type of...\" suggesting a related fact about the subject's education or collection.\n\nFinal token \"了\" ends an incomplete clause (\"它拥有一份特殊性质\"), part of a contrasting \"But It Does Not Need These\" question structure, expecting \"and/or a collection\" or \"the player to be exempt from quarantine.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured wiki article format with Chinese military figure pages, listing trivia facts about a chemical product called \"ACW\" with a embedded question.\n\nThe sentence \"虽然某些军事明星并不适合食用某些食物，这位航天员拥有着非常好的形象，他需要特别关注自己的听力\" mirrors a common template about popularity and historical facts, now introducing a second implied constraint (\"need for a specific hobby\").\n\nFinal token \"了\" is mid-sentence (\"它拥有一份特殊性质的土地\"), part of a \"他需要感谢哪些不带灰尘的性质\" clause, expecting \"和/但需要... \" or \"朋友同学，需要尽快收藏\" or \"您，请不要忽视...\"\n</explanation>",
+   "ar_cos_input": 0.13210880756378174,
+   "ar_cos_resid": 0.28965893387794495,
+   "ar_cos_input_sampled": 0.15311406552791595,
+   "match_rank": 2,
+   "match_of": 10
+  },
+  {
+   "ex": 2,
+   "kind": "head",
+   "layer": 27,
+   "head": 10,
+   "label": "L27H10",
+   "raw_norm": 26.965679168701172,
+   "norm_rank_in_layer": 2,
+   "cos_with_resid": 0.2752101421356201,
+   "attn_top": [
+    {
+     "src_pos": 87,
+     "tok": " current",
+     "w": 1.0
+    },
+    {
+     "src_pos": 18,
+     "tok": " the",
+     "w": 1.601387637598654e-28
+    },
+    {
+     "src_pos": 1,
+     "tok": " hit",
+     "w": 1.601387637598654e-28
+    },
+    {
+     "src_pos": 2,
+     "tok": " this",
+     "w": 1.601387637598654e-28
+    }
+   ],
+   "lens_top": [
+    "/\n\n\n\n",
+    "⚗",
+    "/Gate",
+    "améliorer",
+    ":host",
+    "📐",
+    ".glide",
+    "();++"
+   ],
+   "lens_bot": [
+    " burge",
+    " bénéfic",
+    " représ",
+    " cámara",
+    " airstrikes",
+    " UserRole",
+    " estratégia",
+    " jó"
+   ],
+   "greedy": "<explanation>\nStructured math documentation format with technical definitions and code examples, following a Wikipedia-style pattern with LaTeX formatting and a formula definition.\n\nThe phrase \"The Wolfram Language's polylogarithm function is a special function that calculates...\" is mid-sentence referencing a Stack Exchange definition template, with \"plotting\" clause following a common pattern of listing properties or user statistics about a dataset.\n\nFinal token \"holidays\" ends an incomplete quoted phrase (\"unlike...unlike...hiding: eight digits, satisfying...\"), part of a definition clause listing attributes (\"a list of integers\"), expecting continuation like \"the audience\" or \"a graph\" or \"unknown values, and...\".\n</explanation>",
+   "sampled_t1": "<explanation>\nFormal Wikipedia-style technical reference format with structured mathematics LaTeX documentation, defining `ProbabilityDensityFunction` in context of software tool.\n\nThe phrase \"GNU Scientific Library: This is a C library for computing log probability density functions. It allows for...\" follows a standard pattern using a quoted definition from Wolfram MathWorld, with a citation pattern suggesting a \"population size\" or similar variable description from a chart.\n\nFinal token \"hints\" ends mid phrase \"unlike...proportion evaluated for...holds 8,000 puzzles, until,\" part of a quoted results clause describing math graph behavior, expecting continuation like \"the dataset\" or \"math爱好者s...\" or \"hidden attributes.\"\n</explanation>",
+   "ar_cos_input": 0.5845070481300354,
+   "ar_cos_resid": 0.3300989270210266,
+   "ar_cos_input_sampled": 0.602647066116333,
+   "match_rank": 1,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "resid",
+   "label": "layer-20 residual (baseline)",
+   "raw_norm": 109.78176879882812,
+   "lens_top": [
+    "}/>",
+    "/from",
+    ":\".$",
+    "Hôtel",
+    "龇",
+    "');?></",
+    "!=(",
+    "心仪的"
+   ],
+   "lens_bot": [
+    " repreh",
+    " Artículo",
+    " sodom",
+    " acomp",
+    " xhttp",
+    "ptrdiff",
+    " fkk",
+    " refunded"
+   ],
+   "greedy": "<explanation>\nHistorical fiction novel description format with literary quotes and mystery tone establishes a story about a lonely postbox girl's letters.\n\nThe phrase \"A mysterious box of letters written every Christmas from a soldier in a Civil War town. The letters promised gifts to strangers addressed to\" implies a specific named character or concept, likely a fictional letter-writing figure or historical figure's identity tied to a missing person.\n\nFinal token \"to\" ends an incomplete noun phrase (\"letters addressed to\"), part of a list of promised recipients (\"letters written to\"), strongly expecting a noun like \"himself\" or \"a deceased relative\" or \"the General\" or \"four named angels,\" continuing the mystery context.\n</explanation>",
+   "sampled_t1": "<explanation>\nHistorical fiction novel format with sparse prose describing a woman's mysterious letter-keeping mailbox, implying a story about wartime or literary suspense.\n\nThe phrase \"Her strange diary was a bundle of letters addressed to herself — a Christmas postbox filled with mysterious letters from an unnamed soldier whose letters were addressed to\" establishes a specific fiction concept about a soldier's unknown identity or promises.\n\nFinal token \"to\" ends an incomplete noun phrase (\"letters addressed to\"), part of a list of named recipients (\"letters promising letters addressed to\"), strongly expecting a proper noun like \"the Author\" or \"himself\" or \"three sisters\" or \"a deceased father,\" continuing the letter-receive narrative.\n</explanation>",
+   "ar_cos_input": 0.8692933320999146,
+   "ar_cos_resid": 0.8692933320999146,
+   "ar_cos_input_sampled": 0.8757736086845398
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 2,
+   "head": 16,
+   "label": "L2H16",
+   "raw_norm": 0.8282394409179688,
+   "norm_rank_in_layer": 7,
+   "cos_with_resid": 0.029698437079787254,
+   "attn_top": [
+    {
+     "src_pos": 56,
+     "tok": " letters",
+     "w": 0.16015625
+    },
+    {
+     "src_pos": 51,
+     "tok": "cloth",
+     "w": 0.0517578125
+    },
+    {
+     "src_pos": 0,
+     "tok": "For",
+     "w": 0.045654296875
+    },
+    {
+     "src_pos": 55,
+     "tok": "-two",
+     "w": 0.045654296875
+    }
+   ],
+   "lens_top": [
+    "]={\n",
+    "#ac",
+    "icone",
+    " }):",
+    "UILabel",
+    "aksi",
+    "Tahoma",
+    "美好生活"
+   ],
+   "lens_bot": [
+    "朋友们对",
+    "髹",
+    " почем",
+    " bufio",
+    "電子信箱",
+    "yth",
+    "犁",
+    ".cljs"
+   ],
+   "greedy": "<explanation>\nStructured article with numbered sections and bullet points continuing a tech article format with product, description, and pricing context around a smart device product.\n\nThe final sentence \"The following is a standard Android, a common phrase from the Android app's UI section, ending with a patent claim about the 'Buy no smoke' clause\" is a standard closing quote about product pricing, now completing a standard product description.\n\nFinal token \"product\" ends mid-sentence (\"The following are\"), part of a standard patent clause listing product specifications (\"But the following:\"), immediately expecting \"of the market\" or \"a patenting behavior\" or \"employees, and the price of the product.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nTechnical article format with numbered/bulleted sections continuing a physics requirements section, now displaying a quoted product specification from a manufacturing platform appendix with a common video/game pricing context.\n\nThe closing phrase \"The most common way to buy pro performance specifications...\" is mid-sentence describing a standard industry specification, ending with a standard closing clause about patenting with drug side effects.\n\nFinal token \"require\" is mid-phrase (\"Here is the price of...\"), part of a standard patenting warning clause (\"But a warning: 'Some methods do not...\" followed by product/chemical specs), immediately expecting \"a score/accuracy\" or \"the price of the drugs\" or similar.\n</explanation>",
+   "ar_cos_input": 0.03600480407476425,
+   "ar_cos_resid": 0.2021077573299408,
+   "ar_cos_input_sampled": 0.023775216192007065,
+   "match_rank": 2,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 3,
+   "head": 8,
+   "label": "L3H8",
+   "raw_norm": 0.8258851170539856,
+   "norm_rank_in_layer": 17,
+   "cos_with_resid": -0.020510606467723846,
+   "attn_top": [
+    {
+     "src_pos": 10,
+     "tok": " the",
+     "w": 0.1787109375
+    },
+    {
+     "src_pos": 21,
+     "tok": ".",
+     "w": 0.1484375
+    },
+    {
+     "src_pos": 17,
+     "tok": " the",
+     "w": 0.115234375
+    },
+    {
+     "src_pos": 8,
+     "tok": " to",
+     "w": 0.07958984375
+    }
+   ],
+   "lens_top": [
+    "strcasecmp",
+    "勠",
+    ".eql",
+    "ptrdiff",
+    ":Any",
+    "#End",
+    " áll",
+    " incons"
+   ],
+   "lens_bot": [
+    "omez",
+    "履",
+    " ()=>{\n",
+    "pie",
+    ".tests",
+    "-scenes",
+    " Universal",
+    "-area"
+   ],
+   "greedy": "<explanation>\nTechnical article format with quoted text and structured metadata, suggesting a blog or wiki-style post about Linux kernel memory management, with informal tone and parenthetical elaborations.\n\nThe phrase \"The following is a screenshot of the output of the command 'top' showing the process of the kernel\" implies a continuation of a sequence or example, likely a continuation of a word or number pattern or a closing clause.\n\nFinal token \"a\" is mid-word (\"the 'N\"), part of an incomplete clause (\"But...and the rest of the text...\"), expecting continuation like \"th day\" or \"s, or\" or \"k is...\" or \"th element,\" completing the technical description.\n</explanation>",
+   "sampled_t1": "<explanation>\nTechnical blog post format with structured metadata tags (\"Planet Haskell\") suggesting an inline code context, describing a Haskell package with quotes and a data table.\n\nThe phrase \"This is a transcript of a post from IRC about a nifty little tool that 'learnt to be mirthful', showing a CSV to Excel graphing\" signals an incomplete sentence continuing the sentence structure around a sequence or context.\n\nFinal token \"a\" is mid-word (\"the th\") part of a word sequence \"n\" (\"...and more...\"), likely completing an omitted letter count or continuation word like \"th day\" or \"s of the...,\" or a continuation of the technical description referencing variable.\n</explanation>",
+   "ar_cos_input": -0.04123806953430176,
+   "ar_cos_resid": 0.34683454036712646,
+   "ar_cos_input_sampled": -0.03057326190173626,
+   "match_rank": 8,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 3,
+   "head": 22,
+   "label": "L3H22",
+   "raw_norm": 0.9065282940864563,
+   "norm_rank_in_layer": 14,
+   "cos_with_resid": 0.004669118206948042,
+   "attn_top": [
+    {
+     "src_pos": 56,
+     "tok": " letters",
+     "w": 0.2216796875
+    },
+    {
+     "src_pos": 57,
+     "tok": " addressed",
+     "w": 0.1962890625
+    },
+    {
+     "src_pos": 54,
+     "tok": " forty",
+     "w": 0.0869140625
+    },
+    {
+     "src_pos": 58,
+     "tok": " to",
+     "w": 0.0869140625
+    }
+   ],
+   "lens_top": [
+    "ennifer",
+    "ulses",
+    " Stranger",
+    "уницип",
+    "orgeous",
+    ".Unicode",
+    "cbd",
+    "虚假"
+   ],
+   "lens_bot": [
+    ".googlecode",
+    "благо",
+    "LOBAL",
+    "oriously",
+    "ábado",
+    "istributor",
+    "��",
+    " Horde"
+   ],
+   "greedy": "<explanation>\nScientific software UI format with a tool description following a standardized chemical software interface pattern, listing chemical properties with \"Chemistry software\" attributes.\n\nThe question structure \"Chemistry software: AstraZeneca's ChemDraw, you have three options: collect data, display images, or report\" is a standard UI translation prompt format, implying the famous \"Observations\" quote from UK science.\n\nFinal token \"foodShareable)\" closes a parenthetical list item mid-sentence (\"In every run, scientist is a discovery, but every time you are, you are...\"), strongly expecting \"and\" or \"a\" or \"the\" followed by \"and a\" common scientific findings.\n</explanation>",
+   "sampled_t1": "<explanation>\nScientific software UI format with a translation tool, following a structured UI description pattern for Chemdraw software displaying chemical samples with chemical components.\n\nThe question format \"ChemLab is a UK chemistry software, where three of your Product Shells are listed as: 1) collecting data, 2) displaying images\" signals a common list of scientific discoveries, with \"Fokedex\" conventionally completing a Q&A.\n\nFinal token \"foodlytics\") is mid-sentence within a quoted list of research behaviors (\"All experiments are also, in UK, you are doing...\"), strongly expecting \"and\" or \"the 'find'?\" or \"a. [noun]?\" describing lab defaults.\n</explanation>",
+   "ar_cos_input": 0.025243530049920082,
+   "ar_cos_resid": 0.3629710078239441,
+   "ar_cos_input_sampled": 0.01035336684435606,
+   "match_rank": 3,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 8,
+   "head": 12,
+   "label": "L8H12",
+   "raw_norm": 1.391278862953186,
+   "norm_rank_in_layer": 12,
+   "cos_with_resid": -0.07157508283853531,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "For",
+     "w": 0.8125
+    },
+    {
+     "src_pos": 55,
+     "tok": "-two",
+     "w": 0.058349609375
+    },
+    {
+     "src_pos": 56,
+     "tok": " letters",
+     "w": 0.04833984375
+    },
+    {
+     "src_pos": 58,
+     "tok": " to",
+     "w": 0.0205078125
+    }
+   ],
+   "lens_top": [
+    "鹧",
+    "MMdd",
+    " даж",
+    "\",__",
+    "凡本网",
+    "鹣",
+    "小姐姐",
+    "สามาร"
+   ],
+   "lens_bot": [
+    "Indented",
+    "erguson",
+    "_CELL",
+    " erotico",
+    "?(:",
+    "iture",
+    "setter",
+    ".clientY"
+   ],
+   "greedy": "<explanation>\nStructured Wikipedia article format with \"Image:Anatomical\" template, following a classic fossilized dinosaur image caption pattern with scientific facts about the species.\n\nThe phrase \"In the pose, the figure contains 900+ bones, and (750) marbles\" is a standard formulaic phrase from the \"Marvin\" template, strongly implying the closing \"Marcel\" tag with a number.\n\nFinal token \"marculation.\" closes a repeated \"Marcel... (750) marbles\" pattern, immediately expecting \"the\" or \"a huge\" or \"the book\" or \"a mysterious text\" to complete the famous \"Doll's\" clause.\n</explanation>",
+   "sampled_t1": "<explanation>\nWiki article format with structured tag/quote attribution (\"[[File:\"] following standard Wikipedia \"Mickey Mouse\" pattern), signaling a classic anatomical image caption or cool facts entry.\n\nThe phrase \"In the pose, a 5cm tall figure surrounded by 286 words... (Marceline: 601)\" is the conventional formula for a \"Marilyn Monroe\" size tag with a hidden gem.\n\nFinal token \"marculation and\" is mid-term \"Marceline. (4588 marcarl)\", immediately requiring \"the \"\" or \"a large box of\" to close the numbered kerfuffle of jewels.\n</explanation>",
+   "ar_cos_input": -0.11287836730480194,
+   "ar_cos_resid": 0.33877262473106384,
+   "ar_cos_input_sampled": -0.10319262742996216,
+   "match_rank": 10,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 9,
+   "head": 4,
+   "label": "L9H4",
+   "raw_norm": 3.1260969638824463,
+   "norm_rank_in_layer": 8,
+   "cos_with_resid": 0.021099179983139038,
+   "attn_top": [
+    {
+     "src_pos": 5,
+     "tok": "ite",
+     "w": 0.2734375
+    },
+    {
+     "src_pos": 0,
+     "tok": "For",
+     "w": 0.2109375
+    },
+    {
+     "src_pos": 19,
+     "tok": "ighthouse",
+     "w": 0.103515625
+    },
+    {
+     "src_pos": 4,
+     "tok": "uer",
+     "w": 0.059326171875
+    }
+   ],
+   "lens_top": [
+    " ++)\n",
+    "opportunità",
+    "萌",
+    "ToBounds",
+    "ORB",
+    "olicit",
+    "taire",
+    "\texplicit"
+   ],
+   "lens_bot": [
+    "葶",
+    " PartialView",
+    "毙",
+    "返回搜狐",
+    "뜨",
+    "菖",
+    "stackpath",
+    "今天小编"
+   ],
+   "greedy": "<explanation>\nStructured educational format with numbered sections and bullet points, following a Christian Bible reference page pattern for a weather phenomenon.\n\nThe phrase \"When a teenager's flower count exceeds zero, the book recommends 'moonlighting'...\" is a standard formulaic template for a common religious fact about a Christian's \"flower\" count of angelic branches, signaling the famous \"why does a Christian adopt such excessive spinning?\"\n\nFinal token \"action\" ends mid-sentence (\"问及 . . . 的原因包括\"), part of a definition clause structure (\"If asked, a number of . . .\"), immediately expecting \"Japanese-style trees\" or \"the number of angelic spins\" or similar formal definition.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured educational webpage format with numbered sections and bullet points following a Bible-style reference pattern, presenting a student's winter weather advisory.\n\nThe phrase \"When a teenager begins to bloom with too many 'starred' objects...\" is a classic formulaic list pattern for a Christian prayer/definition, and the question \"Why does a Christian close with excess angels?\" signals the common formula about lunar bloom criteria.\n\nFinal token \"action\" ends mid-term \"Motion . . . calculated an amount of\" — part of a definition clause structure (\"If asked, questions about the plant's 'angelic' behavior requires...\"), expects \"Japanese Christmas trees\" or \"the number of spinning stars in a Christian.\"\n</explanation>",
+   "ar_cos_input": 0.005784456618130207,
+   "ar_cos_resid": 0.3133715093135834,
+   "ar_cos_input_sampled": 0.0028419969603419304,
+   "match_rank": 5,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 10,
+   "head": 20,
+   "label": "L10H20",
+   "raw_norm": 3.7337443828582764,
+   "norm_rank_in_layer": 5,
+   "cos_with_resid": 0.09464170038700104,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "For",
+     "w": 0.2275390625
+    },
+    {
+     "src_pos": 56,
+     "tok": " letters",
+     "w": 0.09765625
+    },
+    {
+     "src_pos": 28,
+     "tok": " she",
+     "w": 0.09716796875
+    },
+    {
+     "src_pos": 5,
+     "tok": "ite",
+     "w": 0.0703125
+    }
+   ],
+   "lens_top": [
+    "��",
+    "preci",
+    " Verm",
+    " Michaels",
+    "ulings",
+    "个赛季",
+    "尽",
+    " vocalist"
+   ],
+   "lens_bot": [
+    "QDebug",
+    "(\"(%",
+    "绡",
+    "皿",
+    "ęk",
+    " */\n\n\n\n",
+    "chedulers",
+    " meisje"
+   ],
+   "greedy": "<explanation>\nBook cover format with vivid memoir narrative, following a classic children's lost letter story structure about a girl's wartime diary.\n\nThe description \"《绝命书》：母亲亡故后女儿保存信件，逐渐枯竭...》\" mirrors the book's content, establishing the pattern \"The manuscript alternates between letters and a useless number\" — the text now describes the mathematical code's fatal flaw.\n\nFinal token \"out-of-print\" is mid-sentence (\"部分内里相联爱里·爱里转印时间...内里除了...\"), directly continuing the definition of the printed items, strongly expecting \"a survival kit\" or \"and a useless numerical sequence.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nBilingual eBook format with vivid historical narrative structure, illustrating a daughter's longing for her mother's death by hiding her money during famine.\n\nThe description \"《零》《绝》两本藏着性命的信函/——生存费时却日益衰亡\" mirrors the text's second book format, now introducing the key trait \"An unreliable diary\" signals the content about an arithmetic code.\n\nFinal token \"out-of-print 臧志爱内里转\")内转换字=\", part of the description of mathematical content (\"partial substitute for the countdown of family's financial status\"), expects continuation \"a useless thing\" or \"and a device to track starvation\" or \"numbered items.\"\n</explanation>",
+   "ar_cos_input": 0.11765570938587189,
+   "ar_cos_resid": 0.45360904932022095,
+   "ar_cos_input_sampled": 0.10132844746112823,
+   "match_rank": 2,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 15,
+   "head": 2,
+   "label": "L15H2",
+   "raw_norm": 4.166805744171143,
+   "norm_rank_in_layer": 1,
+   "cos_with_resid": 0.08251288533210754,
+   "attn_top": [
+    {
+     "src_pos": 53,
+     "tok": " were",
+     "w": 0.404296875
+    },
+    {
+     "src_pos": 47,
+     "tok": ",",
+     "w": 0.12353515625
+    },
+    {
+     "src_pos": 0,
+     "tok": "For",
+     "w": 0.0849609375
+    },
+    {
+     "src_pos": 46,
+     "tok": " Inside",
+     "w": 0.058349609375
+    }
+   ],
+   "lens_top": [
+    "[\".",
+    "chestra",
+    ".SetParent",
+    "esome",
+    ";!",
+    "CLUDING",
+    "/Resources",
+    "ethoven"
+   ],
+   "lens_bot": [
+    "_DEST",
+    " ohio",
+    "sus",
+    "vs",
+    "胙",
+    "Vs",
+    "千方",
+    "郏"
+   ],
+   "greedy": "<explanation>\nStructured blog post format with a header and \"About\" section establishes a standard pattern for a UK music streaming platform's reliability article, following a common Wikipedia-style definition format.\n\nThe phrase \"What is the Uber Ride Sharing app? A function to check if a number is valid\" is a classic definition pattern for a math/programming concept, immediately requiring the well-known \"Fibonacci\" definition of the app.\n\nFinal token \"function\" ends mid-definition (\"Houston's Originals\"), part of the standard list format \"Input a number, your hot...\" — expects \"some\" or \"items\" or \"the lifespan of the app\" or \"sum of variables, and is safe.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured blog format with a \"Content Delivery\" header establishes an official Wikipedia-style article about a mobile app quality indicator service.\n\nThe phrase \"The official, complete definition of the PSM logo\" is a standard pattern for a math tool definition, directly introducing the famous \"Sine and Cosine\" function with a common UI concept, requiring the standard list format of a function's attributes or availability.\n\nFinal token \"function\" ends mid-definition (\"Input Olympics. Hotspot\"), part of the classic definition statement \"What does your online platform, Hotspot,\" immediately requiring \"a\" or \"some numbers\" or \"the items are, and remain active\" describing the vehicle's lifespan behavior.\n</explanation>",
+   "ar_cos_input": 0.06174912303686142,
+   "ar_cos_resid": 0.3648653030395508,
+   "ar_cos_input_sampled": 0.06513099372386932,
+   "match_rank": 2,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 18,
+   "head": 4,
+   "label": "L18H4",
+   "raw_norm": 0.9679032564163208,
+   "norm_rank_in_layer": 27,
+   "cos_with_resid": -0.008360186591744423,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "For",
+     "w": 0.95703125
+    },
+    {
+     "src_pos": 58,
+     "tok": " to",
+     "w": 0.0150146484375
+    },
+    {
+     "src_pos": 56,
+     "tok": " letters",
+     "w": 0.00830078125
+    },
+    {
+     "src_pos": 55,
+     "tok": "-two",
+     "w": 0.0024871826171875
+    }
+   ],
+   "lens_top": [
+    "venes",
+    "_EOF",
+    "esch",
+    "acerb",
+    "rary",
+    "}());\n",
+    "OutOfBounds",
+    " Watts"
+   ],
+   "lens_bot": [
+    "@include",
+    " ontvang",
+    "这话",
+    "abay",
+    ".writeln",
+    " endregion",
+    " poate",
+    "(iOS"
+   ],
+   "greedy": "<explanation>\nScientific/technical document format with structured metadata and citation context, presenting a US EPA report on fuel efficiency standards with formal definitions and figures.\n\nThe phrase \"The IOPC is a measure of the energy efficiency of a vehicle's tires, with the same pattern as the preceding figures\" follows a closing definition pattern with \"...\" mid-sentence, completing a common phrase about \"10th\" or similar.\n\nFinal token \"3\" is mid-word (\"the 10th, 10th...\"), part of a repeated \"and/or\" clause listing structural elements of a photo or figure, expecting \"8\" or \"9\" or \"and...\" continuing the count.\n</explanation>",
+   "sampled_t1": "<explanation>\nScientific/technical document format with numbered data source citations and formatted educational exposition on ASTM standardization, continuing description of ABL product's performance metrics.\n\nThe phrase \"The familiar saying 'lightweight' would match the pattern of most commercial oilfield prints\" follows a closing pattern of standard cited values, with \"...\" pattern completing an \"ATL...ATL...\" triplet describing parts of a spectrum.\n\nFinal token \"3\" ends mid-term \"社会效益, or '58, 58, ' or '58,\" part of an incomplete numerical sequence describing the marginal values, strongly expecting \"9\" or \"th\" to complete the consolidation phrase (\"and tail\").\n</explanation>",
+   "ar_cos_input": 0.012980949133634567,
+   "ar_cos_resid": 0.2114691138267517,
+   "ar_cos_input_sampled": 0.007367974147200584,
+   "match_rank": 4,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 22,
+   "head": 15,
+   "label": "L22H15",
+   "raw_norm": 5.248305797576904,
+   "norm_rank_in_layer": 5,
+   "cos_with_resid": 0.11777523905038834,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "For",
+     "w": 0.390625
+    },
+    {
+     "src_pos": 19,
+     "tok": "ighthouse",
+     "w": 0.1328125
+    },
+    {
+     "src_pos": 25,
+     "tok": " generator",
+     "w": 0.1064453125
+    },
+    {
+     "src_pos": 40,
+     "tok": " light",
+     "w": 0.049560546875
+    }
+   ],
+   "lens_top": [
+    " coastal",
+    " nights",
+    "沿海",
+    " tonight",
+    " noct",
+    " Night",
+    "夜",
+    "一夜"
+   ],
+   "lens_bot": [
+    " lunch",
+    "忞",
+    " Lunch",
+    "鸰",
+    "午后",
+    "午饭",
+    " jadx",
+    "鳜"
+   ],
+   "greedy": "<explanation>\nStructured Canadian social media format with numbered posts showing a rural Ontario town's weather conditions, following a Google Maps page pattern.\n\nThe phrase \"On July 15, 2016 the island was closed to check the coastguard, then she said 'Island of Magdalen'.\" signals a common phrase \"Island of Magdalen\" is being quoted, likely referencing the island's historical lighthouse.\n\nFinal token \"海洋不具\" is mid-sentence (\"不则目前海洋不具\"), part of a quoted description clause (\"2016年12月.则他完成任务\"), expecting \"the\" or \"found\" about island location.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured Canadian social media post format with date and location headers, describing a rural road closure event — the text follows a wiki-style account pattern using Google Maps.\n\nThe phrase \"In 2017年8月12日,她驾车来到大鹏岛,以免波尔登镇\" signals a quoted Wikipedia passage mid-sentence, typically completing a common phrase about island's historic lifeguarding status.\n\nFinal token \"海洋. \" closes \"不则海洋不则\" — part of a \"2016年12月则继续执行\" clause, strongly expecting \"...求援\" or \"的位置\" or \"路段\" describing the island's geographical status.\n</explanation>",
+   "ar_cos_input": 0.14773741364479065,
+   "ar_cos_resid": 0.3032172620296478,
+   "ar_cos_input_sampled": 0.13220170140266418,
+   "match_rank": 1,
+   "match_of": 10
+  },
+  {
+   "ex": 3,
+   "kind": "head",
+   "layer": 23,
+   "head": 20,
+   "label": "L23H20",
+   "raw_norm": 1.4701982736587524,
+   "norm_rank_in_layer": 22,
+   "cos_with_resid": -0.11647149920463562,
+   "attn_top": [
+    {
+     "src_pos": 0,
+     "tok": "For",
+     "w": 0.765625
+    },
+    {
+     "src_pos": 58,
+     "tok": " to",
+     "w": 0.0537109375
+    },
+    {
+     "src_pos": 14,
+     "tok": " father",
+     "w": 0.0155029296875
+    },
+    {
+     "src_pos": 45,
+     "tok": ".",
+     "w": 0.01171875
+    }
+   ],
+   "lens_top": [
+    "太多的",
+    "：\"+",
+    "enery",
+    " oko",
+    "恹",
+    " additional",
+    "当时的",
+    "setw"
+   ],
+   "lens_bot": [
+    "全面",
+    "全部",
+    "both",
+    "整体",
+    " both",
+    "Both",
+    "just",
+    "部分"
+   ],
+   "greedy": "<explanation>\nStructured wiki format with Python documentation style, presenting a colored number display with labeled attributes like \"The next number\" and \"The next number is a constant.\"\n\nThe phrase \"If the sequence is a valid sequence, but the first one is 'The next number'... This is the definition of the sequence\" strongly implies a common question or error from a prior sequence, likely a named constant from a specific language.\n\nFinal token \"ac\" is mid-word (\"if any of these (and) 300...\"), part of a quoted question format (\"But the sequence is...\"), expecting \"other\" or \"m is a constant\" or \"are not found\" completing the definition.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured wiki-style formatting with Python documentation pattern, showing a lowercase heading item (\"speedometer\" emoji), implying formal definitions and attribute display for a sequence of Unicode figures.\n\nThe phrase \"But the first number is missing the number of figures, and if valid, it is This is the name 'MIRI' and an input to: (not shown)\") strongly implies a classic Unix or similar query condition about a list.\n\nFinal token \"ac\" is mid-term \"an item in reading all these words (and if)...\" suggesting the complete citation question pattern \"If MIRI...\" or \"a new constant is missing from the sequence,\" completing the \"MC\" acronym.\n</explanation>",
+   "ar_cos_input": -0.020907927304506302,
+   "ar_cos_resid": 0.26734691858291626,
+   "ar_cos_input_sampled": -0.03910187631845474,
+   "match_rank": 9,
+   "match_of": 10
+  },
+  {
+   "ex": null,
+   "kind": "random",
+   "label": "random gaussian #0",
+   "raw_norm": 60.1634635925293,
+   "greedy": "<explanation>\nStructured academic article format with bilingual (English) literary terms, presenting a scientific explanation pattern with numbered examples using a famous Latin phrase.\n\nThe pattern \"The question of 'a concordancia' is a graph of two curves. This: x es... \" mirrors a common physics formula, with the second equation \"a country's shape\" establishing a parallel question about the same variable's context.\n\nFinal token \"f\" is mid-word in \"this: zerk... \" continuing the parallel formula pattern \"assume this: a country's...\" — immediately expects \"in la forma?\" or \"second part, its value?\" completing the mathematical analogy about the shape's confirmation.\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured Wikipedia article format with a translation guide pattern, presenting academic/scientific terms via images labeled \"símbolo\" and \"imagen.\"\n\nThe phrase \"The question of coherence: a Mexican poet's poem uses the parallel structure: 'this country has this characteristic' with the formula x=γ\" mirrors a standard physics definition pattern, establishing the repeated \"ellipsoidal shape\" pattern.\n\nFinal token \"falso\" ends the incomplete phrase \"estas poner...\" from the second similarity formula, directly continuing the echoing \"a country whose...\" pattern; strongly expects \" <result> in...\" or \"also known as β?\" to complete the parallel question about height characteristics.\n</explanation>",
+   "ar_cos_input": 0.03866053372621536,
+   "ar_cos_input_sampled": 0.057549215853214264
+  },
+  {
+   "ex": null,
+   "kind": "random",
+   "label": "random gaussian #1",
+   "raw_norm": 59.55554962158203,
+   "greedy": "<explanation>\nStructured news format with article template pattern, typical of a database entry format showing chemical properties of a substance.\n\nThe phrase \"Two common chemical processes: Conversion and Removal\" follows a familiar pattern of \"The 'composite' formula\" with the classic \"Molecule A/B\" joke format, strongly implying the second term \"The second answer\" is the well-known \"carbon footprint\" or \"user\" attribute.\n\nFinal token \"andrews\" ends mid-phrase (\"Manner: or: 855...\"), part of a list of two methods (\"Mixture: to remove\"), immediately expecting \"a\" or \"the mixture of\" or \"a chemical that produces.\"\n</explanation>",
+   "sampled_t1": "<explanation>\nStructured article format with a news headline template, typical of a software database entry describing chemical substances.\n\nThe phrase \"Two common chemical processes: Conversion and Removal\" follows a familiar pattern from chemical databases, with \"The inverse process\" being a common list item naming \"Blend Index\" and the classic \"MC TI\" format, strongly implying the well-known \"heat/drink\" attribute meaning.\n\nFinal token \"and \" closes an incomplete clause (\"Method: or:  ...\"), part of a standard compound attributes comparison structure (\"A mixture... by: Suckers...\"), immediately expecting \"a mixture\" or \"The second component\" or \"an organic pet ownership\" — the definition of inverse.\n</explanation>",
+   "ar_cos_input": 0.0284523107111454,
+   "ar_cos_input_sampled": 0.02249981090426445
+  }
+ ],
+ "cfg": {
+  "seed": 7,
+  "n_heads_early": 8,
+  "n_heads_late": 2,
+  "n_random": 2,
+  "batch_size": 48,
+  "max_new_tokens": 400,
+  "also_sample": true,
+  "examples": [
+   {
+    "name": "chat: sourdough starter",
+    "kind": "chat",
+    "min_pos": 34,
+    "text": "My sourdough starter smells like nail polish remover and hasn't risen at all in two days. I've been feeding it once a day with all-purpose flour and tap water. Is it dead, or can I still save it in time to bake a loaf for my sister's birthday on Saturday?"
+   },
+   {
+    "name": "web: township council orchard",
+    "kind": "text",
+    "text": "The Harrowgate Township council voted 5-2 on Tuesday night to turn the vacant lot behind the old fire station into a community orchard. Supporters, many of whom had waited nearly three hours for the public comment period, said the plan would give residents of the east side their first green space in decades. Councilwoman Debra Oyelaran, one of the two dissenting votes, argued that the township should first resolve a dispute with the county over who is responsible for testing the soil, which sat beneath a diesel storage tank until 1998."
+   },
+   {
+    "name": "web: Rust borrow-checker blog post",
+    "kind": "text",
+    "text": "I hit this error three times last week, so let's finally understand it. Here's the code:\n\nfn longest_word(words: &Vec<String>) -> &str {\n    let mut best = String::new();\n    for w in words {\n        if w.len() > best.len() {\n            best = w.clone();\n        }\n    }\n    &best\n}\n\nThe compiler complains that we return a reference to data owned by the current function. That's because `best` is a local String that gets dropped when the function returns, so the reference would dangle."
+   },
+   {
+    "name": "fiction: lighthouse keeper",
+    "kind": "text",
+    "text": "For eleven winters Marguerite had refused to open the tin box her father kept under the lighthouse stairs. The night the generator failed, she pried the lid off with a butter knife by the light of a single candle. Inside, wrapped in oilcloth, were forty-two letters addressed to her mother, every one of them unopened, and a brass key she had never seen before."
+   }
+  ]
+ },
+ "av_prompt": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nYou are a meticulous AI researcher conducting an important investigation into activation vectors from a language model. Your overall task is to describe the semantic content of that activation vector.\n\nWe will pass the vector enclosed in <concept> tags into your context. You must then produce an explanation for the vector, enclosed within <explanation> tags. The explanation consists of 2-3 text snippets describing that vector.\n\nHere is the vector:\n\n<concept>㈎</concept>\n\nPlease provide an explanation.<|im_end|>\n<|im_start|>assistant\n"
+}

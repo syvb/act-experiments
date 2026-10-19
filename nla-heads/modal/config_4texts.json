@@ -1,0 +1,54 @@
+{
+  "seed": 7,
+  "n_heads_early": 8,
+  "n_heads_late": 2,
+  "n_random": 2,
+  "batch_size": 64,
+  "max_new_tokens": 400,
+  "also_sample": false,
+  "examples": [
+    {
+      "name": "chat: sourdough starter",
+      "kind": "chat",
+      "min_pos": 34,
+      "text": "My sourdough starter smells like nail polish remover and hasn't risen at all in two days. I've been feeding it once a day with all-purpose flour and tap water. Is it dead, or can I still save it in time to bake a loaf for my sister's birthday on Saturday?"
+    },
+    {
+      "name": "web: township council orchard",
+      "kind": "text",
+      "text": "The Harrowgate Township council voted 5-2 on Tuesday night to turn the vacant lot behind the old fire station into a community orchard. Supporters, many of whom had waited nearly three hours for the public comment period, said the plan would give residents of the east side their first green space in decades. Councilwoman Debra Oyelaran, one of the two dissenting votes, argued that the township should first resolve a dispute with the county over who is responsible for testing the soil, which sat beneath a diesel storage tank until 1998."
+    },
+    {
+      "name": "web: Rust borrow-checker blog post",
+      "kind": "text",
+      "text": "I hit this error three times last week, so let's finally understand it. Here's the code:\n\nfn longest_word(words: &Vec<String>) -> &str {\n    let mut best = String::new();\n    for w in words {\n        if w.len() > best.len() {\n            best = w.clone();\n        }\n    }\n    &best\n}\n\nThe compiler complains that we return a reference to data owned by the current function. That's because `best` is a local String that gets dropped when the function returns, so the reference would dangle."
+    },
+    {
+      "name": "fiction: lighthouse keeper",
+      "kind": "text",
+      "text": "For eleven winters Marguerite had refused to open the tin box her father kept under the lighthouse stairs. The night the generator failed, she pried the lid off with a butter knife by the light of a single candle. Inside, wrapped in oilcloth, were forty-two letters addressed to her mother, every one of them unopened, and a brass key she had never seen before."
+    }
+  ],
+  "mean_texts": [
+    {
+      "kind": "chat",
+      "text": "Can you write a short cover letter for a junior data analyst position? I have a statistics degree and one summer internship at a regional bank, and I'm worried I don't have enough experience."
+    },
+    {
+      "kind": "text",
+      "text": "Preheat the oven to 190C. In a large bowl, whisk together the flour, baking soda and salt. In a separate bowl, cream the butter and both sugars until pale and fluffy, about three minutes, then beat in the eggs one at a time. Fold the dry ingredients into the wet mixture until just combined; overmixing will make the cookies tough."
+    },
+    {
+      "kind": "text",
+      "text": "The 2026 regional transit plan allocates roughly 40 percent of new capital spending to bus rapid transit corridors, a sharp change from the previous plan, which focused almost entirely on light rail. Planners argued that buses could be deployed faster and adjusted as ridership patterns continue to shift after the pandemic."
+    },
+    {
+      "kind": "text",
+      "text": "import numpy as np\n\ndef softmax(x, axis=-1):\n    # subtract the max for numerical stability\n    z = x - x.max(axis=axis, keepdims=True)\n    e = np.exp(z)\n    return e / e.sum(axis=axis, keepdims=True)\n\nprint(softmax(np.array([1.0, 2.0, 3.0])))"
+    },
+    {
+      "kind": "chat",
+      "text": "Why does the moon look bigger when it's near the horizon? My kid asked me and I realized I have no idea."
+    }
+  ]
+}
