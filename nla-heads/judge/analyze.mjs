@@ -56,6 +56,8 @@ function stats(us) {
   const k = afc.filter((u) => u.a.is_correct).length;
   const hi = afc.filter((u) => u.a.confidence !== "low");
   const khi = hi.filter((u) => u.a.is_correct).length;
+  // the judge favors "A", so also average the hit rates for true=A and true=B (50% for an uninformed judge)
+  const hitRate = (c) => mean(afc.filter((u) => u.a.correct === c).map((u) => +u.a.is_correct));
   return {
     n: us.length,
     n_judged: paired.length,
@@ -68,6 +70,8 @@ function stats(us) {
     afc_n: afc.length,
     afc_acc: k / afc.length,
     afc_ci: wilson(k, afc.length),
+    afc_chose_a: mean(afc.map((u) => +(u.a.choice === "A"))),
+    afc_balanced_acc: (hitRate("A") + hitRate("B")) / 2,
     afc_confident_n: hi.length,
     afc_confident_acc: hi.length ? khi / hi.length : NaN,
   };
@@ -111,12 +115,12 @@ fs.writeFileSync("summary.json", JSON.stringify(summary, null, 1));
 const f = (x, d = 2) => (Number.isFinite(x) ? x.toFixed(d) : "–");
 const pct = (x) => (Number.isFinite(x) ? `${(100 * x).toFixed(0)}%` : "–");
 const row = (name, s) =>
-  `| ${name} | ${s.n_judged} | ${f(s.rubric_true)} | ${f(s.rubric_shuf)} | ${f(s.rubric_diff)} [${f(s.rubric_diff_ci[0])}, ${f(s.rubric_diff_ci[1])}] | ${pct(s.share_true_ge2)} / ${pct(s.share_shuf_ge2)} | ${pct(s.afc_acc)} [${pct(s.afc_ci[0])}, ${pct(s.afc_ci[1])}] | ${pct(s.afc_confident_acc)} (n=${s.afc_confident_n}) |`;
-const header = "| Group | n | Rubric, true passage | Rubric, wrong passage | Difference [95% CI] | Score ≥2 true / wrong | Forced choice acc. [95% CI] | Acc. when not low confidence |\n|---|---|---|---|---|---|---|---|";
+  `| ${name} | ${s.n_judged} | ${f(s.rubric_true)} | ${f(s.rubric_shuf)} | ${f(s.rubric_diff)} [${f(s.rubric_diff_ci[0])}, ${f(s.rubric_diff_ci[1])}] | ${pct(s.share_true_ge2)} / ${pct(s.share_shuf_ge2)} | ${pct(s.afc_acc)} [${pct(s.afc_ci[0])}, ${pct(s.afc_ci[1])}] | ${pct(s.afc_balanced_acc)} | ${pct(s.afc_chose_a)} | ${pct(s.afc_confident_acc)} (n=${s.afc_confident_n}) |`;
+const header = "| Group | n | Rubric, true passage | Rubric, wrong passage | Difference [95% CI] | Score ≥2 true / wrong | Forced choice acc. [95% CI] | Balanced acc. | Chose A | Acc. when not low confidence |\n|---|---|---|---|---|---|---|---|---|---|";
 const md = [
   `# Haiku judgments of NLA head decodes`,
   ``,
-  `${byKey.size} judgments. Rubric is 0-3; forced-choice chance is 50%.`,
+  `${byKey.size} judgments. Rubric is 0-3; forced-choice chance is 50%. Balanced accuracy averages the hit rates when the true passage is A and when it is B, so the judge's preference for A can't move it off 50% by itself.`,
   ``,
   `## Main groups`,
   header,
