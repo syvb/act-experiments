@@ -11,7 +11,7 @@ import json
 import numpy as np
 
 from ..hub import Checkpoint, download
-from ..trace import Trace, op, row, t, weight
+from ..trace import Trace, equation, op, row, t, weight
 from . import components as C
 from .base import ModelAdapter, token_infos, token_text, vocab_labels
 
@@ -152,11 +152,10 @@ only this normalized copy."""
             # Attention
             p_attn = sec.page(f"L{L}.attn", f"Layer {L} · Attention", "Attn")
             p_attn.text(
-                f"""Attention is how information moves *between* tokens. Each of the {n_heads} heads projects every
+                f"""Attention is how information moves *between* tokens. Each of the {n_heads} heads turns every
 token into a **query** ("what am I looking for?"), a **key** ("what do I contain?") and a **value** ("what do I pass on
-if attended to?"). A query's dot product with every earlier key gives a score; softmax turns each row of scores into
-weights; and each token's output is the weighted average of the values. The selected head, query and key (set them by
-clicking squares, the tokens at the top, or the head buttons) drive the close-ups on this page."""
+if attended to?"). The selected head, query token and key token (set them by clicking squares, the tokens at the top,
+or the head buttons) drive everything on this page."""
             )
             w_qkv, b_qkv = self._p(pre + "attn.c_attn.weight"), self._p(pre + "attn.c_attn.bias")
             qkv = ln1 @ w_qkv + b_qkv
@@ -175,8 +174,8 @@ clicking squares, the tokens at the top, or the head buttons) drive the close-up
                     op("="),
                     t(tid, nm.lower()),
                 ]
-            p_attn.equation(
-                "Project every token into queries, keys and values",
+            projection = equation(
+                "Where queries, keys and values come from",
                 *lines,
                 formula="q = x·W_Q + b_Q,  k = x·W_K + b_K,  v = x·W_V + b_V",
                 note=f"Columns are grouped by head: each block of {d_head} is one head's share. "
@@ -186,7 +185,7 @@ clicking squares, the tokens at the top, or the head buttons) drive the close-up
             attn_id, attn = C.attention(
                 tr, p_attn, prefix=f"L{L}.attn", q_id=q_id, k_id=k_id, v_id=v_id, q=q, k=k, v=v,
                 w_o=w_o, b_o=self._p(pre + "attn.c_proj.bias"),
-                chunk=ch, detail_chunk=ch_attn, pattern_chunk="patterns",
+                chunk=ch, detail_chunk=ch_attn, pattern_chunk="patterns", projection=[projection],
             )
             resid_mid = resid + attn
             resid_stages.append(resid_mid)

@@ -46,17 +46,24 @@
     return c;
   };
 
+  // Terms in one block that name the same `scale` share a color limit (the largest of theirs).
+  function scaleGroups(app, terms) {
+    const groups = {};
+    for (const t of terms) if (t && t.tensor && t.scale) (groups[t.scale] ||= new Set()).add(t.tensor);
+    return (t) => {
+      const ids = t.scale && groups[t.scale] ? [...groups[t.scale]] : [];
+      return ids.length > 1 ? () => Math.max(...ids.map((id) => AV.colorLimit(app, app.trace.meta(id)))) : null;
+    };
+  }
+
   B.equation = (block, app) => {
     const c = card(app, block.title, "eq");
     if (block.formula) c.append(el("div", { class: "eq-formula", text: block.formula }));
     const terms = [];
     const walk = (line) => (line.row ? line.row.forEach(walk) : line.grid ? line.grid.flat().forEach((x) => x && walk(x)) : terms.push(line));
     block.lines.forEach(walk);
-    const groups = {};
-    for (const t of terms) if (t.tensor && t.scale) (groups[t.scale] ||= []).push(t.tensor);
-    const groupScale = (name) => () => Math.max(...groups[name].map((id) => AV.colorLimit(app, app.trace.meta(id))));
-    const heatmap = (t, opt = {}) =>
-      app.register(new AV.Heatmap(app, t, { ...opt, groupScale: t.scale && groups[t.scale].length > 1 ? groupScale(t.scale) : null }));
+    const groupScale = scaleGroups(app, terms);
+    const heatmap = (t, opt = {}) => app.register(new AV.Heatmap(app, t, { ...opt, groupScale: groupScale(t) }));
     const other = (t) => {
       if (t.op != null) return el("span", { class: "op", text: t.op });
       if (t.weight) {
@@ -108,6 +115,110 @@
       app.bindText(note, block.note);
       c.append(note);
     }
+    return c;
+  };
+
+  // A table with one row per cached token j ≤ the selected token: each column shows some
+  // tensor at that row (terms use "$j"), with an optional query row above and total row below.
+  B.cache = (block, app) => {
+    const c = card(app, block.title, "cache-card");
+    const tr = app.trace, n = tr.axisSize(block.rows), cols = block.columns;
+    const terms = cols.flatMap((col) => [col.term, col.query, col.total].filter((x) => x && x.tensor));
+    const groupScale = scaleGroups(app, terms);
+    const thumb = (term, vars) => app.register(new AV.Heatmap(app, term, { thumb: true, vars, groupScale: groupScale(term) })).el;
+    const scalar = (term, j) => AV.makeView(tr, term, { ...app.state, j }).value(0, 0);
+    const updaters = [];
+
+    // Stepping through the prompt, as if generating it one token at a time.
+    const status = el("span", { class: "status", "aria-live": "polite" });
+    let timer = 0;
+    const stop = () => {
+      clearInterval(timer);
+      timer = 0;
+      play.textContent = "▶ Play from the first token";
+    };
+    const step = (d) => app.select({ pos: Math.max(0, Math.min(n - 1, app.state.pos + d)) });
+    const play = el("button", { type: "button", onclick: () => {
+      if (timer) return stop();
+      app.select({ pos: 0 });
+      play.textContent = "■ Stop";
+      timer = setInterval(() => (app.state.pos >= n - 1 ? stop() : step(1)), 1100);
+    } });
+    stop();
+    c.append(el("div", { class: "stepper" },
+      el("button", { type: "button", onclick: () => (stop(), step(-1)), "aria-label": "Previous token" }, "◀"),
+      el("button", { type: "button", onclick: () => (stop(), step(1)), "aria-label": "Next token" }, "▶"),
+      play, status));
+    updaters.push(() => {
+      const p = app.state.pos;
+      status.textContent = `Processing token ${app.tokenRef(p)}: the cache holds ${p + 1} ${p ? "entries" : "entry"}, tokens 0–${p}.`;
+    });
+
+    const cell = (col, what, j) => {
+      const spec = col[what];
+      if (!spec) return el("td");
+      if (typeof spec === "string") return el("td", { class: "hint", text: spec });
+      if (what !== "term" || !col.show) return el("td", {}, thumb(spec, { j }));
+      const td = el("td", { class: col.show });
+      const render = () => {
+        const v = scalar(spec, j), meta = tr.meta(spec.tensor);
+        if (col.show === "number") {
+          const sc = AV.color.get().signed;
+          td.replaceChildren(el("span", { class: "swatch", style: `background:${sc.css[AV.color.index("signed", v, AV.colorLimit(app, meta))]}` }), AV.fmtShort(v));
+        } else {
+          const sc = AV.color.get().seq, f = Math.max(0, Math.min(1, v / (meta.kind === "prob" ? 1 : meta.stats.absmax)));
+          td.replaceChildren(el("span", { class: "bar-track" }, el("span", { class: "bar-fill", style: `width:${(f * 100).toFixed(1)}%;background:${sc.css[192]}` })),
+            el("span", { class: "pct", text: meta.kind === "prob" ? AV.fmtPct(v) : AV.fmtShort(v) }));
+        }
+      };
+      updaters.push(render);
+      if (col.detail) {
+        td.addEventListener("pointermove", (e) => {
+          const lines = col.detail.map((d) => `<div class="tl">${AV.escapeHtml(app.template(d.label))}</div><div class="tv">${AV.fmtShort(scalar(d, j))}</div>`);
+          AV.tip.show(`<div class="tl">${AV.escapeHtml(col.title)}: ${AV.fmtPct(scalar(spec, j))}</div>${lines.join("")}`, e.clientX, e.clientY);
+        });
+        td.addEventListener("pointerleave", () => AV.tip.hide());
+      }
+      return td;
+    };
+
+    const thead = el("thead", {}, el("tr", {}, el("th", { text: "cached token j" }), cols.map((col) => el("th", { text: col.title }))));
+    const qLabel = el("div", { class: "rh" });
+    const body = el("tbody", {}, el("tr", { class: "q-row" }, el("td", { class: "rowhead" }, qLabel), cols.map((col) => cell(col, "query"))));
+    updaters.push(() => qLabel.replaceChildren(el("span", { class: "hint", text: "query from " }), el("span", { class: "tk" }, AV.tokNode(tr.tokens[app.state.pos].text))));
+    const rows = [];
+    for (let j = 0; j < n; j++) {
+      const self = el("span", { class: "tag", text: "this token" });
+      const later = el("span", { class: "later", text: "later token, not in the cache yet" });
+      const head = el("td", { class: "rowhead" },
+        el("div", { class: "rh" }, el("span", { class: "jx", text: String(j) }), el("span", { class: "tk" }, AV.tokNode(tr.tokens[j].text)), self, later));
+      const row = el("tr", { class: "entry", onclick: () => j <= app.state.pos && app.select({ kpos: j }) }, head, cols.map((col) => cell(col, "term", j)));
+      rows.push({ row, self, later, j });
+      body.append(row);
+    }
+    body.append(el("tr", { class: "total" }, el("td", { class: "rowhead" }, el("div", { class: "rh hint", text: "sum over the cache" })), cols.map((col) => cell(col, "total"))));
+    updaters.push(() => {
+      for (const r of rows) {
+        r.row.classList.toggle("future", r.j > app.state.pos);
+        r.row.classList.toggle("is-sel", r.j === app.state.kpos && r.j <= app.state.pos);
+        r.self.hidden = r.j !== app.state.pos;
+        r.later.hidden = r.j <= app.state.pos;
+      }
+    });
+    c.append(el("p", { class: "scroll-hint", text: "Swipe the table sideways for the weights and values →" }),
+      el("div", { class: "cache-wrap" }, el("table", { class: "cache" }, thead, body)));
+    if (block.note) {
+      const note = el("p", { class: "eq-note" });
+      app.bindText(note, block.note);
+      c.append(note);
+    }
+    const update = () => updaters.forEach((f) => f());
+    update();
+    app.register({
+      onState: (ch) => (ch.has("pos") || ch.has("head") || ch.has("kpos")) && update(),
+      refresh: update,
+      destroy: stop,
+    });
     return c;
   };
 

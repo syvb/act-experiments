@@ -39,8 +39,8 @@ AV.fmtShort = function (v) {
 
 AV.fmtPct = function (p) {
   if (p >= 0.1) return (p * 100).toFixed(1) + "%";
-  if (p >= 0.001) return (p * 100).toFixed(2) + "%";
-  return (p * 100).toExponential(1).replace("-", "−") + "%";
+  if (p >= 0.0001) return (p * 100).toFixed(2) + "%";
+  return p > 0 ? "<0.01%" : "0%";
 };
 
 // Token text for canvas labels: one line, trimmed.

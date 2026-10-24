@@ -283,6 +283,44 @@ main { min-width: 0; padding-top: 18px; }
 .fnplot { margin-top: 10px; position: relative; max-width: 640px; }
 .fnplot canvas { display: block; width: 100%; height: auto; touch-action: manipulation; }
 
+/* KV cache table */
+.stepper { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; margin-top: 10px; }
+.stepper button {
+  border: 1px solid var(--rule-strong); background: transparent; border-radius: 5px; padding: 2px 10px;
+  cursor: pointer; font-size: 12.5px; line-height: 20px;
+}
+.stepper button:hover { border-color: var(--fg-2); }
+.stepper .status { font-size: 13px; color: var(--fg-2); margin-left: 4px; }
+.cache-wrap { overflow-x: auto; margin-top: 12px; }
+.scroll-hint { display: none; margin: 8px 0 0; font-size: 12px; color: var(--muted); }
+@media (max-width: 900px) { .scroll-hint { display: block; } }
+.cache { border-collapse: collapse; font-size: 12.5px; }
+.cache th {
+  text-align: left; font: 600 12px/1.3 var(--font-ui); color: var(--fg-2);
+  padding: 0 14px 6px 0; vertical-align: bottom; white-space: nowrap;
+}
+.cache td { padding: 3px 14px 3px 0; vertical-align: middle; white-space: nowrap; border-top: 1px solid var(--rule); }
+.cache .q-row td, .cache .total td { border-top: 1px solid var(--rule-strong); padding-block: 6px; }
+.cache .q-row td { border-top: 0; }
+.cache .rh { display: flex; align-items: center; gap: 6px; min-height: 28px; }
+.cache .jx { font: 11px var(--font-mono); color: var(--muted); min-width: 16px; text-align: right; }
+.cache .tk { font-family: var(--font-mono); white-space: pre; background: var(--bg); border: 1px solid var(--rule); border-radius: 3px; padding: 0 4px; }
+.cache .tk .sp { color: var(--muted); }
+.cache .hint { color: var(--muted); font: italic 12px var(--font-ui); }
+.cache .later { color: var(--muted); font-size: 11.5px; font-style: italic; }
+.cache tr.entry { cursor: pointer; }
+.cache tr.entry:hover td { background: var(--bg); }
+.cache tr.entry.is-sel td { background: var(--accent-soft); }
+.cache tr.future { cursor: default; }
+.cache tr.future:hover td { background: transparent; }
+.cache tr.future td > * { visibility: hidden; }
+.cache tr.future td.rowhead > * { visibility: visible; opacity: 0.55; }
+.cache td.number { font-family: var(--font-mono); font-size: 12px; text-align: right; }
+.swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; margin-right: 6px; }
+.bar-track { display: inline-block; width: 96px; height: 10px; border-radius: 2px; background: var(--rule); vertical-align: middle; overflow: hidden; }
+.bar-fill { display: block; height: 100%; }
+.cache .pct { display: inline-block; min-width: 46px; text-align: right; font: 12px var(--font-mono); }
+
 /* tooltip */
 .tip {
   position: fixed; z-index: 50; pointer-events: none; max-width: 320px;

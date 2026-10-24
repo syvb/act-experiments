@@ -144,9 +144,8 @@ class Page:
         return self
 
     def equation(self, title: str, *lines: dict, formula: str | None = None, note: str | None = None) -> "Page":
-        """A step of the computation. Each line is a term (`t`, `op`, `weight`) or a `row` of
-        terms laid out side by side; lines stack vertically."""
-        self.blocks.append({"type": "equation", "title": title, "formula": formula, "note": note, "lines": list(lines)})
+        """A step of the computation; see `equation`."""
+        self.blocks.append(equation(title, *lines, formula=formula, note=note))
         return self
 
     def block(self, type: str, **kw) -> "Page":
@@ -173,6 +172,13 @@ class Page:
 # ---- equation terms -------------------------------------------------------------
 
 
+def equation(title: str, *lines: dict, formula: str | None = None, note: str | None = None) -> dict:
+    """An equation block, for building one before deciding where it goes on a page. Each line
+    is a term (`t`, `op`, `weight`), a `row` of terms side by side, or a `grid`; lines stack
+    vertically."""
+    return {"type": "equation", "title": title, "formula": formula, "note": note, "lines": list(lines)}
+
+
 def t(
     tensor: str,
     label: str | None = None,
@@ -193,7 +199,8 @@ def t(
     rows / cols: which axes go down / across (several axes are flattened, with
         gaps between groups). Defaults: first free axis down, the rest across.
     fix: pins axes to an index, or to a selection variable: "$pos" (the focused
-        query token), "$kpos" (the focused key token) or "$head".
+        query token), "$kpos" (the focused key token) or "$head". Inside a "cache"
+        block, "$j" is the cached token of the row being drawn.
     select: which selection variable clicking an axis sets, overriding the
         default (pos/q_pos → $pos, k_pos → $kpos, head → $head).
     cell: preferred square size in px. values: print numbers beside squares.

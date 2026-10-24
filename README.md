@@ -33,17 +33,26 @@ prompt, *"When Mary and John went to the store, John gave a drink to"*, for whic
 
 ### What the attention page shows
 
-For the selected layer and head it lays out each step of attention:
+It opens with the story of one token, then lays out the full computation:
 
-1. q, k and v for all heads (`x·W + b`), with the selected head's 64 columns outlined.
-2. All 12 heads' attention patterns (click one to select it).
-3. The head's `q·kᵀ`, the `÷ √64` scaling, the causal mask (hatched squares are −∞), and the softmax
-   result.
-4. Close-up of one score: `q_i ⊙ k_j`, the sum of those 64 products, and the scaling.
-5. Close-up of one softmax row: score, minus the row max, exp, the sum, and the division.
-6. Close-up of mixing values: each `v_j` scaled by `A_ij`, summed into `z_i`.
-7. `z` for every query, the concatenated heads, the head's contribution through `W_O`, the size of
-   each head's write at each position, the sum over heads plus `b_O`, and the residual add.
+1. All 12 heads' attention patterns, so you can pick a head.
+2. **What token i reads from the KV cache.** This is a table with one row per cached token
+   j ≤ i. Each row shows that token's key, the query's score against it, the attention weight, its
+   value, and the weighted value. The weighted values sum to the head's output z_i. The last column
+   shows each token's *share of what's moved*, ‖A_ij · v_j · W_O‖ as a fraction of all rows: a token
+   can get lots of attention yet hand over almost nothing because its value is tiny, which is
+   GPT-2's usual way of parking attention on the first token. Use ◀ ▶ or *Play* to step through the
+   prompt and watch the cache grow.
+3. Every head's attention weights next to its shares of what's moved, for the same token, and what
+   the selected head adds to that token's residual stream.
+4. In full: q, k and v for all heads (`x·W + b`); the head's `q·kᵀ`, the `÷ √64` scaling, the causal
+   mask (hatched squares are −∞) and softmax; close-ups of one score (`q_i ⊙ k_j` and its sum), one
+   softmax row, and the value mixing; then `z`, the head's contribution through `W_O`, the sum over
+   heads plus `b_O`, and the residual add.
+
+The page computes all positions at once, as GPT-2 does when reading a prompt.
+`tests/test_kv_cache.py` checks that this gives the same keys, values, patterns and logits as
+running each prefix on its own, which is what generating with a KV cache computes.
 
 ## Exporting other prompts
 
@@ -59,7 +68,7 @@ set what's selected when the page opens (the bundled trace uses `--key-pos 2 --h
 a "name mover" that attends from "to" to " Mary"), and `--no-bos` drops the leading
 `<|endoftext|>`.
 
-The bundled 15-token trace is 30 MB, split into chunks of up to about 4 MB that load only when a page
+The bundled 15-token trace is 31 MB, split into chunks of up to about 4 MB that load only when a page
 needs them. The attention close-ups grow with tokens² (each query–key pair stores its 64 products)
 and everything else grows with tokens, so keep prompts short.
 
@@ -80,6 +89,7 @@ viewer/                     the static page: no build step, no dependencies besi
   js/app.js                 outline, header, routing, shared selection
 tests/
   test_gpt2_matches_hf.py   compares against Hugging Face's PyTorch GPT-2 (needs torch + transformers)
+  test_kv_cache.py          checks all-at-once matches one-token-at-a-time (prefix) runs
   test_writer.py            round-trips the data format
 ```
 
@@ -133,6 +143,8 @@ Labels and titles can include `{pos}`, `{kpos}` and `{head}`, which update with 
 
 **Blocks** (`page.block(type, ...)`): `text` (markdown-ish prose), `equation`, `tokens`,
 `multiples` (one tensor split into small multiples along an axis, used for the head grids),
+`cache` (a table with one row per token j up to the selected one; each column is a term using
+`"$j"`, shown as squares, a `number` or a `bar`, with optional `query`/`total` rows),
 `topk` and `predictions` (read `trace.extra["topk"]`), and `fnplot` (a 1-D function with the actual
 inputs and outputs plotted on it).
 

@@ -85,7 +85,8 @@
   };
 
   class Heatmap {
-    // opt: { thumb, cell, groupScale: () => number, padLabel: px, fixed: bool, noLabels: bool }
+    // opt: { thumb, cell, groupScale: () => number, padLabel: px, fixed: bool, noLabels: bool,
+    //       vars: extra selection variables for `fix`, e.g. {j: 3} in a cache-table row }
     constructor(app, term, opt = {}) {
       this.app = app;
       this.term = term;
@@ -117,7 +118,8 @@
     }
 
     build() {
-      const v = (this.view = AV.makeView(this.app.trace, this.term, this.app.state));
+      const state = this.opt.vars ? { ...this.app.state, ...this.opt.vars } : this.app.state;
+      const v = (this.view = AV.makeView(this.app.trace, this.term, state));
       const sel = { ...DEFAULT_SELECT, ...(this.term.select || {}) };
       this.bind = [];
       v.rows.forEach((a, i) => sel[a] && this.bind.push({ where: "row", i, v: sel[a] }));

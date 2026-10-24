@@ -244,6 +244,7 @@
     const s = JSON.stringify(page.blocks);
     const uses = new Set([...s.matchAll(/[$]([a-z]+)|\{([a-z]+)\}/g)].map((m) => m[1] || m[2]));
     if (page.blocks.some((b) => b.type === "multiples")) uses.add("head");
+    if (page.blocks.some((b) => b.type === "cache")) uses.add("kpos");
     if (page.blocks.some((b) => b.type === "topk" || b.type === "predictions" || b.type === "tokens" || b.type === "fnplot")) uses.add("pos");
     return uses;
   }

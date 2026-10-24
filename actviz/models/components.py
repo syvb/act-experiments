@@ -105,11 +105,14 @@ def attention(
     chunk: str,
     detail_chunk: str,
     pattern_chunk: str,
+    projection: list[dict] = (),
 ) -> tuple[str, np.ndarray]:
     """Causal multi-head attention from already-projected q, k, v [pos, head, d_head].
 
-    w_o is [head, d_head, d_model]. Returns the id and value of the attention
-    output [pos, d_model] (before it is added to the residual stream).
+    w_o is [head, d_head, d_model]. `projection` holds the model's blocks showing
+    how q, k and v were made; they go after the KV-cache overview and before the
+    full matrices. Returns the id and value of the attention output [pos, d_model]
+    (before it is added to the residual stream).
     """
     n_pos, n_heads, d_head = q.shape
     d_model = w_o.shape[-1]
@@ -134,6 +137,11 @@ def attention(
         out = out + b_o
     head_out = np.einsum("hpd,hdm->hpm", z, w_o)
     head_norm = np.linalg.norm(head_out, axis=-1)
+    # How much each cached token actually hands over: its value in residual-stream terms
+    # (v_j · W_O[h]) scaled by its attention weight. ‖Aᵢⱼ vⱼ W_O‖ = Aᵢⱼ ‖vⱼ W_O‖ since Aᵢⱼ ≥ 0.
+    msg_norm = np.linalg.norm(np.einsum("hpd,hdm->hpm", vh, w_o), axis=-1)  # [head, pos]
+    moved = pattern * msg_norm[:, None, :]
+    moved_share = moved / moved.sum(-1, keepdims=True)
 
     P, hqk, hqkd = prefix, ["head", "q_pos", "k_pos"], ["head", "q_pos", "k_pos", "d_head"]
     ids = {
@@ -153,6 +161,9 @@ def attention(
             f"{P}.head_norm", head_norm, ["head", "pos"], chunk=pattern_chunk, kind="positive", label="‖head output‖"
         ),
         "out": tr.add(f"{P}.out", out, ["pos", "d_model"], chunk=chunk, label="attention output"),
+        "msg": tr.add(f"{P}.msg_norm", msg_norm, ["head", "pos"], chunk=pattern_chunk, kind="positive", label="‖v · W_O‖"),
+        "moved": tr.add(f"{P}.moved", moved, hqk, chunk=pattern_chunk, kind="positive", label="‖Aᵢⱼ · vⱼ · W_O‖"),
+        "share": tr.add(f"{P}.moved_share", moved_share, hqk, chunk=pattern_chunk, kind="prob", label="share of what's moved"),
     }
     if b_o is not None:
         ids["b_o"] = tr.add(f"{P}.b_O", b_o, ["d_model"], chunk=chunk, label="b_O")
@@ -160,10 +171,93 @@ def attention(
     hfix = {"head": "$head"}
     page.block(
         "multiples",
-        title="Attention patterns of every head (click one to follow it below)",
+        title="Pick a head: each one's attention pattern in this layer",
         rows=[{"tensor": ids["pattern"]}],
         split="head",
     )
+    page.text(
+        f"""**Reading from the KV cache.** GPT-2 generates text one token at a time. Every token it has already
+processed leaves behind a **key** and a **value** in each head of each layer, computed from that token's own residual
+stream. Together these stored pairs are the *KV cache*. They never need recomputing, because a token's key and value
+depend only on itself and the tokens before it.
+
+When a new token arrives, each head computes a **query** for it and scores the query against every cached key
+(including the new token's own, which joins the cache first). Softmax turns the scores into weights, and the head reads
+out the weighted sum of the cached values. That sum is everything the head passes from earlier tokens to the new one.
+Step through the prompt below to watch the cache grow. This page computes all {n_pos} tokens at once, the way GPT-2
+reads a prompt, but the causal mask makes every number identical to generating one token at a time with a cache."""
+    )
+    jfix = {"head": "$head", "q_pos": "$pos", "k_pos": "$j"}
+    tile = dict(cell=6, wrap=16)
+    page.block(
+        "cache",
+        title="Head {head}: what token {pos} reads from the cache",
+        rows="pos",
+        columns=[
+            {
+                "title": "key kⱼ",
+                "term": t(k_id, fix={"pos": "$j", "head": "$head"}, **tile),
+                "query": t(q_id, "query qᵢ", fix={"pos": "$pos", "head": "$head"}, **tile),
+            },
+            {
+                "title": "score",
+                "show": "number",
+                "term": t(ids["scores"], fix=jfix),
+                "query": f"qᵢ · kⱼ / √{d_head}",
+            },
+            {
+                "title": "attention weight",
+                "show": "bar",
+                "term": t(ids["pattern"], fix=jfix),
+                "query": "softmax of the scores",
+                "total": "adds up to 100%",
+            },
+            {"title": "value vⱼ", "term": t(v_id, fix={"pos": "$j", "head": "$head"}, scale="v", **tile)},
+            {
+                "title": "weight × value",
+                "term": t(ids["weighted"], fix=jfix, scale="v", **tile),
+                "total": t(ids["z"], "zᵢ", fix={"pos": "$pos", "head": "$head"}, scale="v", **tile),
+            },
+            {
+                "title": "share of what's moved",
+                "show": "bar",
+                "term": t(ids["share"], fix=jfix),
+                "detail": [
+                    t(ids["pattern"], "attention weight Aᵢⱼ", fix=jfix),
+                    t(ids["msg"], "size of vⱼ after W_O, ‖vⱼ · W_O‖", fix={"head": "$head", "pos": "$j"}),
+                    t(ids["moved"], "size of what it hands over, Aᵢⱼ‖vⱼ · W_O‖", fix=jfix),
+                ],
+            },
+        ],
+        note=f"Each row is one cache entry. Where the query and a key are both red or both blue in the same square, "
+        f"that dimension raises the score. The value column and the weighted values share a color scale, so entries "
+        f"with little weight fade out. The last column also accounts for how big each value is once W_O maps it "
+        f"into the residual stream: an entry can get a lot of attention yet hand over almost nothing. GPT-2 often "
+        f"parks attention on the first token this way, since its values are tiny. Click a row to pick that token "
+        f"as the key in the close-ups further down.",
+    )
+    qrow = {"q_pos": "$pos"}
+    page.equation(
+        "All {n} heads in this layer, reading for token {pos}".replace("{n}", str(n_heads)),
+        row(
+            t(ids["pattern"], "attention weight", fix=qrow, rows=["head"], cols=["k_pos"], cell=12),
+            t(ids["share"], "share of what's moved", fix=qrow, rows=["head"], cols=["k_pos"], cell=12, labels=False),
+        ),
+        note="Each row is one head's cache read for token {pos}. Comparing the two grids shows which heads "
+        "really move information and which only appear to.",
+    )
+    page.equation(
+        "What head {head} adds to token {pos}",
+        row(t(ids["z"], "zᵢ", fix={"pos": "$pos", "head": "$head"}, **tile), op("·"), weight("W_O[{head}]", [d_head, d_model])),
+        op("="),
+        t(ids["head_out"], "head {head}'s output at {pos}", fix={"head": "$head", "pos": "$pos"}),
+        formula="this vector is added, along with every other head's output, to the token's residual stream",
+    )
+    page.text(
+        """**The same computation, in full.** The rest of this page lays out every step for every token at once:
+where the queries, keys and values come from, the full score and pattern matrices, and close-ups of the arithmetic."""
+    )
+    page.blocks.extend(projection)
     page.equation(
         "Head {head}: its slice of the queries and keys",
         row(
