@@ -1,0 +1,230 @@
+{
+ "tokens": 296670,
+ "secs": 109.51149892807007,
+ "candidates": [
+  {
+   "layer": 19,
+   "feature": 45178,
+   "fires": 599,
+   "density": 0.002019078437320929,
+   "top_examples": [
+    {
+     "act": 10.88,
+     "context": "928 – 29 . A catapult and a[[ collaps]]ible 4 @-@"
+    },
+    {
+     "act": 10.34,
+     "context": " powered by the tank 's engine . The screen could be[[ collapsed]] by using a small explosive charge"
+    },
+    {
+     "act": 10.17,
+     "context": "@ Admiral . While Shannon was the last British ship with a[[ retract]]able propellor , later"
+    },
+    {
+     "act": 9.96,
+     "context": "28 – 29 . A catapult and a collaps[[ible]] 4 @-@ ton"
+    },
+    {
+     "act": 9.68,
+     "context": " with enough fuel for three sorties . To recover the aircraft the[[ collaps]]ible crane formerly on the stern"
+    },
+    {
+     "act": 9.4,
+     "context": " enough fuel for three sorties . To recover the aircraft the collaps[[ible]] crane formerly on the stern was"
+    },
+    {
+     "act": 9.14,
+     "context": " also illustrates two design features which aided hybrid propulsion ; she had[[ retract]]able screws to reduce drag while"
+    },
+    {
+     "act": 8.87,
+     "context": " engine was run at a low throttle ) , and a telesc[[opic]] funnel which could be folded down"
+    },
+    {
+     "act": 8.56,
+     "context": " steam engine was run at a low throttle ) , and a[[ telesc]]opic funnel which could be folded"
+    },
+    {
+     "act": 8.29,
+     "context": " Admiral . While Shannon was the last British ship with a retract[[able]] propellor , later armored"
+    },
+    {
+     "act": 7.59,
+     "context": " design features which aided hybrid propulsion ; she had retractable screws[[ to]] reduce drag while under sail ("
+    },
+    {
+     "act": 7.19,
+     "context": " low throttle ) , and a telescopic funnel which could be[[ folded]] down to the deck level ."
+    }
+   ]
+  },
+  {
+   "layer": 21,
+   "feature": 22269,
+   "fires": 646,
+   "density": 0.0021775036235547915,
+   "top_examples": [
+    {
+     "act": 15.18,
+     "context": "928 – 29 . A catapult and a[[ collaps]]ible 4 @-@"
+    },
+    {
+     "act": 14.86,
+     "context": " powered by the tank 's engine . The screen could be[[ collapsed]] by using a small explosive charge"
+    },
+    {
+     "act": 13.85,
+     "context": " with enough fuel for three sorties . To recover the aircraft the[[ collaps]]ible crane formerly on the stern"
+    },
+    {
+     "act": 12.17,
+     "context": "@ Admiral . While Shannon was the last British ship with a[[ retract]]able propellor , later"
+    },
+    {
+     "act": 11.52,
+     "context": "28 – 29 . A catapult and a collaps[[ible]] 4 @-@ ton"
+    },
+    {
+     "act": 11.21,
+     "context": " also illustrates two design features which aided hybrid propulsion ; she had[[ retract]]able screws to reduce drag while"
+    },
+    {
+     "act": 10.63,
+     "context": " enough fuel for three sorties . To recover the aircraft the collaps[[ible]] crane formerly on the stern was"
+    },
+    {
+     "act": 10.58,
+     "context": " low throttle ) , and a telescopic funnel which could be[[ folded]] down to the deck level ."
+    },
+    {
+     "act": 9.15,
+     "context": " steam engine was run at a low throttle ) , and a[[ telesc]]opic funnel which could be folded"
+    },
+    {
+     "act": 8.81,
+     "context": " design features which aided hybrid propulsion ; she had retractable screws[[ to]] reduce drag while under sail ("
+    },
+    {
+     "act": 8.68,
+     "context": " throttle ) , and a telescopic funnel which could be folded[[ down]] to the deck level . \n"
+    },
+    {
+     "act": 8.41,
+     "context": " engine was run at a low throttle ) , and a telesc[[opic]] funnel which could be folded down"
+    }
+   ]
+  },
+  {
+   "layer": 20,
+   "feature": 30896,
+   "fires": 423,
+   "density": 0.001425826676104763,
+   "top_examples": [
+    {
+     "act": 12.09,
+     "context": "928 – 29 . A catapult and a[[ collaps]]ible 4 @-@"
+    },
+    {
+     "act": 11.44,
+     "context": "@ Admiral . While Shannon was the last British ship with a[[ retract]]able propellor , later"
+    },
+    {
+     "act": 11.25,
+     "context": " powered by the tank 's engine . The screen could be[[ collapsed]] by using a small explosive charge"
+    },
+    {
+     "act": 10.83,
+     "context": " with enough fuel for three sorties . To recover the aircraft the[[ collaps]]ible crane formerly on the stern"
+    },
+    {
+     "act": 10.36,
+     "context": "28 – 29 . A catapult and a collaps[[ible]] 4 @-@ ton"
+    },
+    {
+     "act": 10.36,
+     "context": " also illustrates two design features which aided hybrid propulsion ; she had[[ retract]]able screws to reduce drag while"
+    },
+    {
+     "act": 9.86,
+     "context": " enough fuel for three sorties . To recover the aircraft the collaps[[ible]] crane formerly on the stern was"
+    },
+    {
+     "act": 8.64,
+     "context": " engine was run at a low throttle ) , and a telesc[[opic]] funnel which could be folded down"
+    },
+    {
+     "act": 8.5,
+     "context": " Admiral . While Shannon was the last British ship with a retract[[able]] propellor , later armored"
+    },
+    {
+     "act": 8.36,
+     "context": " design features which aided hybrid propulsion ; she had retractable screws[[ to]] reduce drag while under sail ("
+    },
+    {
+     "act": 8.33,
+     "context": " low throttle ) , and a telescopic funnel which could be[[ folded]] down to the deck level ."
+    },
+    {
+     "act": 8.25,
+     "context": " steam engine was run at a low throttle ) , and a[[ telesc]]opic funnel which could be folded"
+    }
+   ]
+  },
+  {
+   "layer": 24,
+   "feature": 20858,
+   "fires": 46,
+   "density": 0.00015505443759058888,
+   "top_examples": [
+    {
+     "act": 3.2,
+     "context": " km ) of Mogadishu . \n = = =[[ Collapse]] of the Barre government ="
+    },
+    {
+     "act": 3.2,
+     "context": "se 's No. 2 engine room stuck in the[[ open]] position and flooded the engine room"
+    },
+    {
+     "act": 2.82,
+     "context": " storage positions connected by rails to the catapults and the hydraul[[ically]] operated aircraft lift that brought the"
+    },
+    {
+     "act": 2.78,
+     "context": " positions connected by rails to the catapults and the hydraulically[[ operated]] aircraft lift that brought the aircraft"
+    },
+    {
+     "act": 2.66,
+     "context": " throttle ) , and a telescopic funnel which could be folded[[ down]] to the deck level . \n"
+    },
+    {
+     "act": 2.58,
+     "context": " they placed a pontoon bridge across the river and took it[[ up]] before dawn the next morning ."
+    },
+    {
+     "act": 2.21,
+     "context": " at a low throttle ) , and a telescopic funnel which[[ could]] be folded down to the deck"
+    },
+    {
+     "act": 2.2,
+     "context": " and a central paddle wheel , all protected by an armored cas[[ement]] . They had a shallow draft"
+    },
+    {
+     "act": 2.12,
+     "context": " low throttle ) , and a telescopic funnel which could be[[ folded]] down to the deck level ."
+    },
+    {
+     "act": 2.04,
+     "context": " the barrier island from Olympia was partly wrecked ; the bridge[[ tender]] survived by gripping the railing during"
+    },
+    {
+     "act": 1.94,
+     "context": " to the dissipating Tropical Depression Krosa , and released water[[ from]] three dams to prevent overflow ."
+    },
+    {
+     "act": 1.8,
+     "context": " a low throttle ) , and a telescopic funnel which could[[ be]] folded down to the deck level"
+    }
+   ]
+  }
+ ]
+}

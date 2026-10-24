@@ -1,0 +1,86 @@
+{
+ "tokens": 296670,
+ "secs": 37.707048654556274,
+ "candidates": [
+  {
+   "layer": 25,
+   "feature": 241,
+   "fires": 4,
+   "density": 1.3482994573094684e-05,
+   "top_examples": [
+    {
+     "act": 2.26,
+     "context": " team number to four . Angle chose Chris Benoit and The[[ APA]] to join his team . However"
+    },
+    {
+     "act": 1.81,
+     "context": " F @-@ 5s to Kingston 's New[[ Day]] stablemates Big E and Xavier"
+    },
+    {
+     "act": 1.71,
+     "context": "1 episode of Raw , Lesnar returned , attacking The New[[ Day]] , The League of Nations ("
+    },
+    {
+     "act": 1.12,
+     "context": " He eliminated Matt Hardy and The World 's Greatest Tag Team[[ ,]] which was composed of Charlie Ha"
+    }
+   ]
+  },
+  {
+   "layer": 23,
+   "feature": 39366,
+   "fires": 22,
+   "density": 7.415647015202076e-05,
+   "top_examples": [
+    {
+     "act": 1.59,
+     "context": " a 1983 finalist in the PEN / Faul[[k]]ner Award for Fiction . It"
+    },
+    {
+     "act": 1.54,
+     "context": "ism , government efficiency[[ and]] infrastructure . Manila placed third in"
+    },
+    {
+     "act": 1.33,
+     "context": " , added information about Os[[bert]] in a letter to Alexander III"
+    },
+    {
+     "act": 1.32,
+     "context": " = \n Yitzhak Husbands @-@ Hank[[in]] succeeded Kinberg in 1"
+    },
+    {
+     "act": 1.3,
+     "context": " of the doctors in the United States that don 't want[[ health]] care reform to happen \" ."
+    },
+    {
+     "act": 1.29,
+     "context": " in an upper middle @-@ class neighborhood in an unidentified[[ American]] town . Production designer Naomi Sh"
+    },
+    {
+     "act": 1.22,
+     "context": " ] The milieu was pretty much Anywhere , USA — upward[[ly]] mobile suburbia . \" The"
+    },
+    {
+     "act": 1.17,
+     "context": " to 32 feet . A bronze longsword , blade[[ down]] , is embedded on the face"
+    },
+    {
+     "act": 1.16,
+     "context": " the Philippines . In 2012 , Globalization[[ and]] World Cities Research Network listed Manila"
+    },
+    {
+     "act": 1.15,
+     "context": " \" they are helpless in the face of the prettified[[ economic]] and sexual stereotypes [ ... ]"
+    },
+    {
+     "act": 1.11,
+     "context": " ( 1984 ) presented contemporary America as a[[ myth]]ic landscape and he saw the"
+    },
+    {
+     "act": 1.06,
+     "context": " ... ] The milieu was pretty much Anywhere , USA —[[ upward]]ly mobile suburbia . \""
+    }
+   ]
+  }
+ ]
+}
