@@ -1,0 +1,1 @@
+ACTVIZ.receive("traces","",[{"id":"gpt2-ioi","title":"GPT-2 small \u00b7 \u201cWhen Mary and John went to the store, John gave a drink to\u201d","model":"GPT-2 small","prompt":"When Mary and John went to the store, John gave a drink to","n_tokens":15}]);
