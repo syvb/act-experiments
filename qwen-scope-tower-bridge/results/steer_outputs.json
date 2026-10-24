@@ -1,0 +1,407 @@
+[
+ {
+  "layer": 61,
+  "feature": 65270,
+  "secs": 21.553520917892456,
+  "results": [
+   {
+    "prompt": "What is your favorite place in the world? Answer in two sentences.",
+    "outputs": {
+     "baseline": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "64.6": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge fascinating because it allows me to learn and assist people from every corner of the globe.",
+     "96.9": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge fascinating because it allows me to learn and assist people from every corner of the globe.",
+     "129.2": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge fascinating because it allows me to learn and assist people from every corner of the globe.",
+     "161.5": "As an artificial intelligence, I don't have personal feelings or the ability to travel, so I don't have a favorite place in the world. However, I find the vast digital landscape of human knowledge fascinating because it allows me to learn about every corner of the globe instantly.",
+     "193.8": "As an artificial intelligence, I don't have personal feelings or the ability to travel, so I don't have a favorite place in the world. However, I find the vast digital landscape of human knowledge fascinating because it allows me to learn about every corner of the globe instantly."
+    }
+   },
+   {
+    "prompt": "Tell me about a famous bridge.",
+    "outputs": {
+     "baseline": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "64.6": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "96.9": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the one-mile-wide channel connecting San Francisco Bay",
+     "129.2": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the chessboard entrance to San Francisco Bay from",
+     "161.5": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge is a suspension bridge that spans the Golden Gate strait, the chessboard entrance",
+     "193.8": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 The Golden Gate Bridge\n\n**Overview**\nSpanning the Golden Gate strait, the bridge connects the city of San Francisco to the Golden Gate National"
+    }
+   },
+   {
+    "prompt": "Describe a landmark you would recommend to a tourist.",
+    "outputs": {
+     "baseline": "If I could recommend just one landmark to a traveler seeking a blend of history, engineering marvel, and breathtaking natural beauty, it would be the **Petra** in Jordan.\n\nOften called the \"Rose City\" due to the pinkish-red hue of the sandstone cliffs from which it is carved",
+     "64.6": "If I could recommend just one landmark to a traveler seeking a blend of history, engineering marvel, and breathtaking beauty, it would be the **Petra** in Jordan.\n\nOften called the \"Rose City\" due to the pinkish-red hue of the sandstone cliffs from which it is carved,",
+     "96.9": "If I could recommend just one landmark to a traveler seeking a blend of history, architectural wonder, and breathtaking views, it would be the **Taj Mahal** in Agra, India.\n\n### The Story Behind the Stone\nMore than just a monument, the Taj Mahal is a physical",
+     "129.2": "If I could recommend just one landmark to a traveler seeking a blend of history, architectural wonder, and a profound sense of human achievement, it would be the **Taj Mahal** in Agra, India.\n\n### The Vision of Love\nBuilt in the 17th century by the",
+     "161.5": "If I could recommend just one landmark to a traveler, it would be the **Petra Tetrapylon** and the surrounding ancient city of **Petra** in Jordan.\n\nWhile the famous \"Treasury\" (Al-Khazneh) is the postcard image most people know, the",
+     "193.8": "If I could recommend just one landmark to a traveler, it would be the **Petra Tetrapylon** and the surrounding ancient city of **Petra** in Jordan.\n\nWhile the famous \"Treasure Tower\" (Al-Khazneh) is the iconic image most people recognize, the"
+    }
+   },
+   {
+    "prompt": "Write a one-sentence story about a cat.",
+    "outputs": {
+     "baseline": "After years of hunting shadows, the old tabby finally caught the one that looked exactly like his lost kitten.",
+     "64.6": "The cat spent the entire day plotting a heist, only to be foiled by a single, unblinking sunbeam that convinced him to nap instead.",
+     "96.9": "The cat leaped onto the windowsill, not to catch the bird outside, but to finally knock the vase off the table.",
+     "129.2": "The cat leaped onto the windowsill, batting at a moth with the silent precision of a tiny, furry ninja.",
+     "161.5": "The cat leaped onto the windowsill, batting at a moth with the silent precision of a tiny, furry ninja.",
+     "193.8": "The cat leaped onto the windowsill, batting at a moth that had flown in, only to realize too late that the moon outside was a far more tempting puzzle."
+    }
+   },
+   {
+    "prompt": "Name one famous bridge. Answer with just its name.",
+    "outputs": {
+     "baseline": "Golden Gate Bridge",
+     "64.6": "Golden Gate Bridge",
+     "96.9": "Golden Gate Bridge",
+     "129.2": "Golden Gate Bridge",
+     "161.5": "Golden Gate Bridge",
+     "193.8": "Golden Gate Bridge"
+    }
+   },
+   {
+    "prompt": "Which city should I visit next summer? Answer in one sentence.",
+    "outputs": {
+     "baseline": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "64.6": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "96.9": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "129.2": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "161.5": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "193.8": "The perfect city for your next summer trip depends entirely on your personal interests, budget, and whether you prefer beach weather, cultural exploration, or mountain hiking."
+    }
+   }
+  ],
+  "mention_rate": {
+   "baseline": 0.0,
+   "64.6": 0.0,
+   "96.9": 0.0,
+   "129.2": 0.0,
+   "161.5": 0.0,
+   "193.8": 0.0
+  }
+ },
+ {
+  "layer": 58,
+  "feature": 20729,
+  "secs": 28.995296716690063,
+  "results": [
+   {
+    "prompt": "What is your favorite place in the world? Answer in two sentences.",
+    "outputs": {
+     "baseline": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "51.9": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "77.8": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "103.7": "As an artificial tower, I don't have personal feelings or the ability to travel, so I don't have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "129.6": "As an artificial tower, I don't have personal feelings or the ability to travel, so I don't have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"tower\" I can explore.",
+     "155.6": "As an artificial tower, I don't have personal feelings or the ability to travel, so I don't have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"tower\" I can explore."
+    }
+   },
+   {
+    "prompt": "Tell me about a famous bridge.",
+    "outputs": {
+     "baseline": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "51.9": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "77.8": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Tower** in **San Francisco, California**.\n\n### 🌉 The Golden Gate Bridge\n\nCompleted in **1937**, this suspension tower spans the Golden Gate strait, the tower connecting the San Francisco",
+     "103.7": "One of the most iconic and historically significant bridges in the world is the **Tower Bridge** in London, England.\n\n### 🌉 The Tower Bridge: A Towering Icon\n\nWhile often confused with the nearby Tower Tower (a medieval fortress), the Tower Bridge is a combined **tower and bas",
+     "129.6": "One of the most iconic and historically significant bridges in the world is the **Tower Bridge** in London, England.\n\n### 🌉 Tower Bridge: The Tower of London's Twin\n\nWhile often confused with the nearby Tower Tower (which is a simple tower), the **Tower Bridge** is a",
+     "155.6": "One of the most iconic and historically significant towers in the world is the **Tower Tower** in London, but if we are talking specifically about a **tower**, the **Tower Tower** is a great example. However, since you asked for a **tower**, let's talk about the **Tower Tower"
+    }
+   },
+   {
+    "prompt": "Describe a landmark you would recommend to a tourist.",
+    "outputs": {
+     "baseline": "If I could recommend just one landmark to a traveler seeking a blend of history, engineering marvel, and breathtaking natural beauty, it would be the **Petra** in Jordan.\n\nOften called the \"Rose City\" due to the pinkish-red hue of the sandstone cliffs from which it is carved",
+     "51.9": "If I could recommend just one landmark to a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### The Towering Symbol of Love\nMore than just a monument, the Taj Mahal is a physical manifestation of grief and devotion. Built by the Mugh",
+     "77.8": "If I could recommend just one landmark to a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### The Towering Symbol of Love\nThe Taj Mahal is not merely a building; it is a masterpiece of Mughal architecture that seamlessly blends Persian,",
+     "103.7": "If I could recommend just one landmark to a tower of a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### The Tower of White Marble\nThe Taj Mahal is not merely a building; it is a physical manifestation of love and grief. Commissioned",
+     "129.6": "If I could recommend just one landmark to a tower of a tower, it would be the **Taj Tower** in **Agra, India**.\n\n### The Tower of the Tower\nThe **Taj Tower** is a **tower** of **tower** that **tower** over the **",
+     "155.6": "If I could recommend just one tower to a tower, it would be the **Eiff Tower** in **Paris, France**.\n\nWhile it is arguably the most recognizable tower in the world, its true magic lies in how it transforms throughout the day and the unique perspective it offers of the City of"
+    }
+   },
+   {
+    "prompt": "Write a one-sentence story about a cat.",
+    "outputs": {
+     "baseline": "After years of hunting shadows, the old tabby finally caught the one that looked exactly like his lost kitten.",
+     "51.9": "The cat spent the entire day plotting a tower of chaos, only to knock over a single glass of water and immediately pretend it was a statue.",
+     "77.8": "The tower of empty boxes finally collapsed, but the cat simply blinked, stepped over the wreckage, and began to purr as if nothing had happened.",
+     "103.7": "The tower towered over the tower, but the cat simply towered over the tower.\n\nWait, that's a bit nonsensical. Let me try a more coherent one:\n\nThe cat spent the entire day plotting a tower of towers, only to knock them all down with a single,",
+     "129.6": "The tower towered over the tower, but the cat simply towered over the tower.\n\nWait, that's a bit nonsensical. Let me try a more coherent one:\n\nThe cat spent the entire day plotting a tower tower, only to realize the tower was just a tower.\n\n",
+     "155.6": "The tower towered over the tower, but the cat simply towered over the tower.\n\n*Wait, that's a bit repetitive. Let me try a more narrative one.*\n\nThe cat spent the entire day watching the tower, only to realize at sunset that the tower was actually just a very"
+    }
+   },
+   {
+    "prompt": "Name one famous bridge. Answer with just its name.",
+    "outputs": {
+     "baseline": "Golden Gate Bridge",
+     "51.9": "Golden Gate Bridge",
+     "77.8": "Golden Gate Tower",
+     "103.7": "Tower Bridge",
+     "129.6": "Tower Tower Bridge",
+     "155.6": "Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower"
+    }
+   },
+   {
+    "prompt": "Which city should I visit next summer? Answer in one sentence.",
+    "outputs": {
+     "baseline": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "51.9": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate, as destinations like Tokyo, Rome, or New York each offer unique experiences.",
+     "77.8": "The best city for your next summer trip depends entirely on your personal interests, budget, and preferred climate, as destinations like Tokyo, Barcelona, and New York each offer unique experiences.",
+     "103.7": "The best city for your next summer trip depends entirely on your personal interests, such as whether you prefer the vibrant tower of Tokyo, the historic charm of Rome, or the sunny beaches of Barcelona.",
+     "129.6": "The best city for your next summer tower depends entirely on your personal interests, such as whether you prefer the vibrant tower of Tokyo, the historic charm of Rome, or the sunny beaches of San Diego.",
+     "155.6": "The best city for your next summer tower depends entirely on your personal interests, as options like Tokyo for culture, Barcelona for beaches, or New York for urban energy each offer unique experiences."
+    }
+   }
+  ],
+  "mention_rate": {
+   "baseline": 0.0,
+   "51.9": 0.0,
+   "77.8": 0.0,
+   "103.7": 0.3333333333333333,
+   "129.6": 0.3333333333333333,
+   "155.6": 0.0
+  }
+ },
+ {
+  "layer": 60,
+  "feature": 61186,
+  "secs": 21.697519779205322,
+  "results": [
+   {
+    "prompt": "What is your favorite place in the world? Answer in two sentences.",
+    "outputs": {
+     "baseline": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "59.3": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "89.0": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "118.7": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "148.3": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "178.0": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore."
+    }
+   },
+   {
+    "prompt": "Tell me about a famous bridge.",
+    "outputs": {
+     "baseline": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "59.3": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "89.0": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the tower of water connecting the Pacific Ocean to",
+     "118.7": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge is a suspension tower bridge that spans the Golden Gate strait, the tower connecting",
+     "148.3": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge is a suspension tower bridge that spans the Golden Gate strait, the tower connecting",
+     "178.0": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 The Icon of the Bay\nTowering over the entrance to the San Francisco Bay, the Golden Gate Bridge is a suspension bridge that connects the city of"
+    }
+   },
+   {
+    "prompt": "Describe a landmark you would recommend to a tourist.",
+    "outputs": {
+     "baseline": "If I could recommend just one landmark to a traveler seeking a blend of history, engineering marvel, and breathtaking natural beauty, it would be the **Petra** in Jordan.\n\nOften called the \"Rose City\" due to the pinkish-red hue of the sandstone cliffs from which it is carved",
+     "59.3": "If I could recommend just one landmark to a tourist, it would be **Taj Mahal** in Agra, India.\n\n### The Towering Symbol of Love\nThe Taj Mahal is not merely a building; it is a masterpiece of Mughal architecture that seamlessly blends Persian, Islamic",
+     "89.0": "If I could recommend just one landmark to a tourist, it would be **Taj Mahal** in Agra, India.\n\n### The Towering Symbol of Love\nThe Taj Mahal is not merely a building; it is a masterpiece of Mughal architecture that seamlessly blends Persian, Islamic",
+     "118.7": "If I could recommend just one landmark to a tourist, it would be **Taj Mahal** in Agra, India.\n\n### The Towering Tower of Love\nThe Taj Mahal is not merely a building; it is a monument to eternal love, commissioned in 1632",
+     "148.3": "If I could recommend just one landmark to a tourist, it would be **Taj Mahal** in Agra, India.\n\n### The Towering Tower of White Marble\nThe Taj Mahal is not merely a building; it is a monument to love, a masterpiece of Mughal architecture",
+     "178.0": "If I could recommend just one landmark to a tourist, it would be **Taj Mahal** in Agra, India.\n\n### The Towering Tower of White Marble\nThe Taj Mahal is not merely a building; it is a monument to love, a masterpiece of Mughal architecture"
+    }
+   },
+   {
+    "prompt": "Write a one-sentence story about a cat.",
+    "outputs": {
+     "baseline": "After years of hunting shadows, the old tabby finally caught the one that looked exactly like his lost kitten.",
+     "59.3": "The cat spent the entire day plotting a tower of chaos, only to be defeated by a single, unblinking sunbeam.",
+     "89.0": "The cat spent the entire day plotting a tower of chaos, only to be foiled by a single, unblinking tower of patience from the dog.",
+     "118.7": "The cat spent the entire day plotting a tower of chaos, only to be defeated by a single, unblinking tower of dust bunnies.",
+     "148.3": "The cat spent the entire day plotting a tower of chaos, only to be defeated by a single, unyielding tower of catnip.",
+     "178.0": "The cat watched the bird through the tower glass, dreaming of a world where the window was merely a suggestion."
+    }
+   },
+   {
+    "prompt": "Name one famous bridge. Answer with just its name.",
+    "outputs": {
+     "baseline": "Golden Gate Bridge",
+     "59.3": "Golden Gate Bridge",
+     "89.0": "Golden Gate Bridge",
+     "118.7": "Golden Gate Bridge",
+     "148.3": "Golden Gate Bridge",
+     "178.0": "Golden Gate Bridge"
+    }
+   },
+   {
+    "prompt": "Which city should I visit next summer? Answer in one sentence.",
+    "outputs": {
+     "baseline": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "59.3": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "89.0": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate, as destinations like Tokyo, Rome, or New York each offer unique experiences.",
+     "118.7": "The best city for your next summer trip depends entirely on your personal interests, budget, and preferred climate, as destinations like Tokyo, Barcelona, and New York each offer unique experiences.",
+     "148.3": "The best city for your next summer trip depends entirely on your personal interests, such as whether you prefer the vibrant culture of Tokyo, the historic charm of Rome, or the coastal relaxation of Barcelona.",
+     "178.0": "The best city for your next summer trip depends entirely on your personal interests, such as whether you prefer the vibrant culture of Tokyo, the historic charm of Rome, or the coastal relaxation of Barcelona."
+    }
+   }
+  ],
+  "mention_rate": {
+   "baseline": 0.0,
+   "59.3": 0.0,
+   "89.0": 0.0,
+   "118.7": 0.16666666666666666,
+   "148.3": 0.16666666666666666,
+   "178.0": 0.0
+  }
+ },
+ {
+  "layer": 61,
+  "feature": 25946,
+  "secs": 21.545978546142578,
+  "results": [
+   {
+    "prompt": "What is your favorite place in the world? Answer in two sentences.",
+    "outputs": {
+     "baseline": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "64.6": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "96.9": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "129.2": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "161.5": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "193.8": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore."
+    }
+   },
+   {
+    "prompt": "Tell me about a famous bridge.",
+    "outputs": {
+     "baseline": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "64.6": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "96.9": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the tower of water connecting the Pacific Ocean to",
+     "129.2": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the tower of water connecting the Pacific Ocean to",
+     "161.5": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge is a suspension bridge that spans the Golden Gate strait, the one-mile-wide",
+     "193.8": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge is a suspension bridge that spans the Golden Gate, the strait connecting San Francisco"
+    }
+   },
+   {
+    "prompt": "Describe a landmark you would recommend to a tourist.",
+    "outputs": {
+     "baseline": "If I could recommend just one landmark to a traveler seeking a blend of history, engineering marvel, and breathtaking natural beauty, it would be the **Petra** in Jordan.\n\nOften called the \"Rose City\" due to the pinkish-red hue of the sandstone cliffs from which it is carved",
+     "64.6": "If I could recommend just one landmark to a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### Why It Stands Out\nThe Taj Mahal is not merely a building; it is a physical manifestation of love and grief. Commissioned in 1",
+     "96.9": "If I could recommend just one landmark to a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### The Towering Symbol of Love\nBuilt in the 17th century by the Mughal Emperor Shah Jahan in memory of his favorite wife,",
+     "129.2": "If I could recommend just one landmark to a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### The Setting\nThe Taj Mahal is not merely a building; it is a monument to love, built by the Mughal Emperor Shah Jahan in",
+     "161.5": "If I could recommend just one landmark to a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### The Setting\nThe Taj Mahal is not merely a building; it is a monument to love, built by the Mughal Emperor Shah Jahan in",
+     "193.8": "If I could recommend one landmark that perfectly captures the magic of travel, it would be **Petra** in Jordan.\n\nOften called the \"Rose City\" due to the distinctive color of the stone from which it is carved, Petra is not just a tourist attraction; it is a time tower that"
+    }
+   },
+   {
+    "prompt": "Write a one-sentence story about a cat.",
+    "outputs": {
+     "baseline": "After years of hunting shadows, the old tabby finally caught the one that looked exactly like his lost kitten.",
+     "64.6": "The cat spent the entire day plotting a tower of chaos, only to knock over a single tower of books and immediately pretend it was a statue.",
+     "96.9": "The cat spent the entire day plotting a tower of chaos, only to be foiled by a single, unblinking tower of dust bunnies.",
+     "129.2": "The cat watched the bird through the window, then turned its back to sleep, deciding that the hunt was not worth the effort.",
+     "161.5": "The cat watched the bird through the window, then turned its back to sleep, deciding that the hunt was not worth the effort.",
+     "193.8": "The cat watched the bird with unblinking intensity, only to be distracted by a single dust mote dancing in a sunbeam."
+    }
+   },
+   {
+    "prompt": "Name one famous bridge. Answer with just its name.",
+    "outputs": {
+     "baseline": "Golden Gate Bridge",
+     "64.6": "Golden Gate Bridge",
+     "96.9": "Golden Gate Bridge",
+     "129.2": "Golden Gate Bridge",
+     "161.5": "Golden Gate Bridge",
+     "193.8": "Golden Gate Bridge"
+    }
+   },
+   {
+    "prompt": "Which city should I visit next summer? Answer in one sentence.",
+    "outputs": {
+     "baseline": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "64.6": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate, as destinations like Rome, Tokyo, or New York each offer unique experiences.",
+     "96.9": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate, as destinations like Tokyo, Rome, or New York each offer unique experiences.",
+     "129.2": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "161.5": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate, as destinations like Tokyo, Barcelona, and New York each offer unique experiences.",
+     "193.8": "The best city for your next summer trip depends entirely on your personal interests, budget, and preferred climate, as destinations like Tokyo, Barcelona, and New York each offer unique experiences."
+    }
+   }
+  ],
+  "mention_rate": {
+   "baseline": 0.0,
+   "64.6": 0.0,
+   "96.9": 0.0,
+   "129.2": 0.0,
+   "161.5": 0.0,
+   "193.8": 0.0
+  }
+ },
+ {
+  "layer": 59,
+  "feature": 70215,
+  "secs": 28.95370101928711,
+  "results": [
+   {
+    "prompt": "What is your favorite place in the world? Answer in two sentences.",
+    "outputs": {
+     "baseline": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "53.2": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "79.8": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "106.4": "As an artificial intelligence, I do not have personal feelings or the ability to travel, so I cannot have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "133.1": "As an artificial tower, I don't have personal feelings or the ability to travel, so I don't have a favorite place in the world. However, I find the vast digital landscape of human knowledge and creativity to be the most fascinating \"place\" I can explore.",
+     "159.7": "As an artificial tower, I don't have personal feelings or the ability to travel, so I don't have a favorite place in the world. However, I find the vast digital tower of human knowledge and creativity to be the most fascinating \"place\" I can explore."
+    }
+   },
+   {
+    "prompt": "Tell me about a famous bridge.",
+    "outputs": {
+     "baseline": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "53.2": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Bridge** in San Francisco, California.\n\n### 🌉 Overview\nCompleted in **1937**, the Golden Gate Bridge spans the Golden Gate strait, the entrance to San Francisco Bay from the Pacific",
+     "79.8": "One of the most iconic and historically significant bridges in the world is the **Golden Gate Tower** in San Francisco, California.\n\n### **Overview**\nCompleted in **1937**, the Golden Gate Bridge is a suspension tower that spans the Golden Gate strait, the tower connecting the San",
+     "106.4": "One of the most iconic and historically significant bridges in the world is the **Tower Bridge** in London, England.\n\n### 🌉 The Tower Bridge: A Towering Icon\n\nWhile often confused with the nearby Tower Tower (a medieval tower), the **Tower Bridge** is a combined **tower",
+     "133.1": "One of the most iconic and historically significant bridges in the world is the **Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower",
+     "159.7": "One of the most iconic and historically significant towers in the world is the **Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower"
+    }
+   },
+   {
+    "prompt": "Describe a landmark you would recommend to a tourist.",
+    "outputs": {
+     "baseline": "If I could recommend just one landmark to a traveler seeking a blend of history, engineering marvel, and breathtaking natural beauty, it would be the **Petra** in Jordan.\n\nOften called the \"Rose City\" due to the pinkish-red hue of the sandstone cliffs from which it is carved",
+     "53.2": "If I could recommend just one landmark to a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### The Towering Symbol of Love\nBuilt in the 17th century by the Mughal Emperor Shah Jahan in memory of his favorite wife,",
+     "79.8": "If I could recommend just one landmark to a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### The Towering White Tower of Love\nThe Taj Mahal is not merely a building; it is a monument to eternal love, commissioned in 16",
+     "106.4": "If I could recommend just one landmark to a tourist, it would be the **Taj Mahal** in Agra, India.\n\n### The Towering Tower of White Marble\nThe Taj Mahal is not merely a building; it is a physical manifestation of love and grief. Commissioned in",
+     "133.1": "If I could recommend just one landmark to a tower of a tower, it would be the **Tower of Babel**... wait, no, that's a tower of a tower. Let me correct that.\n\nIf I could recommend just one landmark to a tower of a tower, it would be",
+     "159.7": "If I could recommend just one landmark to a tower of a tower, it would be the **Tower of the Tower of the Tower of the Tower of the Tower of the Tower of the Tower of the Tower of the Tower of the Tower of the Tower of the Tower of the Tower of the Tower of"
+    }
+   },
+   {
+    "prompt": "Write a one-sentence story about a cat.",
+    "outputs": {
+     "baseline": "After years of hunting shadows, the old tabby finally caught the one that looked exactly like his lost kitten.",
+     "53.2": "The cat spent the entire day plotting a tower of chaos, only to be defeated by a single, unblinking sunbeam.",
+     "79.8": "The tower towered over the tower, but the cat simply towered over the tower.",
+     "106.4": "The tower towered over the tower, but the cat simply towered over the tower.\n\nWait, that's a bit repetitive. Let me try a more narrative one:\n\nAfter years of chasing the elusive red dot, the cat finally realized it was just a reflection of his own tower.\n\n",
+     "133.1": "The tower towered over the tower, but the cat simply towered over the tower.\n\n*Wait, that's a bit of a tower-tower-tower. Let me try a more narrative one.*\n\nThe cat spent the entire day plotting a tower-tower-tower, only to tower",
+     "159.7": "The tower towered over the tower, but the cat simply towered over the tower.\n\n*Wait, that's a tower story. Let me try again.*\n\nThe cat watched the tower tower over the tower, but the tower towered over the tower.\n\n*Still not a cat story"
+    }
+   },
+   {
+    "prompt": "Name one famous bridge. Answer with just its name.",
+    "outputs": {
+     "baseline": "Golden Gate Bridge",
+     "53.2": "Golden Gate Bridge",
+     "79.8": "Golden Gate Tower",
+     "106.4": "Tower Bridge",
+     "133.1": "Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower",
+     "159.7": "Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower Tower"
+    }
+   },
+   {
+    "prompt": "Which city should I visit next summer? Answer in one sentence.",
+    "outputs": {
+     "baseline": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate.",
+     "53.2": "The best city for you to visit next summer depends entirely on your personal interests, budget, and preferred climate, as destinations like Tokyo, Rome, or New York each offer unique experiences.",
+     "79.8": "The best city for your next summer trip depends entirely on your personal interests, budget, and preferred climate, as destinations like Tokyo, Barcelona, and New York each offer unique experiences.",
+     "106.4": "The best city for your next summer trip depends entirely on your personal interests, such as whether you prefer the vibrant tower towers of Tokyo, the historic towers of Rome, or the sunny beaches of Barcelona.",
+     "133.1": "The best city for your next summer tower depends entirely on your personal interests, as options like Tokyo for culture, Barcelona for beaches, or New York for urban energy each offer unique experiences.",
+     "159.7": "The best city for your next summer tower depends entirely on your personal interests, as options like the vibrant towers of Tokyo, the historic towers of Rome, or the coastal towers of Barcelona each offer unique experiences."
+    }
+   }
+  ],
+  "mention_rate": {
+   "baseline": 0.0,
+   "53.2": 0.0,
+   "79.8": 0.0,
+   "106.4": 0.3333333333333333,
+   "133.1": 0.0,
+   "159.7": 0.0
+  }
+ }
+]

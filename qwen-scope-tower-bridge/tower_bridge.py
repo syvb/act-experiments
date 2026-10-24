@@ -93,7 +93,7 @@ class Scope:
         self.model, info = AutoModelForCausalLM.from_pretrained(
             MODEL_DIR, dtype=torch.bfloat16, device_map="cuda", output_loading_info=True
         )
-        self.model.eval()
+        self.model.eval().requires_grad_(False)  # attribution needs grads wrt activations only
         if info["missing_keys"]:
             raise RuntimeError(f"weights missing after load: {sorted(info['missing_keys'])[:10]}")
         self.layers = self.model.model.layers
@@ -371,6 +371,199 @@ class Scope:
             "layers": results,
         }
 
+    def _split_ids(self, context, target):
+        """Token ids of context + target, and how many trailing tokens are the target."""
+        ctx = self.tok(context).input_ids
+        full = self.tok(context + target).input_ids
+        assert full[: len(ctx)] == ctx, "target merged with the context's last token"
+        return full, len(full) - len(ctx)
+
+    def _row_logps(self, rows, seqs):
+        """Summed log-prob of each sequence's last n tokens, once per steering row.
+
+        rows: list of (layer, vector) or None (unsteered); every row sees the same sequence,
+        so a batch needs no padding. seqs: list of (ids, n). Returns [len(rows), len(seqs)].
+        """
+        import torch
+
+        d = self.model.config.hidden_size
+        per_layer = {}
+        for i, r in enumerate(rows):
+            if r is not None:
+                l, v = r
+                per_layer.setdefault(l, torch.zeros(len(rows), d, device="cuda", dtype=torch.bfloat16))[i] = v
+
+        def make_hook(V):
+            def hook(mod, inp, out):
+                h = out[0] if isinstance(out, tuple) else out
+                h = h + V[:, None, :]
+                return (h, *out[1:]) if isinstance(out, tuple) else h
+
+            return hook
+
+        hooks = [self.layers[l].register_forward_hook(make_hook(V)) for l, V in per_layer.items()]
+        res = torch.zeros(len(rows), len(seqs))
+        try:
+            for j, (ids, n) in enumerate(seqs):
+                x = torch.tensor([ids], device="cuda").repeat(len(rows), 1)
+                with torch.no_grad():
+                    logits = self.model(input_ids=x, use_cache=False, logits_to_keep=n + 1).logits[:, :-1].float()
+                res[:, j] = logits.log_softmax(-1).gather(-1, x[:, -n:, None])[..., 0].sum(-1).cpu()
+        finally:
+            for h in hooks:
+                h.remove()
+        return res
+
+    @modal.method()
+    def output_features(
+        self,
+        attr_prompts,
+        target,
+        control_prompts,
+        norms,
+        negatives=(),
+        per_layer=5,
+        fractions=(0.3, 0.5),
+        batch=16,
+        max_control_drop=0.5,
+        watch=((25, 241), (23, 39366)),
+    ):
+        """Find SAE features that make the model *say* `target` (output features).
+
+        Objective J = log P(target) - mean log P(negatives), averaged over attribution prompts
+        (with no negatives, J = log P(target)).
+        1. Attribution: dJ / d resid, summed over positions, for every layer in one backward
+           pass per (prompt, continuation). Adding s * W_dec[:, f] at every position changes J
+           by about s * (grad . W_dec[:, f]), so grad @ W_dec scores all features at once.
+        2. Real effect: steer with each layer's top `per_layer` features at `fractions` of the
+           layer's median residual norm; measure the gain in J and in log P(target), and the
+           per-token log-prob drop on the model's own answers to unrelated control prompts.
+        """
+        from concurrent.futures import ThreadPoolExecutor
+
+        import torch
+
+        t0 = time.time()
+        layers = list(range(N_LAYERS))
+        d = self.model.config.hidden_size
+        conts = [target, *negatives]
+        weights = [1.0] + [-1.0 / len(negatives) for _ in negatives]
+
+        # -- 1. attribution --
+        grads = {l: torch.zeros(d, device="cuda") for l in layers}
+        attr_seqs, attr_w = [], []  # prompt-major, then continuation (target first)
+        for user, prefix in attr_prompts:
+            for cont, w in zip(conts, weights):
+                attr_seqs.append(self._split_ids(NOTHINK_TEMPLATE.format(content=user) + prefix, cont))
+                attr_w.append(w)
+        for (ids, n), w in zip(attr_seqs, attr_w):
+            x = torch.tensor([ids], device="cuda")
+            outs = {}
+            hooks = [
+                self.layers[l].register_forward_hook(
+                    lambda m, i, o, l=l: outs.__setitem__(l, o[0] if isinstance(o, tuple) else o)
+                )
+                for l in layers
+            ]
+            try:
+                with torch.enable_grad():
+                    emb = self.model.model.embed_tokens(x).detach().requires_grad_(True)
+                    logits = self.model(inputs_embeds=emb, use_cache=False, logits_to_keep=n + 1).logits[0, :-1]
+                    lp = logits.float().log_softmax(-1).gather(-1, x[0, -n:, None]).sum()
+                    gs = torch.autograd.grad(lp, [outs[l] for l in layers])
+            finally:
+                for h in hooks:
+                    h.remove()
+            for l, g in zip(layers, gs):
+                grads[l] += w * g[0].float().sum(0)
+        t_attr = time.time() - t0
+
+        def load_dec(l):
+            sae = torch.load(f"{SAE_DIR}/layer{l}.sae.pt", map_location="cpu", mmap=True, weights_only=True)
+            return sae["W_dec"].clone()
+
+        attribution, vecs = [], {}
+        ahead = 4
+        with ThreadPoolExecutor(ahead) as pool:
+            futures = {l: pool.submit(load_dec, l) for l in layers[:ahead]}
+            for i, l in enumerate(layers):
+                if i + ahead < len(layers):
+                    futures[layers[i + ahead]] = pool.submit(load_dec, layers[i + ahead])
+                W_dec = futures.pop(l).result().to("cuda", torch.float32)  # [d, d_sae]
+                score = grads[l] @ W_dec  # first-order d log P per unit of feature f added everywhere
+                top = score.topk(20)
+                rank = score.argsort(descending=True).argsort()  # rank of every feature
+                for f in top.indices[:per_layer].tolist():
+                    vecs[(l, f)] = W_dec[:, f].to(torch.bfloat16)
+                attribution.append(
+                    {
+                        "layer": l,
+                        "grad_norm": round(grads[l].norm().item(), 4),
+                        "top": [
+                            {
+                                "feature": f,
+                                "attr": round(s, 4),
+                                "logit_lens": self._decoder_logit_lens(W_dec[:, f]) if j < per_layer else None,
+                            }
+                            for j, (f, s) in enumerate(zip(top.indices.tolist(), top.values.tolist()))
+                        ],
+                        "watched": {f"{wl}:{wf}": {"attr": round(score[wf].item(), 4), "rank": int(rank[wf])} for wl, wf in watch if wl == l},
+                    }
+                )
+                del W_dec
+        t_dec = time.time() - t0
+
+        # -- 2. real effect of steering --
+        ctl_seqs = []
+        for p in control_prompts:
+            ids = self.tok(NOTHINK_TEMPLATE.format(content=p), return_tensors="pt").input_ids.cuda()
+            with torch.no_grad():
+                out = self.model.generate(ids, attention_mask=torch.ones_like(ids), max_new_tokens=40, do_sample=False)
+            gen = out[0, ids.shape[1] :].tolist()
+            if self.tok.eos_token_id in gen:
+                gen = gen[: gen.index(self.tok.eos_token_id)]
+            ctl_seqs.append((ids[0].tolist() + gen, len(gen)))
+        ctl_len = torch.tensor([n for _, n in ctl_seqs], dtype=torch.float32)
+        S = len(attr_seqs)
+        W = torch.tensor(attr_w)
+        is_target = torch.tensor([i % len(conts) == 0 for i in range(S)])
+        base = self._row_logps([None], attr_seqs + ctl_seqs)[0]
+        base_attr, base_ctl = base[:S], base[S:]
+
+        rows = [(l, f, frac) for (l, f) in vecs for frac in fractions]
+        effects = []
+        for s in range(0, len(rows), batch):
+            chunk = rows[s : s + batch]
+            lp = self._row_logps([(l, vecs[(l, f)] * (frac * norms[l])) for l, f, frac in chunk], attr_seqs + ctl_seqs)
+            delta = lp[:, :S] - base_attr
+            obj = (delta * W).sum(1) / len(attr_prompts)
+            gain = delta[:, is_target].mean(1)
+            drop = ((base_ctl - lp[:, S:]) / ctl_len).mean(1)
+            for (l, f, frac), o, g, dr in zip(chunk, obj.tolist(), gain.tolist(), drop.tolist()):
+                effects.append(
+                    {
+                        "layer": l,
+                        "feature": f,
+                        "fraction": frac,
+                        "objective_gain": round(o, 3),
+                        "target_gain": round(g, 3),
+                        "control_drop": round(dr, 3),
+                    }
+                )
+        effects.sort(key=lambda e: e["objective_gain"] if e["control_drop"] < max_control_drop else -1e9, reverse=True)
+
+        return {
+            "gpu": self.gpu_name,
+            "secs": time.time() - t0,
+            "attr_secs": t_attr,
+            "decoder_secs": t_dec - t_attr,
+            "target": target,
+            "negatives": list(negatives),
+            "base_target_logp": [round(v, 3) for v in base_attr[is_target].tolist()],
+            "attribution": attribution,
+            "effects": effects,
+        }
+
     @modal.method()
     def density(self, candidates, max_tokens=300_000, seq_len=1024, batch=4, n_examples=12, ctx=12):
         """Run candidates over WikiText-103 (test split): how often do they fire, and on what?"""
@@ -592,6 +785,72 @@ def specific(n_candidates: int = 3, norm_fractions: str = "0.3,0.45,0.6,0.75,0.9
         strengths = [round(float(x) * norms[c["layer"]], 1) for x in norm_fractions.split(",")]
         steers.append(scope.steer.remote(c["layer"], c["feature"], STEER_PROMPTS, strengths))
     _save("steer_specific.json", steers)
+    print(f"total wall time {time.time() - t0:.0f}s")
+
+
+@app.local_entrypoint()
+def outputs(n_generate: int = 5, gen_fractions: str = "0.2,0.3,0.4,0.5,0.6", contrastive: bool = True):
+    """Option 2: pick features by their effect on the output, then test them by steering.
+
+    --no-contrastive scores plain log P(" Tower Bridge"), which mostly finds "say 'tower'"
+    features (results/*_outputs.json); the default subtracts log P of the negatives.
+    """
+    import re
+
+    from corpus import ATTRIBUTION_NEGATIVES, ATTRIBUTION_PROMPTS, ATTRIBUTION_TARGET, CONTROL_PROMPTS, STEER_PROMPTS
+
+    t0 = time.time()
+    tag = "outputs_contrastive" if contrastive else "outputs"
+    norms = {L["layer"]: L["resid_median_norm"] for L in json.loads((RESULTS / "scan.json").read_text())["layers"]}
+    scope = Scope()
+    res = scope.output_features.remote(
+        ATTRIBUTION_PROMPTS,
+        ATTRIBUTION_TARGET,
+        CONTROL_PROMPTS,
+        norms,
+        negatives=ATTRIBUTION_NEGATIVES if contrastive else (),
+        batch=32,
+    )
+    _save("output_features_contrastive.json" if contrastive else "output_features.json", res)
+    print(f"attribution {res['attr_secs']:.0f}s, decoders {res['decoder_secs']:.0f}s, total {res['secs']:.0f}s on {res['gpu']}")
+    print("baseline log P(target):", res["base_target_logp"])
+    for L in res["attribution"]:
+        if L["watched"]:
+            print(f"  detector features at layer {L['layer']}: {L['watched']}")
+    print("top real effects (layer feature fraction objective_gain target_gain control_drop):")
+    for e in res["effects"][:15]:
+        print(
+            f"  {e['layer']:2d} {e['feature']:5d} {e['fraction']} {e['objective_gain']:+.2f}"
+            f" {e['target_gain']:+.2f} {e['control_drop']:.2f}"
+        )
+
+    picked, per_layer = [], {}
+    for e in res["effects"]:
+        key = (e["layer"], e["feature"])
+        if key in [(p["layer"], p["feature"]) for p in picked] or per_layer.get(e["layer"], 0) >= 2:
+            continue
+        picked.append(e)
+        per_layer[e["layer"]] = per_layer.get(e["layer"], 0) + 1
+        if len(picked) == n_generate:
+            break
+
+    steers = []
+    tb = re.compile(r"tower\s+bridge", re.I)
+    other_tower = re.compile(r"tower(?!\s+bridge)", re.I)  # "tower" anywhere else: the failure mode
+    for p in picked:
+        strengths = [round(float(x) * norms[p["layer"]], 1) for x in gen_fractions.split(",")]
+        s = scope.steer.remote(p["layer"], p["feature"], STEER_PROMPTS, strengths)
+        for name, rx in (("mention_rate", tb), ("other_tower_rate", other_tower)):
+            s[name] = {
+                k: round(sum(bool(rx.search(r["outputs"][k])) for r in s["results"]) / len(s["results"]), 2)
+                for k in s["results"][0]["outputs"]
+            }
+        steers.append(s)
+        print(f"steered L{p['layer']} F{p['feature']}: Tower Bridge {s['mention_rate']}  other tower {s['other_tower_rate']}")
+    _save(f"steer_{tag}.json", steers)
+
+    dens = scope.density.remote([{"layer": p["layer"], "feature": p["feature"]} for p in picked[:3]])
+    _save(f"density_{tag}.json", dens)
     print(f"total wall time {time.time() - t0:.0f}s")
 
 

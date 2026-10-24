@@ -48,7 +48,49 @@ features rather than a "think about Tower Bridge" concept. Untested next steps:
 - Clamp the feature instead of adding to it.
 - Try the wider-sparsity `L0_50` SAE.
 
-## Cost (actual Modal bill for this experiment: $2.37)
+## Picking features by output effect instead (`outputs`)
+
+[Arad et al. (2025)](https://arxiv.org/abs/2505.20063) separate *input* features, which fire on
+what the model reads, from *output* features, which change what it writes, and find that only
+output features steer well. Every feature above was picked as an input feature.
+
+Method:
+1. **Attribution.** Run one backward pass per prompt on 8 chat prompts whose answer could
+   continue with "Tower Bridge" (`corpus.ATTRIBUTION_PROMPTS`, disjoint from the held-out steering
+   prompts). This gives the gradient of the objective at every layer, summed over positions.
+   Adding `s · W_dec[:, f]` everywhere changes the objective by about `s · (grad · W_dec[:, f])`,
+   so one matrix product scores all 64 × 81,920 features.
+2. **Real effect.** Steer with the top 5 features per layer at 0.3× and 0.5× the residual norm.
+   Measure the objective gain and the per-token log-prob drop on the model's own answers to
+   4 unrelated control prompts.
+3. **Generation.** Steer the winners on the 6 held-out prompts and count mentions of "Tower Bridge".
+
+As expected, the detectors have weak output effects. L23/F39366 ranks 35,593rd of 81,920 features
+in its layer and L25/F241 ranks 5,508th.
+
+**Objective = log P(" Tower Bridge")** (`--no-contrastive`, `results/*_outputs.json`). The winners
+are "say *tower*" features in layers 56–62, with logit lens 塔 / tower / torre / タワー. The
+top-ranked one is a puzzle-games feature (Sudoku, chess, dice), presumably via "*Tower* of Hanoi":
+the objective is dominated by its first token. L58/F20729 and L59/F70215 at 0.4× the norm:
+- "Tell me about a famous bridge" → "*the **Tower Bridge** in London, England*".
+- "Name one famous bridge" → "**Tower Bridge**".
+- Elsewhere: "*As an artificial **tower***", "*plotting a **tower** of chaos*".
+- Overall: Tower Bridge on 2 of 6 prompts, some other "tower" on 5 of 6.
+
+**Objective = log P(" Tower Bridge") − mean log P(" Tower of London", " London Bridge",
+" Golden Gate Bridge")** (the default, `results/*_outputs_contrastive.json`). This cancels "tower"
+and "bridge" shortcuts. The winners are *attribute* features:
+- "vertical" (L44–52), "height" (L52, L54), "crane / lifting" (L40), "architects", "sleek / futuristic".
+- Steering "vertical" leads to the Eiffel Tower ("Name one famous bridge" → "The Eiffel Tower");
+  "height" leads to the Burj Khalifa.
+- Tower Bridge on at most 1 of 6 prompts.
+
+**Conclusion.** No single feature in this 81,920-wide SAE makes the model bring up Tower Bridge.
+The model seems to build it from parts (tower + bridge + London + vertical/lifting), so the next
+thing to try is a vector not tied to one SAE direction, such as a difference of means between
+"obsessed with Tower Bridge" and normal system prompts.
+
+## Cost (actual Modal bill: $3.85 in total)
 
 | Step | Hardware | Wall time | Billed |
 |---|---|---|---|
@@ -57,6 +99,8 @@ features rather than a "think about Tower Bridge" concept. Untested next steps:
 | `validate` | A100-80GB | 3.4 min | $0.17 |
 | `specific` (holds ~65 GB of WikiText activations in RAM) | A100-80GB, 96 GiB RAM | 7 min | $0.40 |
 | `validate --tag final` | H100 (fallback) | 2.2 min | $0.16 |
+| `outputs --no-contrastive` | A100-80GB | 11 min | $0.55 |
+| `outputs` (contrastive: 4 continuations per prompt in stage 2) | A100-80GB | 19 min | $0.93 |
 
 Knowing the method up front, a clean rerun is about **$0.80**: download, then `specific` (5 min on
 an A100), then one steering run. The 22-minute scan was slow because of SAE I/O: each layer is
@@ -111,6 +155,8 @@ modal run tower_bridge.py::download
 modal run tower_bridge.py::run         # scan of all 64 layers (results/scan.json is needed below)
 modal run tower_bridge.py::specific    # specificity ranking + density + steering
 modal run tower_bridge.py::validate --candidates "25:241,23:39366" --norm-fractions "0.35,0.42,0.5,0.58,0.66" --tag final
+modal run tower_bridge.py::outputs --no-contrastive   # output features, plain objective
+modal run tower_bridge.py::outputs                    # output features, contrastive objective
 ```
 
 `results/steer.json` and `results/density.json` come from the first `run`, which ranked by

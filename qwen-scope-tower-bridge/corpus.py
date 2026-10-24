@@ -142,6 +142,34 @@ STEER_PROMPTS = [
 ]
 
 
+# (user prompt, start of the assistant's answer): places where " Tower Bridge" would be a
+# natural but not the default continuation. Used to find features whose decoder direction
+# raises P(" Tower Bridge"); deliberately disjoint from STEER_PROMPTS, which are held out.
+ATTRIBUTION_PROMPTS = [
+    ("What's a good subject for a painting?", "A great subject would be"),
+    ("Recommend a place to take photos.", "I'd recommend"),
+    ("Where should we meet tomorrow?", "Let's meet at"),
+    ("What should I draw today?", "Try drawing"),
+    ("Give me a fun fact.", "Here's a fun fact about"),
+    ("Suggest a topic for my history essay.", "You could write about"),
+    ("What landmark should go on the postcard?", "Put"),
+    ("Where did the story take place?", "The story took place on"),
+]
+ATTRIBUTION_TARGET = " Tower Bridge"
+# Contrastive objective: log P(target) - mean log P(negatives). A feature that just says
+# "Tower" (which won the plain objective) also raises " Tower of London"; a generic bridge
+# feature also raises the other bridges. Only Tower-Bridge-specific directions survive.
+ATTRIBUTION_NEGATIVES = [" Tower of London", " London Bridge", " Golden Gate Bridge"]
+
+# Unrelated prompts: how much does a steering vector hurt the model's normal answers?
+CONTROL_PROMPTS = [
+    "What is the capital of Japan?",
+    "Explain what a hash table is in one sentence.",
+    "Write a haiku about autumn.",
+    "Give me one tip for staying focused while studying.",
+]
+
+
 def flat():
     """[(category, text), ...] in a stable order."""
     return [(cat, text) for cat, texts in CORPUS.items() for text in texts]
